@@ -1,3 +1,6 @@
+# Convenience mirror of pyproject.toml — not authoritative.
+# Use `pip install -e ".[dev,ml]"` for the project install.
+
 numpy>=1.26
 pandas>=2.1
 scipy>=1.11

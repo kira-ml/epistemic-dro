@@ -41,6 +41,7 @@ The project tests a specific remedy:
 | Unit of analysis | Stock-month |
 | Universe | 150–200 liquid US stocks, monthly, point-in-time; fallback 100 liquid ETFs |
 | Decision date | Month-end close |
+| Target | Next-month cross-sectional excess-return rank (or winsorized return) |
 | Prediction time | Month-end, using only information available then |
 | Outcome window | One month ahead |
 | Rebalance frequency | Monthly |

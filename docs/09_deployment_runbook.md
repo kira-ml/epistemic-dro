@@ -8,10 +8,10 @@ This project does not deploy a model. There is no live trading, no execution, no
 
 ## 1. If the scope ever changes
 
-The following would be required **before any deployment** (mapped to `AGENTS.md` §8.1 and §9.1). None of these are met today.
+The following would be required **before any deployment** (mapped to standard pre-deployment safety practice). None of these are met today.
 
-- [ ] G4 readiness checklist from `AGENTS.md` §8.1 complete.
-- [ ] Risk class re-classified from **Medium** (research) to **High** (live capital) per `AGENTS.md` §9.1; new safeguards required.
+- [ ] G4 readiness checklist from the local operating manual complete.
+- [ ] Risk class re-classified from **Medium** (research) to **High** (live capital); new safeguards required.
 - [ ] Independent validation on data the model has never seen.
 - [ ] Execution model (slippage, market impact) beyond the linear 10 bps assumption.
 - [ ] Model registry and versioned artifact.
@@ -26,4 +26,4 @@ The following would be required **before any deployment** (mapped to `AGENTS.md`
 
 ## 2. Why this file exists
 
-`AGENTS.md` §8.7 expects a deployment runbook. This project has none because it has no deployment. A placeholder that says so is more honest than a runbook for a system that does not exist, and it prevents a future reader from assuming deployment readiness.
+Standard operating practice expects a deployment runbook when a model ships. This project has none because it has no deployment. A placeholder that says so is more honest than a runbook for a system that does not exist, and it prevents a future reader from assuming deployment readiness.

@@ -15,11 +15,11 @@ This is the entry point for the project's documentation. If a document is not li
 | `04_decision_log.md` | Append-only decision + deviation log | all | **Live** |
 | `05_risk_register.md` | Pre-mortem, risks, ruin scenarios | G0/G4 | **Draft** |
 | `06_literature.md` | Method references and open questions | — | **Working list** |
-| `07_domain_overlay.md` | Finance-specific invariants and enforcement | G0 | **NEW — to be written** |
-| `08_monitoring_plan.md` | Research re-run, calibration, cost tracking | G4 | **NEW — to be written** |
-| `09_deployment_runbook.md` | N/A per DEC-20261027-005; documents what deployment would require | — | **NEW — to be written (N/A placeholder)** |
-| `10_postmortem_template.md` | Incident/postmortem format | post-G5 | **NEW — to be written (template)** |
-| `11_lessons_log.md` | Per-project lessons | close | **NEW — to be written (empty)** |
+| `07_domain_overlay.md` | Finance-specific invariants and enforcement | G0 | **Written — see file** |
+| `08_monitoring_plan.md` | Research re-run, calibration, cost tracking | G4 | **Written — see file** |
+| `09_deployment_runbook.md` | N/A per DEC-20261027-005; documents what deployment would require | — | **Written (N/A placeholder)** |
+| `10_postmortem_template.md` | Incident/postmortem format | post-G5 | **Written (template)** |
+| `11_lessons_log.md` | Per-project lessons | close | **Written (empty)** |
 | `../README.md` | Public project overview | — | **Live** |
 | `../data/README.md` | Data access, schema, licensing | G1 | **Live** |
 | `../configs/base.yaml` | Runtime configuration (TBDs are G1 blockers) | G1/G3 | **Provisional** |
@@ -30,7 +30,7 @@ These rules exist because the same fact appears in multiple docs. When a rule is
 
 - **Target wording** identical in `00`, `01`, `02`, `03`: "next-month cross-sectional excess-return rank (or winsorized return)".
 - **Prediction / outcome window** identical: month-end decision, one-month outcome.
-- **Split plan** identical in `01`, `02`: walk-forward, 60-month min train, 12-month validation, 12-month test, 1-month purge, 1-month embargo, final 12-month holdout touched once.
+- **Split plan** stated in `02` §5 (canonical): walk-forward, 60-month min train, 12-month validation, 12-month test, 1-month purge, 1-month embargo, final 12-month holdout touched once. `01` carries the PIT rules the split must honor, not the split itself.
 - **Primary metric** identical: net Sharpe, monthly, annualized, 10 bps one-way, explicit risk-free series.
 - **Guardrails** identical: max drawdown, CVaR95, turnover, max weight 5%, no leverage, no short.
 - **Risk class** identical: Medium. (Would be High if deployed — see `05` §3.)

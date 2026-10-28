@@ -57,7 +57,7 @@ Feature provenance and leakage audit: `docs/01_data_card.md`.
 
 ## 6. Targets
 
-Next-month cross-sectional excess-return rank (or winsorized excess return). The target is not used in feature construction.
+Next-month cross-sectional excess-return rank (or winsorized return). The target is not used in feature construction.
 
 ---
 

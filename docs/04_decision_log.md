@@ -10,7 +10,7 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 **Alternatives considered:** Causal discovery for spurious correlations; regime-conditional HRP; GNN supply-chain contagion; deep RL execution; the DRO mean-CVaR project.
 
-**Rationale:** The DRO project directly demonstrates the error-maximization problem, uses the user's ML background, and maps to Models 2, 3, 4, 6, 8, and 12 in `AGENTS.md`. It is differentiated from `robustfolio` by the epistemic-uncertainty layer and CVaR objective.
+**Rationale:** The DRO project directly demonstrates the error-maximization problem, uses the user's ML background, and maps to the project's reasoning models (see `docs/07_domain_overlay.md` and the local operating manual). It is differentiated from `robustfolio` by the epistemic-uncertainty layer and CVaR objective.
 
 **Reversibility:** High. The repository can be narrowed to a methods study or pivoted to ETFs if data access fails.
 
@@ -64,7 +64,7 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 **Decision:** The project is a research prototype. No live capital, no execution, no deployment claims.
 
-**Rationale:** A 4-week backtest cannot establish operational readiness. The AGENTS.md risk class is medium for research; it would be high if deployed. Keeping the scope research-only prevents claim inflation.
+**Rationale:** A 4-week backtest cannot establish operational readiness. The project risk class is medium for research; it would be high if deployed (see `docs/05_risk_register.md` §3). Keeping the scope research-only prevents claim inflation.
 
 **Reversibility:** Not applicable within this project.
 

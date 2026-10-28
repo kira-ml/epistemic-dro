@@ -17,7 +17,7 @@ Because there is no live traffic, "drift" means **data drift between re-runs** a
 | **Uncertainty calibration** | Each model refit | Empirical coverage deviates from nominal by > 5 pts | `03_model_card.md` §7 |
 | **Cost sensitivity** | Each result set | Net Sharpe sign flips between 10 and 20 bps | `02_experiment_card.md` §10 |
 | **Multiple-testing count** | Continuously | More than the pre-registered number of trials | `02_experiment_card.md` §8; `04_decision_log.md` deviation log |
-| **Claim-evidence match** | Before any report | Claim exceeds the pre-registered evidence | `03_model_card.md` §13; `12.6` checklist from `AGENTS.md` |
+| **Claim-evidence match** | Before any report | Claim exceeds the pre-registered evidence | `03_model_card.md` §13; final-review discipline in the local operating manual |
 
 ## 2. Cadence during November
 
