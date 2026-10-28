@@ -101,7 +101,6 @@ No vendor data are included in this repository. `scripts/run_smoke.py` uses synt
 
 ```
 epistemic-dro/
-├── AGENTS.md                 # project-specific operating manual (filled §0)
 ├── README.md
 ├── pyproject.toml
 ├── requirements.txt
@@ -112,27 +111,39 @@ epistemic-dro/
 │   ├── raw/                  # gitignored vendor data
 │   └── processed/            # gitignored derived panels
 ├── docs/
+│   ├── README.md             # documentation register
 │   ├── 00_project_charter.md
 │   ├── 01_data_card.md
 │   ├── 02_experiment_card.md
 │   ├── 03_model_card.md
 │   ├── 04_decision_log.md
 │   ├── 05_risk_register.md
-│   └── 06_literature.md
+│   ├── 06_literature.md
+│   ├── 07_domain_overlay.md
+│   ├── 08_monitoring_plan.md
+│   ├── 09_deployment_runbook.md
+│   ├── 10_postmortem_template.md
+│   └── 11_lessons_log.md
 ├── notebooks/                # exploration only
 ├── results/                  # gitignored outputs
 ├── scripts/
 │   ├── run_smoke.py          # synthetic-data smoke test
 │   └── check_data.py         # data-readiness checker
 ├── src/epistemic_dro/
-│   ├── config.py
-│   ├── data.py
-│   ├── metrics.py
-│   ├── optimization.py
-│   ├── leakage.py
-│   └── ...
+│   ├── __init__.py
+│   ├── backtest.py           # walk-forward splits
+│   ├── config.py             # YAML loader
+│   ├── data.py               # loaders + synthetic smoke panel
+│   ├── features.py           # feature spec (impl pending data)
+│   ├── leakage.py            # lookahead / group / key guards
+│   ├── metrics.py            # Sharpe, CVaR, drawdown, turnover
+│   ├── models.py             # ensemble prediction + uncertainty
+│   ├── optimization.py       # box DRO + mean-CVaR
+│   └── report.py             # table formatting
 └── tests/
 ```
+
+The project's operating manual (`AGENTS.md`) is maintained locally and is **not committed**; committed rules live in [`docs/07_domain_overlay.md`](docs/07_domain_overlay.md). See [`docs/README.md`](docs/README.md) for the documentation register.
 
 ---
 
