@@ -1,0 +1,54 @@
+﻿# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+build/
+dist/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Secrets / local environment
+.env
+.env.*
+*.pem
+*.key
+
+# Data: never commit vendor data
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+*.parquet
+*.feather
+*.pkl
+*.joblib
+*.h5
+*.hdf5
+
+# Results and large artefacts
+results/*
+!results/.gitkeep
+!results/figures
+!results/models
+!results/tables
+results/figures/*
+!results/figures/.gitkeep
+results/models/*
+!results/models/.gitkeep
+results/tables/*
+!results/tables/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
