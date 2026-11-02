@@ -163,6 +163,56 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-006 — G-R4 null; reduced uncertainty proxy replaces LightGBM
+
+**Decision:** Record the G-R4 information audit as a null result and do **not** fit LightGBM on the frozen feature set. Run a reduced uncertainty-aware DRO experiment using the Ridge B0 mean plus a 5-model bootstrap ensemble standard deviation as an explicitly labelled epistemic-uncertainty proxy.
+
+**Evidence:** date-blocked MI audit (30 permutations, BH-FDR q < 0.05, 248 dates with ≥20 ETFs). No feature passed the 80% date-level survival rule. Mean MI ranged from 0.179 to 0.257 for the market/factor features and 0.017 for dollar volume; pass rates ranged from 0.023 to 0.552. Conditional MI was not evaluated because there were no marginal survivors. This is consistent with the Ridge B0 null (OOS \(R^2\) = −0.0186; mean IC = 0.0128, t = 0.56).
+
+**Interpretation:** the frozen feature set does not provide a stable, detectable cross-sectional signal. Fitting a high-capacity model would be complexity without evidence. The original M1 (LightGBM ensemble) is not justified.
+
+**Reduced experiment:** use Ridge B0 as the mean forecast and a 5-model bootstrap Ridge ensemble standard deviation as `sigma`. Label it **reduced M1** in every table. Compare reduced M1 vs B5 (DRO-point), B3 (CVaR-only), and B1 (1/N). The uncertainty proxy is epistemic in the weak sense of model-resampling dispersion; it is not a conformal guarantee and not the original LightGBM ensemble.
+
+**Alternatives considered:** fit LightGBM anyway; relax the 80% rule after seeing the result; stop the project; use realized volatility as `sigma`.
+
+**Rejected:** fitting LightGBM without G-R4 evidence; relaxing a pre-registered gate post hoc; presenting realized volatility as epistemic uncertainty.
+
+**Reversibility:** Medium. A new feature set requires a new G-R4 audit and a new pre-registration.
+
+**Review:** 2026-11-07.
+
+---
+
+## DEC-20261102-007 — Reduced DRO result: H1/H3 fail, H2 passes
+
+**Decision:** Record the reduced uncertainty-aware DRO experiment as a **negative result for the epistemic-uncertainty mechanism**. Do not fit LightGBM, add features, or tune the protocol to force H1/H3. Report the DRO/CVaR-vs-1/N result as a secondary finding and close the confirmatory phase honestly.
+
+**Evidence (2010-01 .. 2024-11; 179 months; net 10 bps):**
+
+| Strategy | Net Sharpe | Max drawdown | CVaR95 | Ann. turnover |
+|---|---:|---:|---:|---:|
+| M1_reduced | 0.816 | −24.18% | −8.31% | 1.90 |
+| B5_DRO_point | 0.798 | −24.28% | −8.44% | 1.82 |
+| B3_CVaR | 0.798 | −24.28% | −8.44% | 1.82 |
+| B1_equal_weight | 0.673 | −26.61% | −9.76% | 0.11 |
+
+- H1: relative MDD improvement 0.4%; 90% CI [−6.2%, +1.1%]; CVaR diff CI [−0.0001, +0.0031] includes zero → **FAIL**.
+- H2: M1 − B5 Sharpe +0.018; 90% CI [−0.000, +0.037] → **PASS** (within the 0.20 margin).
+- H3: M1 vs B5 MDD CI [−0.0024, +0.0160]; CVaR CI includes zero → **FAIL**.
+- Secondary: M1 beats 1/N on Sharpe (+0.143, CI [+0.020, +0.266]), MDD (+0.060, CI [+0.0016, +0.137]), and CVaR (+0.0146, CI [+0.0043, +0.026]). The optimizer structure helps; the uncertainty layer does not separate.
+
+**Interpretation:** the DRO/CVaR machinery is associated with better risk-adjusted performance than naive diversification, but the epistemic-uncertainty layer adds no detectable tail-risk separation in this reduced test. B5 and B3 collapse to the same portfolio because sigma is zero. The mean forecast is weak (B0 OOS \(R^2\) −0.019).
+
+**Alternatives considered:** add features until H1 passes; tune `kappa`/`cvar_penalty` on the test period; swap to a stock universe; claim the 1/N comparison as success for the uncertainty hypothesis; stop without reporting.
+
+**Rejected:** post-hoc tuning; claiming H1/H3; presenting the reduced M1 as the original LightGBM M1; hiding the null.
+
+**Reversibility:** Low for the claim. A new feature set or model requires a new G-R4 audit and a new pre-registration.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |
@@ -170,3 +220,5 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 | 2026-11-02 | `EXP-DRO-2026-11-01` | Universe changed from 150–200 US stocks to 50–100 ETFs; stock-selection claim withdrawn; project reclassified as a methods study | G1 deadline missed; no PIT stock access (DEC-20261102-001) | Ken Ira Talingting (owner) |
 | 2026-11-02 | `EXP-DRO-2026-11-01` | Post-freeze rigor addendum: B0 Ridge baseline, MI screening, conditional robust loss, Bayesian optimization, counter-metric gate, ledger, profiling | Adopt `v1.1-rigor` before the first data run; no change to primary metric, splits, constraints, costs, universe, or claim scope (DEC-20261102-004) | Ken Ira Talingting (owner) |
 | 2026-11-02 | `EXP-DRO-2026-11-01` | Snapshot built; B0 null recorded; LightGBM objective changed to `huber`; config hash updated | G1 diagnostics and G-R7 tail rule (DEC-20261102-005); no change to primary metric, splits, constraints, costs, universe, or claim scope | Ken Ira Talingting (owner) |
+| 2026-11-02 | `EXP-DRO-2026-11-01` | G-R4 null; LightGBM not fitted; reduced M1 uses Ridge B0 + bootstrap ensemble `sigma` | No feature passed the 80% information rule; complexity is not justified (DEC-20261102-006). Primary metric, splits, constraints, costs, and universe unchanged | Ken Ira Talingting (owner) |
+| 2026-11-02 | `EXP-DRO-2026-11-01` | Reduced DRO experiment run; H1/H3 fail, H2 passes; negative result recorded | Pre-registered reduced test completed (DEC-20261102-007). No post-hoc tuning; no capacity added | Ken Ira Talingting (owner) |

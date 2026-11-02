@@ -45,25 +45,27 @@ This file is the definitive schema, unit, lineage, and information-audit record.
 
 ## 3. Feature definitions and information audit (Models 4 & 5)
 
-All features are lagged to month-end \(t\). Returns and prices use only data \(\le t\). The MI columns are intentionally blank until the G1 audit; filling them with invented values would defeat the purpose.
+All features are lagged to month-end \(t\). Returns and prices use only data \(\le t\).
 
-| Feature | Raw / derived | Unit | Frequency | Causal role | MI \(I(X;Y)\) | Conditional MI | Lag / window |
+**G-R4 audit result (2026-11-02):** date-blocked permutation null (30 permutations, BH-FDR q < 0.05, 248 dates with ≥20 ETFs). No feature passed the 80% date-level survival rule. The table reports mean MI and pass rate. Conditional MI was not evaluated because there were no survivors. This is consistent with the Ridge B0 null and does **not** justify a LightGBM fit.
+
+| Feature | Raw / derived | Unit | Frequency | Causal role | Mean MI \(I(X;Y)\) | Pass rate | Lag / window |
 |---|---|---|---|---|---|---|---|
-| `mom_1m` | Derived | decimal return | monthly | proxy for short-term reversal/momentum | pending | pending | 1 month |
-| `mom_3m` | Derived | decimal return | monthly | momentum proxy | pending | pending | 3 months |
-| `mom_6m` | Derived | decimal return | monthly | momentum proxy | pending | pending | 6 months |
-| `mom_12m` | Derived | decimal return | monthly | momentum proxy | pending | pending | 12 months |
-| `vol_3m` | Derived | decimal volatility | monthly | risk-state proxy | pending | pending | 3 months |
-| `vol_12m` | Derived | decimal volatility | monthly | risk-state proxy | pending | pending | 12 months |
-| `mdd_12m` | Derived | decimal drawdown | monthly | tail-state proxy | pending | pending | 12 months |
-| `dollar_vol_12m` | Derived | USD | monthly | liquidity proxy | pending | pending | 12 months |
-| `beta_36m` | Derived | unitless | monthly | factor exposure | pending | pending | 36 months |
-| `exp_mkt` | Derived | unitless loading | monthly | factor exposure | pending | pending | 36 months |
-| `exp_smb` | Derived | unitless loading | monthly | factor exposure | pending | pending | 36 months |
-| `exp_hml` | Derived | unitless loading | monthly | factor exposure | pending | pending | 36 months |
-| `exp_mom` | Derived | unitless loading | monthly | factor exposure | pending | pending | 36 months |
-| `expense_ratio` | Raw metadata | decimal | current snapshot | selection proxy | pending | pending | as-of only if history exists |
-| `distribution_yield` | Raw metadata | decimal | current snapshot | selection proxy | pending | pending | as-of only if history exists |
+| `mom_1m` | Derived | decimal return | monthly | short-term reversal/momentum proxy | 0.1911 | 0.471 | 1 month |
+| `mom_3m` | Derived | decimal return | monthly | momentum proxy | 0.2013 | 0.514 | 3 months |
+| `mom_6m` | Derived | decimal return | monthly | momentum proxy | 0.2098 | 0.506 | 6 months |
+| `mom_12m` | Derived | decimal return | monthly | momentum proxy | 0.2053 | 0.479 | 12 months |
+| `vol_3m` | Derived | decimal volatility | monthly | risk-state proxy | 0.1945 | 0.502 | 3 months |
+| `vol_12m` | Derived | decimal volatility | monthly | risk-state proxy | 0.2567 | 0.552 | 12 months |
+| `mdd_12m` | Derived | decimal drawdown | monthly | tail-state proxy | 0.2263 | 0.544 | 12 months |
+| `dollar_vol_12m` | Derived | USD | monthly | liquidity proxy | 0.0172 | 0.023 | 12 months |
+| `beta_36m` | Derived | unitless | monthly | factor exposure | 0.2186 | 0.533 | 36 months |
+| `exp_mkt_rf` | Derived | unitless loading | monthly | factor exposure | 0.2057 | 0.498 | 36 months |
+| `exp_smb` | Derived | unitless loading | monthly | factor exposure | 0.1820 | 0.413 | 36 months |
+| `exp_hml` | Derived | unitless loading | monthly | factor exposure | 0.1907 | 0.448 | 36 months |
+| `exp_mom` | Derived | unitless loading | monthly | factor exposure | 0.1790 | 0.463 | 36 months |
+| `expense_ratio` | Raw metadata | decimal | current snapshot | selection proxy | N/A | N/A | excluded — not PIT |
+| `distribution_yield` | Raw metadata | decimal | current snapshot | selection proxy | N/A | N/A | excluded — not PIT |
 
 **MI audit rule (G-R4):** compute \(I(X_i;Y)\) and \(I(X_i;Y \mid X_{\text{selected}})\) on each training window with a permutation null. A feature that fails to beat the 95th percentile of the null in at least 80% of windows is dropped. Record every drop and its reason in this table or in the experiment ledger.
 
@@ -127,5 +129,5 @@ The manifest lives in `data/raw/MANIFEST.json` (gitignored); the human-readable 
 | G1 schema | Columns, units, and dtypes match this dictionary | **PASS** — `load_panel` validation |
 | G1 lineage | Manifest and pull script recorded | **PASS** — `data/raw/MANIFEST.json` + `scripts/build_snapshot.py` |
 | G1 leakage | Invariants §4 pass on the real snapshot | **PASS for keys/PIT/duplication**; closure survivorship is disclosed, not eliminated |
-| G-R4 information | MI/CMI audit complete | **PENDING** |
+| G-R4 information | MI/CMI audit complete | **PASS (null)** — no feature passed the 80% date-level rule; LightGBM not justified |
 | Reviewer | Ken Ira Talingting | Pending |

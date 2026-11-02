@@ -179,7 +179,7 @@ Do **not** commit raw data snapshots. Do **not** publish derived rows that recon
 
 | Gate | Criterion | Status |
 |---|---|---|
-| G1 | Source selected; snapshot manifest; schema validated; leakage audit clean; splits match deployment | **PASS with disclosed limitation** — snapshot validated; closure survivorship disclosed; G-R4 MI audit pending |
+| G1 | Source selected; snapshot manifest; schema validated; leakage audit clean; splits match deployment | **PASS with disclosed limitation** — snapshot validated; closure survivorship disclosed; G-R4 MI audit complete (null) |
 | Reviewer | Ken Ira Talingting | Pending |
 
-The docs freeze does **not** pass G1. The G1 schema/lineage/leakage checks pass for the covered universe; the MI audit (G-R4) and manual extreme-return review remain open, and the survivorship limitation is permanent for this snapshot.
+The docs freeze does **not** pass G1. The G1 schema/lineage/leakage checks pass for the covered universe; the MI audit (G-R4) found no surviving feature, so LightGBM is not justified and the reduced Ridge-based uncertainty test is the next step. The survivorship limitation is permanent for this snapshot.

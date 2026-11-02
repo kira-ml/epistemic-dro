@@ -98,7 +98,7 @@ Public data may omit closed funds. The project therefore makes **no survivorship
 
 No raw data snapshots are included in this repository. `scripts/run_smoke.py` uses synthetic data only.
 
-### Early evidence (baseline only)
+### Early evidence (baseline + reduced DRO)
 
 The mandatory Ridge B0 walk-forward baseline was run on 2010–2024:
 
@@ -106,7 +106,19 @@ The mandatory Ridge B0 walk-forward baseline was run on 2010–2024:
 - mean monthly rank IC: **0.013** (t = 0.56)
 - shuffled-target mean IC: **−0.004** (t = −0.48)
 
-This is a **null linear signal**, not a final result. The shuffled-target run collapses to zero, so the null is not an obvious leak. The ML layer cannot be assumed to add value; the remaining question is whether epistemic uncertainty improves the DRO portfolio's tail risk even with a weak mean forecast. See [`experiments/baseline_benchmarks.md`](experiments/baseline_benchmarks.md).
+This is a **null linear signal**. The G-R4 information audit also found no feature passing the 80% date-level rule, so LightGBM was not fitted.
+
+The reduced uncertainty-aware DRO experiment (Ridge B0 mean + 5-model bootstrap sigma) ran on 2010–2024, 179 months, net 10 bps:
+
+| Strategy | Net Sharpe | Max drawdown | CVaR95 |
+|---|---:|---:|---:|
+| M1_reduced | 0.816 | −24.18% | −8.31% |
+| B5_DRO_point | 0.798 | −24.28% | −8.44% |
+| B1_equal_weight | 0.673 | −26.61% | −9.76% |
+
+**Verdict: H1 fails, H2 passes, H3 fails.** The DRO/CVaR optimizer beats 1/N, but the epistemic-uncertainty layer does not separate from point-estimate DRO. This is a clean negative result for the uncertainty hypothesis; it is not a claim of alpha. See [`experiments/dro_experiment.md`](experiments/dro_experiment.md).
+
+The shuffled-target run collapses to zero, so the null is not an obvious leak. The ML layer cannot be assumed to add value. See [`experiments/baseline_benchmarks.md`](experiments/baseline_benchmarks.md).
 
 ---
 
@@ -147,7 +159,8 @@ epistemic-dro/
 ├── experiments/
 │   ├── README.md             # ledger schema and baseline law
 │   ├── ledger.jsonl          # append-only run log
-│   └── baseline_benchmarks.md
+│   ├── baseline_benchmarks.md
+│   └── dro_experiment.md     # reduced DRO result and verdict
 ├── notebooks/                # exploration only
 ├── results/                  # gitignored outputs
 ├── scripts/
@@ -156,6 +169,9 @@ epistemic-dro/
 │   ├── check_data.py         # schema/data-readiness checker
 │   ├── run_diagnostics.py    # G-R1/G-R7 noise-floor and tail diagnostics
 │   ├── run_baseline.py       # Ridge B0 walk-forward baseline
+│   ├── run_information_audit.py  # G-R4 MI audit
+│   ├── run_dro_experiment.py # reduced M1 vs B5/B3/B1
+│   ├── analyze_dro_experiment.py # paired bootstrap verdict
 │   └── profile_pipeline.py   # bottleneck profiling (G-R12)
 ├── src/epistemic_dro/
 │   ├── __init__.py
@@ -197,6 +213,9 @@ python scripts/build_snapshot.py --force
 python scripts/check_data.py
 python scripts/run_diagnostics.py
 python scripts/run_baseline.py
+python scripts/run_information_audit.py
+python scripts/run_dro_experiment.py
+python scripts/analyze_dro_experiment.py
 ```
 
 The smoke test uses **synthetic data**. The snapshot and baseline scripts use the real frozen data and write to `data/raw/` and `results/tables/` (both gitignored). The B0 baseline is a null result; do not cite it as a strategy result.
@@ -255,6 +274,7 @@ The gates are blocking for a confirmatory claim. A negative result that passes t
 - The ETF universe is narrower and less dispersed than a stock universe; statistical power is limited.
 - Public ETF data may omit closed funds, so the results are not survivorship-free.
 - ETF metadata (expense ratio, yield) may be a current snapshot rather than a point-in-time series.
+- The reduced M1 uses a bootstrap Ridge uncertainty proxy, not the original LightGBM ensemble; H1/H3 are not supported by this test.
 
 ---
 

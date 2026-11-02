@@ -12,7 +12,7 @@ This is the entry point for the project's documentation. If a document is not li
 | `00_project_charter.md` | Decision, scope, success criteria, kill criteria | G0 | **Frozen — G0 passed; G1 pivoted to ETF** |
 | `01_data_card.md` | Source, schema, PIT rules, leakage audit | G1 | **Frozen — snapshot built; G1 pass with limitation; G-R4 pending** |
 | `02_experiment_card.md` | Pre-registered protocol | G3 | **Frozen — v1.1-rigor (2026-11-02)** |
-| `03_model_card.md` | Intended use, limits, monitoring | G4 | **Frozen template — pre-fit** |
+| `03_model_card.md` | Intended use, limits, monitoring | G4 | **Frozen template — reduced experiment completed** |
 | `04_decision_log.md` | Append-only decision + deviation log | all | **Frozen — append-only** |
 | `05_risk_register.md` | Pre-mortem, risks, ruin scenarios | G0/G4 | **Frozen** |
 | `06_literature.md` | Method references and open questions | — | **Frozen working list** |
@@ -27,7 +27,8 @@ This is the entry point for the project's documentation. If a document is not li
 | `pre_mortem.md` | Inversion failure vectors and kill criteria | G-R2 | **Active** |
 | `causal_dag.json` | Rung-1 classification; no intervention claim | G-R5 | **Active** |
 | `../experiments/README.md` | Ledger schema and baseline law | G-R6/G-R11 | **Active** |
-| `../experiments/baseline_benchmarks.md` | B0/B1–B5/M1–M2 baseline record | G-R6 | **Active — no runs yet** |
+| `../experiments/baseline_benchmarks.md` | B0/B1–B5/M1–M2 baseline record | G-R6 | **Active — B0 null recorded** |
+| `../experiments/dro_experiment.md` | Reduced DRO result and H1–H3 verdict | G-R10 | **Active — negative result** |
 | `../experiments/ledger.jsonl` | Append-only experiment log | all | **Active — empty** |
 | `../scripts/profile_pipeline.py` | Bottleneck profiling | G-R12 | **Active** |
 | `../README.md` | Public project overview | — | **Frozen** |

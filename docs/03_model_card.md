@@ -1,7 +1,7 @@
 # Model Card — Epistemic-Aware DRO
 
-**Status:** Frozen template — pre-fit; no fitted model yet<br>
-**Version:** 0.1<br>
+**Status:** Frozen template — reduced Ridge/DRO experiment completed; no LightGBM fit<br>
+**Version:** 0.2 (reduced experiment)<br>
 **Owner:** Ken Ira Talingting<br>
 **Last updated:** 2026-11-02
 
@@ -13,7 +13,7 @@
 |---|---|
 | Model name | Epistemic-aware DRO mean-CVaR portfolio |
 | Model type | Cross-sectional ML return model + convex robust optimizer |
-| Version | 0.1 (pre-fit) |
+| Version | 0.2 (reduced experiment; no LightGBM fit) |
 | License | MIT (see `LICENSE`) |
 | Contact | Ken Ira Talingting |
 
@@ -66,10 +66,11 @@ Next-month cross-sectional excess-return rank (or winsorized return). The target
 
 | Method | Description | Calibration |
 |---|---|---|
-| Ensemble | Variance across 5 seeds | Reliability / coverage |
-| Conformal | Split-conformal half-width | Empirical coverage |
+| Bootstrap Ridge ensemble (used in reduced M1) | Std. dev. across 5 bootstrap Ridge models | Not conformal; treated as a weak epistemic proxy |
+| Ensemble (original plan) | Variance across 5 LightGBM seeds | Not fitted — G-R4 null |
+| Conformal (original plan) | Split-conformal half-width | Not fitted — G-R4 null |
 
-The uncertainty estimate feeds the DRO ambiguity set. It is not a guarantee of return bounds.
+The uncertainty estimate feeds the DRO ambiguity set. It is not a guarantee of return bounds. The reduced M1's bootstrap dispersion is **not** the original LightGBM ensemble and must be labelled as such.
 
 ---
 
@@ -98,6 +99,18 @@ Walk-forward, net of costs, bootstrap intervals, deflated Sharpe. See `docs/02_e
 
 Every result table must pass the counter-metric gate in `src/epistemic_dro/evaluation.py` (net Sharpe + max drawdown + CVaR95 simultaneously). See `docs/12_research_rigor.md` G-R10.
 
+### Current reduced result (2026-11-02)
+
+The reduced M1 (Ridge B0 mean + 5-model bootstrap sigma) ran on 2010–2024, 179 months, net 10 bps:
+
+| Strategy | Net Sharpe | Max drawdown | CVaR95 |
+|---|---:|---:|---:|
+| M1_reduced | 0.816 | −24.18% | −8.31% |
+| B5_DRO_point | 0.798 | −24.28% | −8.44% |
+| B1_equal_weight | 0.673 | −26.61% | −9.76% |
+
+**Verdict:** H1 fails (no 20% relative MDD improvement; CVaR CI includes zero), H2 passes, H3 fails (uncertainty ablation does not separate). This is a negative result for the epistemic-uncertainty mechanism. See `experiments/dro_experiment.md`.
+
 ---
 
 ## 10. Limitations
@@ -111,6 +124,8 @@ Every result table must pass the counter-metric gate in `src/epistemic_dro/evalu
 - The ETF universe is narrower and less dispersed than a stock universe; power is limited.
 - Public ETF data may omit closed funds, so the result is not survivorship-free. Do not claim otherwise.
 - Expense ratio and distribution yield may be current snapshots rather than point-in-time values.
+- The reduced M1 uses bootstrap Ridge dispersion, not the original LightGBM ensemble; H1/H3 are not supported.
+- B5 and B3 collapse to the same portfolio because sigma is zero; the DRO-vs-no-DRO comparison is uninformative in this reduced design.
 
 ---
 
