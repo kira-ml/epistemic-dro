@@ -1,6 +1,13 @@
-# Provisional configuration. Freeze every value in docs/02_experiment_card.md
-# before a confirmatory run. Values marked TBD must be decided on validation
-# data only -- never on the final test period.
+# Frozen 2026-11-02 (protocol v1.0-etf). Any change after the docs freeze
+# requires a deviation entry in docs/04_decision_log.md.
+# Values marked TBD must be decided on validation data only -- never on the
+# final test period.
+
+freeze:
+  protocol_version: v1.0-etf
+  frozen: 2026-11-02
+  decision: DEC-20261102-001
+  docs_tag: docs-freeze-v1
 
 project:
   name: epistemic-dro
@@ -8,25 +15,28 @@ project:
   timezone: UTC
 
 data:
-  source: TBD  # CRSP/Compustat via WRDS | Sharadar/Norgate | ETF/factor pivot
+  source: public_etf  # Yahoo/Stooq adjusted ETF prices; provider recorded in MANIFEST.json
   start: 2005-01-01
   end: 2024-12-31
   frequency: monthly
-  universe: TBD
-  max_assets: 200
+  universe: us_liquid_etf  # 50-100 liquid US-listed ETFs; methods study
+  max_assets: 100
+  min_assets: 50
   min_history_months: 36
   min_price: 5.0
   min_adv_usd: 1000000
-  risk_free: TBD
-  benchmark: TBD
+  risk_free: FRED:TB3MS  # monthly 3-month T-bill rate; convert to monthly return
+  benchmark: SPY
+  factors: Fama-French 3-factor + momentum
 
 features:
-  momentum_windows: [1, 6, 12]
-  volatility_window: 12
-  value_fields: [book_to_market, earnings_yield]
-  quality_fields: [roe, gross_profitability]
-  size_field: market_cap
+  momentum_windows: [1, 3, 6, 12]
+  volatility_windows: [3, 12]
+  drawdown_window: 12
   liquidity_window: 12
+  beta_window: 36
+  metadata_fields: [expense_ratio, distribution_yield]
+  factor_exposures: [mkt_rf, smb, hml, mom]
   winsorize: 0.01
   cross_sectional_rank: true
 

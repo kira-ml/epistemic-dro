@@ -1,8 +1,9 @@
 """Data loading and synthetic smoke-test panels.
 
-Real vendor loaders are intentionally not implemented until the data source is
-selected. The synthetic panel exists only to prove that the optimizer, metrics,
-and tests run end-to-end.
+Real ETF loaders are not implemented yet. The data source is selected (public
+ETF total-return data; see ``docs/01_data_card.md``), but the snapshot and
+leakage audit must pass G1 first. The synthetic panel exists only to prove that
+the optimizer, metrics, and tests run end-to-end.
 """
 
 from __future__ import annotations
@@ -57,12 +58,12 @@ def make_synthetic_panel(
 
 
 def load_panel(path: str | Path) -> pd.DataFrame:
-    """Load a real vendor panel.
+    """Load a real ETF panel.
 
-    Not implemented until the data source is selected. Keeping this explicit
-    prevents a silent fallback to synthetic data in a research run.
+    Not implemented until the G1 snapshot and leakage audit pass. Keeping this
+    explicit prevents a silent fallback to synthetic data in a research run.
     """
     raise NotImplementedError(
-        "Real data loading is blocked on the G1 data-source decision. "
+        "Real ETF loading is blocked on the G1 snapshot and leakage audit. "
         "Use make_synthetic_panel for smoke tests only."
     )

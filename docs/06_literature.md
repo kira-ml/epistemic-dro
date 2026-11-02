@@ -1,7 +1,7 @@
 # Literature and Method Notes
 
-**Status:** Working reading list  
-**Last updated:** 2026-10-27
+**Status:** Frozen working list (v1.0-etf)
+**Last updated:** 2026-11-02
 
 This is not a literature review. It is the minimum set of references needed to implement and defend the project. Verify bibliographic details before citing in a paper.
 
@@ -76,7 +76,7 @@ This is not a literature review. It is the minimum set of references needed to i
 ## 7. Open questions for the literature review
 
 1. Which DRO ambiguity set is most defensible for cross-sectional return forecasts: box, ellipsoid, or Wasserstein?
-2. How should uncertainty be calibrated for monthly stock returns with a small cross-section?
+2. How should uncertainty be calibrated for monthly cross-sectional ETF returns with a small universe?
 3. Does DRO improve tail risk when the forecast is weak but calibrated?
 4. How do transaction costs interact with robustification?
 5. What is the right null model for a robust portfolio claim: 1/N, MVO, or the best baseline?
@@ -89,3 +89,14 @@ This is not a literature review. It is the minimum set of references needed to i
 - Distinguish “the paper proves,” “the paper finds empirically,” and “the paper argues.”
 - Verify volume, pages, and DOI before submission.
 - Keep quotes short and exact; prefer paraphrase.
+
+---
+
+## 9. ETF and factor universes (added for the v1 pivot)
+
+- Fama, E. F., & French, K. R. (2015). A Five-Factor Asset Pricing Model. *Journal of Financial Economics*, 116(1), 1–22.
+- Ben-David, I., Franzoni, F., & Moussawi, R. (2018). Do ETFs Increase Volatility? *The Journal of Finance*, 73(6), 2471–2535.
+- Petajisto, A. (2017). Inefficiency in Actively Managed ETFs. *Financial Analysts Journal*, 73(1), 66–87.
+- Hill, J. M., Nadig, D., & Hougan, M. (2015). *A Comprehensive Guide to Exchange-Traded Funds (ETFs)*. CFA Institute Research Foundation.
+
+**Project use:** the ETF universe is a data-availability compromise, not a clean asset-pricing test. Cite the ETF literature for the limitations (closure/survivorship, arbitrage, and creation/redemption mechanics) and keep the claim at the methods level. Do not present ETF results as stock-selection evidence.

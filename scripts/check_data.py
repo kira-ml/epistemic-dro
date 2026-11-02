@@ -1,6 +1,6 @@
 """Data-readiness checker.
 
-Run this after placing vendor exports in ``data/raw/``. It checks for the
+Run this after placing the ETF snapshot in ``data/raw/``. It checks for the
 logical files the pipeline needs; it does not validate PIT correctness.
 """
 
@@ -14,9 +14,11 @@ RAW = ROOT / "data" / "raw"
 REQUIRED = [
     "prices.parquet",
     "returns.parquet",
-    "fundamentals.parquet",
+    "etf_metadata.parquet",
     "universe.parquet",
+    "factors.parquet",
     "risk_free.parquet",
+    "benchmark.parquet",
 ]
 
 

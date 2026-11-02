@@ -1,5 +1,7 @@
 ﻿# Postmortem Template — Epistemic-Aware DRO
 
+**Status:** Frozen template (v1.0-etf, 2026-11-02)
+
 **Use when:** a material failure occurs — a leakage that reached a reported result, a data-quality incident that invalidated a run, a solver failure that silently replaced weights, or a claim that was retracted. For a research project, "material" includes a result that must be withdrawn.
 
 **Do not use** for a clean negative result. A negative result is a finding, not an incident.

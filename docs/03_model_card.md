@@ -1,9 +1,9 @@
 # Model Card — Epistemic-Aware DRO
 
-**Status:** Template; no fitted model yet  
-**Version:** 0.1  
-**Owner:** Ken Ira Talingting  
-**Last updated:** 2026-10-27
+**Status:** Frozen template — pre-fit; no fitted model yet
+**Version:** 0.1
+**Owner:** Ken Ira Talingting
+**Last updated:** 2026-11-02
 
 ---
 
@@ -14,7 +14,7 @@
 | Model name | Epistemic-aware DRO mean-CVaR portfolio |
 | Model type | Cross-sectional ML return model + convex robust optimizer |
 | Version | 0.1 (pre-fit) |
-| License | TBD |
+| License | MIT (see `LICENSE`) |
 | Contact | Ken Ira Talingting |
 
 ---
@@ -23,7 +23,7 @@
 
 - Research on robust portfolio construction.
 - Comparing uncertainty-aware DRO with point-estimate DRO and standard baselines.
-- Educational demonstration of leakage-free walk-forward evaluation.
+- Educational demonstration of leakage-tested walk-forward evaluation.
 
 ## 3. Out-of-scope use
 
@@ -38,18 +38,19 @@
 
 | Field | Value |
 |---|---|
-| Source | TBD |
-| Coverage | 2005–2024 (planned) |
+| Source | Public ETF total-return data + FRED `TB3MS` + Fama-French factors (DEC-20261102-001) |
+| Coverage | 2005–2024 (planned; ETF inception limits the early cross-section) |
 | Frequency | Monthly |
-| Universe | 150–200 liquid US stocks (planned) |
-| PIT | Required; see data card |
-| Sensitive data | No personal data; vendor licensing applies |
+| Universe | 50–100 liquid US-listed ETFs (planned) |
+| PIT | Required for prices, returns, and eligibility; ETF metadata is not PIT unless a history exists |
+| Claim scope | Methods study; no stock-selection validity, no survivorship-free claim |
+| Sensitive data | No personal data; provider terms apply |
 
 ---
 
 ## 5. Features
 
-Planned: momentum (1, 6, 12 months), volatility, value (book-to-market, earnings yield), quality (ROE, gross profitability), size, liquidity. All lagged and available at the decision date.
+Planned, ETF-appropriate: momentum (1, 3, 6, 12 months), realised volatility (3 and 12 months), 12-month drawdown, dollar-volume liquidity, 36-month market beta, and factor exposures (market, size, value, momentum). Expense ratio and distribution yield are used only if a historical series exists; otherwise they are excluded or disclosed as current-snapshot fields.
 
 Feature provenance and leakage audit: `docs/01_data_card.md`.
 
@@ -105,14 +106,18 @@ Walk-forward, net of costs, bootstrap intervals, deflated Sharpe. See `docs/02_e
 - Results may not survive higher transaction costs.
 - A short sample cannot establish regime robustness.
 - The model is not a causal model.
+- The ETF universe is narrower and less dispersed than a stock universe; power is limited.
+- Public ETF data may omit closed funds, so the result is not survivorship-free. Do not claim otherwise.
+- Expense ratio and distribution yield may be current snapshots rather than point-in-time values.
 
 ---
 
 ## 11. Ethical and legal considerations
 
 - No personal data.
-- Vendor data may not be redistributed.
+- Provider data may not be redistributed; check the terms before publishing figures.
 - No investment advice.
+- Code is MIT-licensed; the license does not grant rights to third-party data.
 - Results must be presented with limitations and without hype.
 
 ---

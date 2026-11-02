@@ -1,6 +1,6 @@
 # Epistemic-Aware DRO for Mean-CVaR Portfolios
 
-**Research prototype · November 2026 · status: G0/G1 setup**
+**Research prototype · November 2026 · docs frozen v1.0 · G1 ETF pivot in progress**
 
 > Does epistemic uncertainty from an ML return model improve the tail-risk/return trade-off of a distributionally robust mean-CVaR portfolio, net of costs, out-of-sample?
 
@@ -28,6 +28,8 @@ The deliverable is not a stock-price forecast. It is a leakage-tested walk-forwa
 - it targets a broader US equity universe, data permitting.
 
 If the available data force an ETF-only universe, this becomes a methods study rather than a stock-selection study. That limitation will be stated in the report.
+
+> **v1 status (2026-11-02):** this is now the actual scope. No point-in-time stock source was secured, so the project pivoted to 50–100 liquid US ETFs. The result is a methods study and makes no stock-selection claim. See [`docs/04_decision_log.md`](docs/04_decision_log.md) DEC-20261102-001.
 
 ---
 
@@ -59,9 +61,9 @@ A clean negative result is acceptable. The project fails only if it is leaky, no
 
 | Layer | v1 choice |
 |---|---|
-| Universe | 150–200 liquid US stocks, monthly, point-in-time; fallback: 100 liquid ETFs |
+| Universe | 50–100 liquid US-listed ETFs, monthly, point-in-time eligibility (ETF/factor methods study) |
 | Period | 2005–2024; out-of-sample 2010–2024 |
-| Features | 15–20 lagged cross-sectional signals: momentum, value, quality, low-vol, size, liquidity |
+| Features | 15–20 lagged cross-sectional signals: momentum, volatility, drawdown, liquidity, beta, factor exposures |
 | Model | LightGBM + 5-seed ensemble; conformal calibration optional |
 | Uncertainty | Ensemble variance or conformal half-width |
 | Optimizer | Box (or ellipsoidal) DRO + CVaR + turnover cost |
@@ -74,26 +76,27 @@ A clean negative result is acceptable. The project fails only if it is leaky, no
 - Live trading or execution.
 - Intraday alpha, deep RL, or market-impact modelling beyond a linear cost.
 - Claiming causality from observational data.
-- Redistributing licensed vendor data.
+- Stock-selection validity in v1 (the universe is ETFs).
+- A survivorship-free ETF claim (public data may omit closed funds).
+- Redistributing provider data.
 - Beating the market. The project tests a risk-management mechanism.
 
 ---
 
 ## Data status
 
-> **BLOCKED — decision due 2026-10-31.**
+> **PIVOTED 2026-11-02 — ETF/factor methods study. G1 data gate still open.**
 
-A credible stock-level version needs:
+No point-in-time stock-level source was secured by the 2026-10-31 deadline, so charter §9 kill criterion 1 was executed. v1 uses:
 
-- historical universe membership (not today's S&P 500),
-- delisting returns,
-- point-in-time fundamentals,
-- adjusted prices,
-- a risk-free series.
+- 50–100 liquid US-listed ETFs with point-in-time eligibility;
+- public total-return ETF prices (provider recorded in the snapshot manifest);
+- FRED `TB3MS` for the risk-free series;
+- Fama-French 3-factor + momentum data for exposures and diagnostics.
 
-Options are compared in [`docs/01_data_card.md`](docs/01_data_card.md). If only free data are available, the project pivots to an ETF/factor universe and is labelled a methods study.
+Public data may omit closed funds. The project therefore makes **no survivorship-free claim** and **no stock-selection claim**. Details and the leakage audit are in [`docs/01_data_card.md`](docs/01_data_card.md).
 
-No vendor data are included in this repository. `scripts/run_smoke.py` uses synthetic data only.
+No raw data snapshots are included in this repository. `scripts/run_smoke.py` uses synthetic data only.
 
 ---
 
@@ -102,10 +105,11 @@ No vendor data are included in this repository. `scripts/run_smoke.py` uses synt
 ```
 epistemic-dro/
 ├── README.md
+├── LICENSE                   # MIT (code only; data terms separate)
 ├── pyproject.toml
 ├── requirements.txt
 ├── configs/
-│   └── base.yaml             # provisional configuration; freeze before confirmatory runs
+│   └── base.yaml             # frozen v1.0-etf configuration (2026-11-02)
 ├── data/
 │   ├── README.md             # data access, schema, licensing
 │   ├── raw/                  # gitignored vendor data
@@ -155,17 +159,18 @@ python -m venv .venv
 .venv\Scripts\activate
 python -m pip install -e ".[dev,ml]"
 pytest -q
+ruff check .
 python scripts/run_smoke.py
 ```
 
-The smoke test uses **synthetic data**. It proves the optimizer and metrics run; it says nothing about real performance.
+The smoke test uses **synthetic data**. It proves the optimizer and metrics run; it says nothing about real performance. `python scripts/check_data.py` will fail until the G1 ETF snapshot is placed in `data/raw/`; that failure is the correct behaviour.
 
 ---
 
 ## Evaluation protocol (summary)
 
 1. **Walk-forward only.** No random train/test splits. Purge and embargo around the test window.
-2. **Point-in-time features.** Fundamentals use filing dates, not fiscal-period ends. Prices and universe membership are as-of the decision date.
+2. **Point-in-time features.** An ETF is eligible only at or after its inception date. Prices, returns, and universe eligibility are as-of the decision date. ETF metadata is not treated as point-in-time unless a historical series exists.
 3. **Net of costs.** 10 bps one-way baseline; sensitivity at 5, 20, and 50 bps.
 4. **Primary metric.** Net Sharpe. Max drawdown and CVaR95 are guardrails.
 5. **Uncertainty.** Bootstrap intervals; deflated Sharpe ratio to account for multiple trials.
@@ -192,13 +197,15 @@ The frozen details belong in [`docs/02_experiment_card.md`](docs/02_experiment_c
 - DRO protects against a chosen ambiguity set, not against model misspecification outside it.
 - A 4-week backtest cannot validate deployment.
 - Multiple testing can produce apparent improvements; the deflated Sharpe ratio and a frozen protocol are mitigations, not guarantees.
-- If data are not survivorship-bias-free, the stock-level results are not credible.
+- The ETF universe is narrower and less dispersed than a stock universe; statistical power is limited.
+- Public ETF data may omit closed funds, so the results are not survivorship-free.
+- ETF metadata (expense ratio, yield) may be a current snapshot rather than a point-in-time series.
 
 ---
 
 ## License and data
 
-Code license: **TBD** (MIT suggested). Vendor data are **not** distributed. See [`data/README.md`](data/README.md).
+Code license: **MIT** (see [`LICENSE`](LICENSE)). Third-party data are **not** distributed and remain subject to their provider terms. See [`data/README.md`](data/README.md).
 
 ---
 

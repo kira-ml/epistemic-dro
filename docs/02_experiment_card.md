@@ -1,9 +1,11 @@
 # Experiment Card / Pre-Registration — Epistemic-Aware DRO
 
-**Experiment ID:** `EXP-DRO-2026-11-01`  
-**Status:** DRAFT — not frozen  
-**Freeze date:** TBD (before any confirmatory run)  
+**Experiment ID:** `EXP-DRO-2026-11-01`
+**Status:** FROZEN — v1.0-etf (2026-11-02)
+**Freeze date:** 2026-11-02
 **Owner:** Ken Ira Talingting
+**Decision record:** `DEC-20261102-001` (ETF pivot), `DEC-20261102-003` (freeze)
+**Tag:** `docs-freeze-v1`
 
 > Do not run the confirmatory experiment until this card is frozen and dated. Exploratory runs must be labelled exploratory and may not be cited as confirmation.
 
@@ -23,7 +25,7 @@
 
 **Primary metric:** Net Sharpe ratio, monthly, annualized, after 10 bps one-way costs, using an explicit risk-free series.
 
-**Decision rule (provisional):**
+**Decision rule (frozen 2026-11-02):**
 
 - **PASS** if:
   - net Sharpe is within 0.20 of the best baseline, **and**
@@ -33,7 +35,9 @@
 - **FAIL** otherwise.
 - **INCONCLUSIVE** if the bootstrap interval is too wide to distinguish the effects; report the power limitation rather than declaring success.
 
-The final thresholds must be frozen before the confirmatory run and must not be changed after seeing test results.
+The thresholds are frozen and must not be changed after seeing test results; any change requires a deviation entry in `04_decision_log.md`.
+
+**Power note (frozen with the ETF pivot):** the v1 cross-section is 50–100 ETFs, not 150–200 stocks. Lower breadth and lower dispersion reduce the power to detect a tail-risk improvement. Report eligible-asset counts per month and describe the power limitation; do not treat a null result as evidence that the method is useless in a broader universe.
 
 ---
 
@@ -75,10 +79,10 @@ The primary comparison is **M1 vs B5** (does uncertainty help?) and **M1 vs best
 
 | Item | Specification |
 |---|---|
-| Source | TBD (see data card) |
-| Universe | 150–200 liquid US stocks, PIT |
+| Source | Public ETF total-return data + FRED `TB3MS` + Fama-French factors (DEC-20261102-001) |
+| Universe | 50–100 liquid US-listed ETFs, PIT eligibility |
 | Frequency | Monthly |
-| Sample | 2005–2024, data permitting |
+| Sample | 2005–2024, data permitting (ETF inception limits the early cross-section) |
 | OOS | 2010–2024, data permitting |
 | Split | Walk-forward: expanding or rolling training window |
 | Train minimum | 60 months |
@@ -88,7 +92,7 @@ The primary comparison is **M1 vs B5** (does uncertainty help?) and **M1 vs best
 | Embargo | 1 month after test before the next training window |
 | Final holdout | Last 12 months, touched once |
 
-No random splits. No test-period information in feature construction, universe formation, hyperparameter tuning, or model selection.
+No random splits. No test-period information in feature construction, universe formation, hyperparameter tuning, or model selection. An ETF enters the panel only at or after its inception date; no backfill is permitted. Months with fewer than 50 eligible ETFs stop the run and are reported as a data limitation (charter §9 kill criterion 7).
 
 ---
 
@@ -97,7 +101,14 @@ No random splits. No test-period information in feature construction, universe f
 ### 6.1 ML return model
 
 - Target: next-month cross-sectional excess-return rank (or winsorized return).
-- Features: 15–20 lagged signals (momentum, value, quality, low-vol, size, liquidity).
+- Features (15–20 lagged signals, ETF-appropriate):
+  - momentum: 1, 3, 6, and 12 months;
+  - volatility: 3- and 12-month realised volatility;
+  - drawdown: 12-month maximum drawdown;
+  - liquidity: 12-month average dollar volume;
+  - beta: 36-month beta to the market factor;
+  - factor exposures: market, size, value, and momentum loadings;
+  - metadata: expense ratio and distribution yield, only if a historical series exists. If only a current snapshot exists, either exclude these fields or disclose that they are not point-in-time.
 - Model: LightGBM regression or ranking; 5 seeds.
 - Tuning: validation window only; no test data.
 - Feature preprocessing: fit inside each training window.
@@ -156,6 +167,7 @@ Each ablation uses the same splits and cost model.
 - Paired comparison against the best baseline where possible.
 - Subperiod analysis: 2008, 2020, 2022 stress windows.
 - Report all trials, including failures, in the decision log.
+- Report the number of eligible ETFs per month (effective breadth).
 - No claim of significance without a pre-specified comparison.
 
 ---
@@ -165,6 +177,7 @@ Each ablation uses the same splits and cost model.
 Stop the experiment and report if:
 
 - leakage is found and cannot be removed;
+- fewer than 50 ETFs are eligible in a test month, or the covered universe is too incomplete to support a methods claim;
 - the solver fails on more than 5% of rebalances;
 - the baseline cannot be reproduced;
 - the uncertainty is uncalibrated after two attempts;
@@ -178,8 +191,10 @@ Do not keep tuning until a positive result appears.
 
 | Threat | Mitigation |
 |---|---|
-| Survivorship bias | PIT universe; delisting returns |
-| Look-ahead bias | Feature timestamps; filing dates |
+| ETF closure survivorship | Disclose that public data may omit closed funds; do not claim survivorship-free; prefer a provider with closure history |
+| Look-ahead bias | Feature timestamps; listing/inception dates |
+| Metadata vintage | Expense ratio / yield are current snapshots unless a history exists; exclude or disclose |
+| Universe breadth | Report eligible ETFs per month; state the power limitation; no broad-market claim |
 | Data snooping | Frozen protocol; deflated Sharpe |
 | Multiple testing | Pre-registered primary metric; report all trials |
 | Cost underestimate | 5/10/20/50 bps sensitivity |
@@ -195,11 +210,11 @@ Do not keep tuning until a positive result appears.
 
 | Item | Value |
 |---|---|
-| Protocol version | `v0.1-draft` |
-| Frozen by | TBD |
-| Freeze date | TBD |
-| Hash of config | TBD |
-| Git commit | TBD |
+| Protocol version | `v1.0-etf` |
+| Frozen by | Ken Ira Talingting (owner) |
+| Freeze date | 2026-11-02 |
+| Hash of config | `2c380990ae02c76c24044f783a5b9b1fb9e90abba67d228e959ebc7714a5cb83` (SHA-256, `configs/base.yaml`) |
+| Git commit | Tag `docs-freeze-v1` (resolve with `git rev-parse docs-freeze-v1`) |
 | Deviation log | `docs/04_decision_log.md` |
 
-**No confirmatory run may occur before this record is complete.**
+**No confirmatory run may occur before this record is complete.** The record is complete; the data gate (G1) and the modelling gates (G2–G4) remain open. Frozen protocol ≠ passed gates.

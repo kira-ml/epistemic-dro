@@ -84,8 +84,50 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-001 — ETF/factor pivot (kill criterion 1 executed)
+
+**Decision:** Pivot v1 from 150–200 US stocks to 50–100 liquid US-listed ETFs, supported by Fama-French factors, FRED risk-free data, and public total-return ETF prices. Reclassify the project as a **methods study**.
+
+**Alternatives considered:** Delay the project and wait for WRDS/Sharadar/Norgate access; proceed with free stock prices and current constituents; run a synthetic-only methods paper.
+
+**Rationale:** No point-in-time stock-level source was secured by the 2026-10-31 deadline. Free stock prices with current constituents would manufacture survivorship and look-ahead bias, and synthetic data cannot support an empirical claim. The ETF pivot preserves the core question (does epistemic uncertainty improve a DRO mean-CVaR trade-off?) while narrowing the claim to what the data can support. Public ETF data may omit closed funds, so the project also gives up any survivorship-free claim.
+
+**Reversibility:** Medium. The code path is reusable, but restoring a stock universe requires a new data card and a new pre-registration.
+
+**Review:** 2026-11-07.
+
+---
+
+## DEC-20261102-002 — MIT license
+
+**Decision:** License the code under the MIT License and add a `LICENSE` file; license stays separate from third-party data terms.
+
+**Alternatives considered:** Apache-2.0; keep the license TBD.
+
+**Rationale:** MIT is permissive, short, and standard for research code. Keeping TBD left the repository legally "all rights reserved" and contradicted the public README. MIT does not grant rights to data the project does not own.
+
+**Reversibility:** Medium. A future license change applies prospectively; already-published copies remain under MIT.
+
+**Review:** 2026-11-30.
+
+---
+
+## DEC-20261102-003 — Documentation freeze v1.0
+
+**Decision:** Freeze the documentation set (`docs/00`–`docs/11`, the register, the root README, `data/README.md`, and `configs/base.yaml`) as protocol `v1.0-etf` and tag the commit `docs-freeze-v1`.
+
+**Alternatives considered:** Keep the docs draft until G1 passes; freeze only `02_experiment_card.md`.
+
+**Rationale:** The protocol must be fixed before any confirmatory run, and the ETF pivot changes the universe, features, and data card. Freezing the full set makes later changes auditable through the deviation log. The freeze is explicitly **not** a claim that G1–G4 passed; the data gate is still open.
+
+**Reversibility:** Low for the pre-registered metric, splits, constraints, and cost model. Any change requires a dated deviation entry.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |
 |---|---|---|---|---|
-| — | — | — | — | — |
+| 2026-11-02 | `EXP-DRO-2026-11-01` | Universe changed from 150–200 US stocks to 50–100 ETFs; stock-selection claim withdrawn; project reclassified as a methods study | G1 deadline missed; no PIT stock access (DEC-20261102-001) | Ken Ira Talingting (owner) |

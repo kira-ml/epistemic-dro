@@ -1,6 +1,6 @@
 # Data
 
-**Status: BLOCKED.** The data source must be selected by **2026-10-31**. No vendor data are included in this repository.
+**Status: PIVOTED (2026-11-02) — ETF/factor methods study; G1 in progress.** No raw data snapshots are included in this repository. See `docs/01_data_card.md` and `docs/04_decision_log.md` DEC-20261102-001.
 
 ## Why this is a gate
 
@@ -11,29 +11,28 @@ A stock-level backtest that uses today's index constituents or a free price API 
 - **restatement bias** — fundamentals are revised after the fact;
 - **timestamp leakage** — a macro or filing value is used before it was public.
 
-Any of these can manufacture a result. This project treats data provenance as a first-class research contribution, not plumbing.
+No point-in-time stock source was secured by the 2026-10-31 deadline. Rather than manufacture a stock-level result, v1 pivots to ETFs and states the residual limitation: public ETF data may omit closed funds, so the result is a methods study and is **not** survivorship-free.
 
 ## Options
 
 | Source | Pros | Cons | Verdict |
 |---|---|---|---|
-| **CRSP + Compustat via WRDS** | Historical constituents, delisting returns, PIT fundamentals, academic standard | Requires university/library access; licensing restricts redistribution | Preferred |
-| **Sharadar / Norgate** | Practical, survivorship-bias-aware, easier setup | Paid; verify PIT fundamentals and delisting handling | Acceptable if verified |
-| **Free prices + current constituents** | Free and fast | Survivorship and look-ahead bias; not credible for a stock-level flagship | Reject for stock-level claims |
-| **ETF / factor data** | Clean, reproducible, free or cheap | Weaker cross-sectional ML story; fewer assets | Fallback / methods study |
-
-If the only available data are free prices and current constituents, the project pivots to an ETF/factor universe and is labelled a methods study. It does not claim stock-selection validity.
+| **CRSP + Compustat via WRDS** | Historical constituents, delisting returns, PIT fundamentals, academic standard | Requires university/library access; licensing restricts redistribution | Not secured for v1; future stock experiment |
+| **Sharadar / Norgate** | Practical, survivorship-bias-aware, easier setup | Paid; verify PIT fundamentals and delisting handling | Not selected for v1 |
+| **Public ETF total-return data (Yahoo/Stooq)** | Free, reproducible, adjusted prices | Closed-fund coverage incomplete; provider terms apply | **Selected for v1 — methods study** |
+| **Fama-French factors** | Free, standard, supports exposures and diagnostics | Factor portfolios are not ETFs | **Supporting data** |
+| **Free stock prices + current constituents** | Free and fast | Survivorship and look-ahead bias; not credible | Reject |
 
 ## Required files
 
-Place vendor exports under `data/raw/` (gitignored). The loader expects these logical tables; exact filenames can be configured.
+Place the ETF snapshot under `data/raw/` (gitignored). The loader expects these logical tables; exact filenames can be configured.
 
 ### `prices`
 
 | Column | Type | Notes |
 |---|---|---|
 | `date` | date | Month-end trading date |
-| `ticker` | string | Stable security identifier preferred |
+| `ticker` | string | ETF ticker; stable identifier preferred |
 | `close` | float | Split-adjusted close |
 | `adj_close` | float | Total-return-adjusted close |
 | `volume` | float | Shares |
@@ -45,22 +44,20 @@ Place vendor exports under `data/raw/` (gitignored). The loader expects these lo
 |---|---|---|
 | `date` | date | Month-end |
 | `ticker` | string | |
-| `ret` | float | Total return, including delisting return where applicable |
+| `ret` | float | Total return implied by `adj_close` |
 | `excess_ret` | float | `ret - rf` |
 
-### `fundamentals`
+### `etf_metadata`
 
 | Column | Type | Notes |
 |---|---|---|
 | `ticker` | string | |
-| `datadate` | date | Fiscal-period end |
-| `rdq` | date | Report date; **use this for PIT availability** |
-| `fiscal_period` | string | |
-| `book_equity` | float | |
-| `earnings` | float | |
-| `roe` | float | |
-| `gross_profitability` | float | |
-| `market_cap` | float | |
+| `name` | string | |
+| `category` | string | Broad category / strategy label |
+| `inception_date` | date | **Use for PIT eligibility** |
+| `expense_ratio` | float | Current snapshot unless a history exists |
+| `distribution_yield` | float | Current snapshot unless a history exists |
+| `underlying_index` | string | Optional |
 
 ### `universe`
 
@@ -68,30 +65,43 @@ Place vendor exports under `data/raw/` (gitignored). The loader expects these lo
 |---|---|---|
 | `date` | date | Formation date |
 | `ticker` | string | |
-| `eligible` | bool | Passes liquidity/price/history filters as of `date` |
+| `eligible` | bool | Listed on/before `date`, passes history/price/liquidity filters |
+
+### `factors`
+
+| Column | Type | Notes |
+|---|---|---|
+| `date` | date | Month-end |
+| `mkt_rf` | float | Market excess return |
+| `smb` | float | Size factor |
+| `hml` | float | Value factor |
+| `mom` | float | Momentum factor |
+| `rf` | float | Risk-free return |
 
 ### `risk_free` and `benchmark`
 
 | Column | Type | Notes |
 |---|---|---|
 | `date` | date | Month-end |
-| `rf` | float | Monthly risk-free return |
-| `benchmark_ret` | float | Optional benchmark total return |
+| `rf` | float | Monthly risk-free return (from FRED `TB3MS`) |
+| `benchmark_ret` | float | `SPY` total return (diagnostic) |
 
 ## Point-in-time rules
 
-1. A fundamental value is available only on or after its `rdq` (report date), not its `datadate`.
-2. A feature at month-end `t` may use data timestamped at or before `t`; it may not use `t+1` prices or returns.
-3. Universe eligibility is computed from data available at `t`, not from the full sample.
-4. Delisting returns are included in the month of delisting; do not silently drop the row.
-5. Corporate actions are handled by the vendor's adjusted prices; document the convention.
-6. Restatements: use the vintage available at the time, not the final revised value, if the vendor supports vintages.
+1. A feature at month-end `t` may use data timestamped at or before `t`; it may not use `t+1` prices or returns.
+2. An ETF is eligible only on or after its `inception_date`; no backfill before listing.
+3. Universe eligibility is computed from data available at `t`, not from the full sample or today's ETF list.
+4. A closed ETF remains in the universe until its closure date; the closure month uses the final total return. If the provider omits a closed fund entirely, record that as a survivorship limitation.
+5. Distribution-adjusted prices are required; document the provider's adjustment convention.
+6. Expense ratio and distribution yield are current snapshots unless a historical series exists. Do not present them as point-in-time values.
+7. The risk-free series is converted from the annualized `TB3MS` rate to a monthly return; document the conversion.
+8. Factor data are pinned by pull date because the series can be revised.
 
 ## Versioning
 
 Record for every snapshot:
 
-- vendor and dataset name;
+- provider and dataset name;
 - pull date;
 - coverage start/end;
 - row counts and checksum;
@@ -102,7 +112,8 @@ Store the manifest in `data/raw/MANIFEST.json` (gitignored) and copy the human-r
 
 ## Licensing
 
-- Do not commit raw vendor data.
-- Do not commit derived rows that reconstruct a licensed dataset.
+- Do not commit raw snapshots.
+- Do not commit derived rows that reconstruct a restricted dataset.
 - A public repo may include code, synthetic smoke-test data, and aggregate results.
-- Check the vendor's terms before publishing any figure that contains raw values.
+- Check the provider's terms before publishing any figure that contains raw values.
+- The repository's MIT license covers the code only; it does not grant rights to third-party data.

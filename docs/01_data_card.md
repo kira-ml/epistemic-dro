@@ -1,9 +1,14 @@
 # Data Card — Epistemic-Aware DRO
 
-**Status:** BLOCKED — source not selected  
-**Owner:** Ken Ira Talingting  
-**Decision deadline:** 2026-10-31  
-**Last updated:** 2026-10-27
+**Status:** PIVOTED — ETF/factor methods study (DEC-20261102-001); G1 in progress
+**Owner:** Ken Ira Talingting
+**Decision date:** 2026-11-02
+**Last updated:** 2026-11-02
+
+> **Scope change.** No point-in-time stock-level source was secured by the
+> 2026-10-31 deadline. Charter §9 kill criterion 1 was executed: v1 uses a
+> 50–100 ETF universe and is a **methods study**. It makes no stock-selection
+> claim and no survivorship-free claim.
 
 ---
 
@@ -11,21 +16,25 @@
 
 This card documents the data needed to test whether epistemic uncertainty improves a DRO mean-CVaR portfolio. It is also the G1 gate artefact: modelling does not start until the source, provenance, timing, and leakage risks are resolved.
 
+The v1 pivot keeps the original question — does an uncertainty-aware robust optimizer improve the tail-risk/return trade-off? — while removing the stock-level claim that the available data cannot support.
+
 ---
 
 ## 2. Source decision
 
-| Candidate | Historical universe | Delisting returns | PIT fundamentals | Cost / access | Verdict |
+| Candidate | Historical universe | Closure / delisting handling | PIT fundamentals | Cost / access | Verdict |
 |---|---|---|---|---|---|
-| **CRSP + Compustat (WRDS)** | Yes | Yes | Yes | University/library access; redistribution restricted | **Preferred** |
-| **Sharadar** | Yes, if using the survivorship-bias-free tier | Verify | Verify `datekey` / filing-date semantics | Paid | Acceptable after verification |
-| **Norgate** | Yes | Yes | Verify fundamentals coverage | Paid | Acceptable after verification |
-| **Yahoo / Stooq + current constituents** | No | No | No | Free | Reject for stock-level claims |
-| **ETF / factor data** | Fund universe is limited | Less severe | N/A | Free/low cost | Fallback / methods study |
+| **CRSP + Compustat (WRDS)** | Yes | Yes | Yes | University/library access; redistribution restricted | **Not secured by 2026-10-31** |
+| **Sharadar** | Yes, if using the survivorship-bias-free tier | Verify | Verify `datekey` / filing-date semantics | Paid | Not selected |
+| **Norgate** | Yes | Yes | Verify fundamentals coverage | Paid | Not selected |
+| **Public ETF total-return data (Yahoo/Stooq)** | Listing history assembled from inception/closure dates; incomplete for closed funds | Closures only partly represented | N/A (ETF metadata instead) | Free | **Selected for v1 — methods study** |
+| **Fama-French factor data** | Factor portfolios, not individual ETFs | N/A | N/A | Free | **Supporting data** (exposures, benchmark, robustness) |
 
-**Decision:** `UNKNOWN` until 2026-10-31.
+**Decision (DEC-20261102-001):** use 50–100 liquid US-listed ETFs with public total-return data, FRED for the risk-free series, and Fama-French factors for exposures and diagnostics.
 
-**If no PIT stock data:** pivot to a 50–100 ETF universe, keep the DRO/CVaR method, and state that the project is a methods study. Do not claim stock-selection validity.
+**Why this is honest:** public ETF sources do not guarantee a complete history of closed funds. The v1 result is therefore a **methods study on the ETFs that the source covers**, not a survivorship-free asset-pricing test. The limitation is stated in `03_model_card.md` §10 and `05_risk_register.md` R2.
+
+**If a PIT stock source becomes available later:** it is a new experiment with a new pre-registration. Do not silently swap universes and reuse the frozen protocol.
 
 ---
 
@@ -33,17 +42,20 @@ This card documents the data needed to test whether epistemic uncertainty improv
 
 | Item | Requirement | Status |
 |---|---|---|
-| Start date | At least 2005-01; 2010-01 minimum for OOS | TBD |
-| End date | 2024-12 or later | TBD |
-| Frequency | Monthly | TBD |
-| Universe | 150–200 liquid US stocks, PIT | TBD |
-| Returns | Total return, including delisting | TBD |
-| Prices | Split- and dividend-adjusted | TBD |
-| Fundamentals | PIT, with report date | TBD |
-| Risk-free | Monthly T-bill or equivalent | TBD |
-| Benchmark | Optional, for diagnostics | TBD |
-| Corporate actions | Vendor-adjusted; convention documented | TBD |
-| Identifier | Stable ticker/permno/CUSIP mapping | TBD |
+| Start date | At least 2005-01; 2010-01 minimum for OOS | Pending snapshot |
+| End date | 2024-12 or later | Pending snapshot |
+| Frequency | Monthly | Pending snapshot |
+| Universe | 50–100 liquid US-listed ETFs, PIT eligibility | Pending snapshot |
+| Returns | Total return, adjusted for distributions | Pending snapshot |
+| Prices | Split- and distribution-adjusted | Pending snapshot |
+| ETF metadata | Expense ratio, distribution yield, category, inception date | Pending snapshot; historical availability limited |
+| Factors | Fama-French 3-factor + momentum, monthly | Pending snapshot |
+| Risk-free | FRED `TB3MS`, converted to a monthly return | Pending snapshot |
+| Benchmark | `SPY` total return (diagnostic) | Pending snapshot |
+| Corporate actions | Vendor-adjusted; convention documented | Pending snapshot |
+| Identifier | Ticker plus ISIN/CUSIP where available | Pending snapshot |
+
+**Minimum breadth:** at least 50 eligible ETFs in every test month. If a month has fewer than 50, the run stops and the limitation is reported rather than backfilled.
 
 ---
 
@@ -57,31 +69,42 @@ This card documents the data needed to test whether epistemic uncertainty improv
 
 `date, ticker, ret, excess_ret`
 
-### Fundamentals
+`ret` is the total return implied by `adj_close`; `excess_ret = ret - rf`.
 
-`ticker, datadate, rdq, fiscal_period, book_equity, earnings, roe, gross_profitability, market_cap`
+### ETF metadata
+
+`ticker, name, category, inception_date, expense_ratio, distribution_yield, underlying_index`
+
+A single current metadata snapshot is acceptable for v1 **only if** the card records that expense ratio and yield are not point-in-time. If the provider supplies a history, use the as-of value.
 
 ### Universe
 
 `date, ticker, eligible`
 
+Eligibility is computed from data available at `date`: listed on or before `date`, minimum history, minimum price, minimum dollar volume, and not scheduled for closure before the decision date.
+
+### Factors
+
+`date, mkt_rf, smb, hml, mom, rf`
+
 ### Risk-free / benchmark
 
 `date, rf, benchmark_ret`
 
-Exact filenames and vendor mappings belong in `configs/base.yaml` and the loader, not in this card.
+Exact filenames and provider mappings belong in the loader and `data/raw/MANIFEST.json`, not in this card.
 
 ---
 
 ## 5. Point-in-time rules
 
-1. **Fundamentals:** available on or after `rdq` (report date), not `datadate`.
-2. **Prices:** a feature at month-end `t` uses data timestamped at or before `t`.
-3. **Universe:** eligibility is computed from data available at `t`, not from the full sample.
-4. **Delisting:** include the delisting return in the delisting month; do not drop the row.
-5. **Restatements:** use the vintage available at the time if the vendor provides it; otherwise document the limitation.
-6. **Timezone:** all timestamps normalized to UTC; month-end defined explicitly.
-7. **Macro releases:** use the release date, not the reference period.
+1. **Prices and returns:** a feature at month-end `t` uses only prices and returns timestamped at or before `t`.
+2. **Universe eligibility:** computed from data available at `t`; no asset is eligible before its inception date, and no asset is backfilled from a later listing.
+3. **Closed ETFs:** an ETF remains in the universe until its closure date; the closure month uses the final total return. If the public source omits a closed fund entirely, that is a documented survivorship limitation, not a silent gap.
+4. **Distributions and splits:** use distribution-adjusted prices; document the vendor convention. Do not reconstruct returns from unadjusted closes.
+5. **ETF metadata:** expense ratio and distribution yield are treated as current snapshots unless a historical series exists. Do not present them as point-in-time values.
+6. **Factor data:** use the published monthly series as of the snapshot date; record the download date because factor data can be revised.
+7. **Risk-free:** use the release/vintage available at the decision date; convert the annualized T-bill rate to a monthly return and document the convention.
+8. **Timezone:** all timestamps normalized to UTC; month-end defined explicitly.
 
 ---
 
@@ -89,14 +112,15 @@ Exact filenames and vendor mappings belong in `configs/base.yaml` and the loader
 
 | Risk | Test | Status |
 |---|---|---|
-| Target leakage | Check that no feature is derived from the label or future returns | TBD |
-| Temporal leakage | Assert `feature_date <= decision_date` for every row | TBD |
-| Group leakage | No entity in both train and test | TBD |
-| Preprocessing leakage | Fit imputation/scaling/winsorization inside training only | TBD |
-| Universe leakage | Historical eligibility, not current constituents | TBD |
-| Delisting leakage | Delisted firms remain until their delisting date | TBD |
-| Benchmark contamination | No test-period data in model selection | TBD |
-| Duplicate leakage | Deduplicate by security/date before splitting | TBD |
+| Target leakage | Check that no feature is derived from the label or future returns | Pending dataset audit; code guard exists |
+| Temporal leakage | Assert `feature_date <= decision_date` for every row | Pending dataset audit; `tests/test_leakage.py` passes |
+| Group leakage | No entity in both train and test (walk-forward time split; duplicate check) | Pending dataset audit |
+| Preprocessing leakage | Fit imputation/scaling/winsorization inside training only | Pending implementation |
+| Universe leakage | PIT eligibility, no backfill before inception | Pending dataset audit |
+| Closure leakage | Closed ETFs remain until closure; omission disclosed | Pending dataset audit |
+| Metadata leakage | Expense ratio / yield not treated as PIT without history | Pending dataset audit |
+| Benchmark contamination | No test-period data in model selection | Pending implementation |
+| Duplicate leakage | Deduplicate by security/date before splitting | Pending dataset audit |
 
 The code-level guard lives in `src/epistemic_dro/leakage.py`; tests live in `tests/test_leakage.py`.
 
@@ -108,12 +132,13 @@ The code-level guard lives in `src/epistemic_dro/leakage.py`; tests live in `tes
 - Missingness by field and by subgroup.
 - Duplicate `(date, ticker)` rows.
 - Extreme returns and their provenance.
-- Price jumps around splits/dividends.
-- Universe count over time.
-- Fundamentals coverage by month.
+- Price jumps around splits/distributions.
+- Universe count over time; months below 50 eligible ETFs.
+- ETF metadata coverage and whether it is historical or current.
 - Label distribution over time.
-- Delisting counts by month.
+- ETF closures by month.
 - Risk-free series completeness.
+- Factor series completeness and revision date.
 - Train/serving schema consistency.
 
 ---
@@ -122,7 +147,7 @@ The code-level guard lives in `src/epistemic_dro/leakage.py`; tests live in `tes
 
 Record:
 
-- vendor and dataset;
+- provider and dataset;
 - pull date;
 - coverage start/end;
 - row counts;
@@ -130,18 +155,18 @@ Record:
 - filters applied;
 - query/export script.
 
-Do **not** commit raw vendor data. Do **not** publish derived rows that reconstruct a licensed dataset. Public artefacts should be code, synthetic smoke-test data, and aggregate results.
+Do **not** commit raw data snapshots. Do **not** publish derived rows that reconstruct a restricted dataset. Public artefacts should be code, synthetic smoke-test data, and aggregate results. Check the provider's terms before publishing any figure containing raw values.
 
 ---
 
 ## 9. Open questions
 
-1. Which source can actually be accessed by 2026-10-31?
-2. Does the source provide historical index membership or a survivorship-bias-free universe?
-3. Are delisting returns included?
-4. Are fundamentals point-in-time, with report dates?
-5. Is the risk-free series monthly and complete?
-6. What redistribution restrictions apply to figures and tables?
+1. Which public provider gives the most complete adjusted ETF history for 2005–2024?
+2. How many ETFs have sufficient history in 2005–2010, and does the in-sample start need to move later?
+3. Are closed ETFs represented at all? If not, how is the survivorship limitation disclosed in every results table?
+4. Is historical expense-ratio or distribution-yield data available, or is only a current snapshot possible?
+5. Is the FRED risk-free series complete for every month, and how is the annualized-to-monthly conversion documented?
+6. What redistribution terms apply to the chosen provider's adjusted prices?
 
 ---
 
@@ -149,5 +174,7 @@ Do **not** commit raw vendor data. Do **not** publish derived rows that reconstr
 
 | Gate | Criterion | Status |
 |---|---|---|
-| G1 | Source selected; schema validated; leakage audit clean; splits match deployment | **Not passed** |
+| G1 | Source selected; snapshot manifest; schema validated; leakage audit clean; splits match deployment | **Not passed** — source selected (ETF pivot); snapshot and audit pending |
 | Reviewer | Ken Ira Talingting | Pending |
+
+The docs freeze does **not** pass G1. The protocol is frozen before the data audit; the data gate remains open and is tracked in `08_monitoring_plan.md`.
