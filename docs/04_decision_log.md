@@ -213,6 +213,29 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-008 — Final report and project close
+
+**Decision:** Accept the final report (`docs/13_final_report.md`), close the confirmatory phase as a clean negative result for H1/H3, and stop modelling. Do not deploy, do not claim alpha, and do not add features or capacity to force a positive result.
+
+**Final evidence:**
+- H1 FAIL: 0.4% relative MDD improvement, 90% CI [−6.2%, +1.1%]; CVaR95 difference CI includes zero.
+- H2 PASS: +0.018 Sharpe vs B5, 90% CI [−0.000, +0.037], within the 0.20 margin.
+- H3 FAIL: uncertainty ablation does not separate from point-DRO.
+- Secondary: M1 beats 1/N on Sharpe (+0.143), MDD (+0.060), and CVaR (+0.0146); the optimizer structure helps, not the uncertainty layer.
+- Cost sensitivity 5/20/50 bps preserves the ordering; 50 bps M1 0.785, B5 0.771, B1 0.671.
+- Stress windows: 2020 M1 0.681 vs B5 0.634; 2022 both negative (−0.508 vs −0.488); differences are small and inconsistent.
+- Deflated Sharpe (strategy-level, 4 trials): M1 0.996, B5 0.995, B1 0.986. This does **not** test M1 vs B5; the incremental test fails.
+
+**Alternatives considered:** extend the project with a new feature set; fit LightGBM despite the G-R4 null; tune kappa/CVaR on the test period; present the 1/N comparison as success for the uncertainty hypothesis.
+
+**Rejected:** post-hoc tuning; claiming H1/H3; presenting the reduced M1 as the original LightGBM M1; hiding the null; deploying.
+
+**Reversibility:** Closed for this protocol. A new feature set or uncertainty model requires a new data card, a new G-R4 audit, and a new pre-registration.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |
@@ -222,3 +245,4 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 | 2026-11-02 | `EXP-DRO-2026-11-01` | Snapshot built; B0 null recorded; LightGBM objective changed to `huber`; config hash updated | G1 diagnostics and G-R7 tail rule (DEC-20261102-005); no change to primary metric, splits, constraints, costs, universe, or claim scope | Ken Ira Talingting (owner) |
 | 2026-11-02 | `EXP-DRO-2026-11-01` | G-R4 null; LightGBM not fitted; reduced M1 uses Ridge B0 + bootstrap ensemble `sigma` | No feature passed the 80% information rule; complexity is not justified (DEC-20261102-006). Primary metric, splits, constraints, costs, and universe unchanged | Ken Ira Talingting (owner) |
 | 2026-11-02 | `EXP-DRO-2026-11-01` | Reduced DRO experiment run; H1/H3 fail, H2 passes; negative result recorded | Pre-registered reduced test completed (DEC-20261102-007). No post-hoc tuning; no capacity added | Ken Ira Talingting (owner) |
+| 2026-11-02 | `EXP-DRO-2026-11-01` | Final report added (`docs/13_final_report.md`); cost sensitivity, stress windows, deflated Sharpe recorded; project closed | Complete the reporting obligations without changing the protocol or claim (DEC-20261102-008) | Ken Ira Talingting (owner) |

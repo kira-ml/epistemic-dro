@@ -1,6 +1,6 @@
 # Epistemic-Aware DRO for Mean-CVaR Portfolios
 
-**Research prototype · November 2026 · docs frozen v1.1 · G1 snapshot built · Ridge B0 null**
+**Research prototype · November 2026 · docs frozen v1.1 · final reduced result: H1/H3 fail, H2 pass****
 
 > Does epistemic uncertainty from an ML return model improve the tail-risk/return trade-off of a distributionally robust mean-CVaR portfolio, net of costs, out-of-sample?
 
@@ -116,7 +116,7 @@ The reduced uncertainty-aware DRO experiment (Ridge B0 mean + 5-model bootstrap 
 | B5_DRO_point | 0.798 | −24.28% | −8.44% |
 | B1_equal_weight | 0.673 | −26.61% | −9.76% |
 
-**Verdict: H1 fails, H2 passes, H3 fails.** The DRO/CVaR optimizer beats 1/N, but the epistemic-uncertainty layer does not separate from point-estimate DRO. This is a clean negative result for the uncertainty hypothesis; it is not a claim of alpha. See [`experiments/dro_experiment.md`](experiments/dro_experiment.md).
+**Verdict: H1 fails, H2 passes, H3 fails.** The DRO/CVaR optimizer beats 1/N, but the epistemic-uncertainty layer does not separate from point-estimate DRO. This is a clean negative result for the uncertainty hypothesis; it is not a claim of alpha. See [`experiments/dro_experiment.md`](experiments/dro_experiment.md) and the final memo [`docs/13_final_report.md`](docs/13_final_report.md).
 
 The shuffled-target run collapses to zero, so the null is not an obvious leak. The ML layer cannot be assumed to add value. See [`experiments/baseline_benchmarks.md`](experiments/baseline_benchmarks.md).
 
@@ -152,6 +152,7 @@ epistemic-dro/
 │   ├── 10_postmortem_template.md
 │   ├── 11_lessons_log.md
 │   ├── 12_research_rigor.md  # 12-model binding addendum (v1.1)
+│   ├── 13_final_report.md    # final memo: H1/H3 fail, H2 pass
 │   ├── axiomatic_spec.md     # first-principles / Bayes-risk gate
 │   ├── data_dictionary.md    # schema, lineage, MI audit
 │   ├── pre_mortem.md         # falsification and kill criteria
@@ -172,6 +173,7 @@ epistemic-dro/
 │   ├── run_information_audit.py  # G-R4 MI audit
 │   ├── run_dro_experiment.py # reduced M1 vs B5/B3/B1
 │   ├── analyze_dro_experiment.py # paired bootstrap verdict
+│   ├── report_final.py       # cost sensitivity, stress, deflated Sharpe
 │   └── profile_pipeline.py   # bottleneck profiling (G-R12)
 ├── src/epistemic_dro/
 │   ├── __init__.py
@@ -216,6 +218,7 @@ python scripts/run_baseline.py
 python scripts/run_information_audit.py
 python scripts/run_dro_experiment.py
 python scripts/analyze_dro_experiment.py
+python scripts/report_final.py
 ```
 
 The smoke test uses **synthetic data**. The snapshot and baseline scripts use the real frozen data and write to `data/raw/` and `results/tables/` (both gitignored). The B0 baseline is a null result; do not cite it as a strategy result.
