@@ -284,6 +284,18 @@ def build_factors(start: str, end: str) -> pd.DataFrame:
     return factors.sort_values("date").reset_index(drop=True)
 
 
+def _align_month_end_trading_dates(frame: pd.DataFrame, prices: pd.DataFrame) -> pd.DataFrame:
+    """Map calendar month-end dates (FRED/FF) to the last trading day in that month."""
+    calendar = pd.DataFrame({"date": sorted(pd.to_datetime(prices["date"]).unique())})
+    calendar["period"] = calendar["date"].dt.to_period("M")
+    month_end = calendar.groupby("period")["date"].max()
+    aligned = frame.copy()
+    aligned["period"] = pd.to_datetime(aligned["date"]).dt.to_period("M")
+    aligned["date"] = aligned["period"].map(month_end)
+    aligned = aligned.dropna(subset=["date"]).drop(columns=["period"])
+    return aligned.sort_values("date").reset_index(drop=True)
+
+
 def build_universe(prices: pd.DataFrame, metadata: pd.DataFrame) -> pd.DataFrame:
     """PIT eligibility: listed, >=36 months of history, price, and ADV floors."""
     rows: list[pd.DataFrame] = []
@@ -327,7 +339,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build the frozen ETF snapshot.")
     parser.add_argument("--universe", type=Path, default=DEFAULT_UNIVERSE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
-    parser.add_argument("--start", default="2004-01-01")
+    parser.add_argument("--start", default="2000-01-01")
     parser.add_argument("--end", default="2025-01-01")
     parser.add_argument("--sleep", type=float, default=0.35)
     parser.add_argument("--force", action="store_true", help="Overwrite an existing snapshot.")
@@ -390,11 +402,13 @@ def main() -> None:
     returns = returns.dropna(subset=["ret"])[["date", "ticker", "ret"]]
 
     risk_free, risk_free_fallback = build_risk_free(args.start, args.end, fred_api_key)
+    risk_free = _align_month_end_trading_dates(risk_free, prices)
     returns = returns.merge(risk_free[["date", "rf"]], on="date", how="left")
     returns["excess_ret"] = returns["ret"] - returns["rf"]
     returns = returns[["date", "ticker", "ret", "excess_ret", "rf"]]
 
     factors = build_factors(args.start, args.end)
+    factors = _align_month_end_trading_dates(factors, prices)
     universe_panel = build_universe(prices, metadata)
 
     benchmark = returns[returns["ticker"] == "SPY"][["date", "ret"]].rename(
