@@ -6,6 +6,9 @@
 
 This repository is a research apparatus, not a live strategy. It is designed to answer the question above honestly, including the possibility that the answer is **no**.
 
+**Read the paper:** [`paper/mini_paper.pdf`](paper/mini_paper.pdf) — *The holdout is still untouched: three pre-registered tests of uncertainty-aware DRO*.
+**Visual summary:** [`paper/linkedin_carousel.pdf`](paper/linkedin_carousel.pdf) · [`paper/linkedin_card.png`](paper/linkedin_card.png)
+
 ---
 
 ## Why this project
@@ -178,6 +181,12 @@ epistemic-dro/
 │   ├── ledger.jsonl          # append-only run log
 │   ├── baseline_benchmarks.md
 │   └── dro_experiment.md     # reduced DRO result and verdict
+├── paper/
+│   ├── mini_paper.pdf        # 6-page working paper
+│   ├── linkedin_carousel.pdf # 6-slide native document post
+│   ├── linkedin_card.png     # 4:5 visual card
+│   ├── one_pager.pdf         # one-page leave-behind
+│   └── README.md             # publishing strategy and assets
 ├── notebooks/                # exploration only
 ├── results/                  # gitignored outputs
 ├── scripts/

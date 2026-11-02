@@ -37,6 +37,7 @@ This is the entry point for the project's documentation. If a document is not li
 | `../experiments/ledger.jsonl` | Append-only experiment log | all | **Active — empty** |
 | `../scripts/profile_pipeline.py` | Bottleneck profiling | G-R12 | **Active** |
 | `../README.md` | Public project overview | — | **Frozen** |
+| `../paper/README.md` | Public paper, carousel, card, one-pager | — | **Final — public package** |
 | `../data/README.md` | Data access, schema, licensing | G1 | **Frozen — ETF pivot** |
 | `../configs/base.yaml` | Runtime configuration (frozen protocol values) | G1/G3 | **Frozen v1.1-rigor** |
 | `../LICENSE` | Code license | — | **MIT** |

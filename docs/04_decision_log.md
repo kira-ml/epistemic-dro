@@ -298,6 +298,20 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-013 — Public-facing paper and LinkedIn package
+
+**Decision:** Publish a layered public package: a 6-page working paper (`paper/mini_paper.pdf`), a 6-slide LinkedIn carousel (`paper/linkedin_carousel.pdf`), a 4:5 visual card (`paper/linkedin_card.png`), a one-page leave-behind (`paper/one_pager.pdf`), and a short post draft (`paper/linkedin_post.md`). The paper is the canonical artifact; the carousel is the reach layer.
+
+**Rationale:** a text-only one-pager is a weak acquisition format on LinkedIn. A native document carousel earns dwell time, while the paper carries the technical claim. The hook is the negative result and the preserved holdout, not a performance claim.
+
+**Guardrails:** v1 is described as a reduced M1 (Ridge + bootstrap sigma), not the original LightGBM ensemble; v2/v3 are described as stopped before the holdout; no alpha, investable, causal, or deployment claim; “not investment advice” appears on the visual and in the caption.
+
+**Reversibility:** High. The assets are generated from committed result tables by `scripts/build_paper.py`.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |
