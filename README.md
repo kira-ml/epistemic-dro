@@ -1,6 +1,6 @@
 # Epistemic-Aware DRO for Mean-CVaR Portfolios
 
-**Research prototype · November 2026 · docs frozen v1.0 · G1 ETF pivot in progress**
+**Research prototype · November 2026 · docs frozen v1.1 · G1 snapshot built · Ridge B0 null**
 
 > Does epistemic uncertainty from an ML return model improve the tail-risk/return trade-off of a distributionally robust mean-CVaR portfolio, net of costs, out-of-sample?
 
@@ -85,18 +85,28 @@ A clean negative result is acceptable. The project fails only if it is leaky, no
 
 ## Data status
 
-> **PIVOTED 2026-11-02 — ETF/factor methods study. G1 data gate still open.**
+> **Snapshot built 2026-11-02 — 72 ETFs, FRED `TB3MS`, 68+ eligible ETFs in every 2010+ month. G1 passes with a disclosed survivorship limitation; G-R4 MI audit is still open.**
 
 No point-in-time stock-level source was secured by the 2026-10-31 deadline, so charter §9 kill criterion 1 was executed. v1 uses:
 
-- 50–100 liquid US-listed ETFs with point-in-time eligibility;
-- public total-return ETF prices (provider recorded in the snapshot manifest);
+- 72 liquid US-listed equity ETFs with point-in-time eligibility;
+- Yahoo Finance adjusted total-return prices (provider recorded in the snapshot manifest);
 - FRED `TB3MS` for the risk-free series;
 - Fama-French 3-factor + momentum data for exposures and diagnostics.
 
 Public data may omit closed funds. The project therefore makes **no survivorship-free claim** and **no stock-selection claim**. Details and the leakage audit are in [`docs/01_data_card.md`](docs/01_data_card.md).
 
 No raw data snapshots are included in this repository. `scripts/run_smoke.py` uses synthetic data only.
+
+### Early evidence (baseline only)
+
+The mandatory Ridge B0 walk-forward baseline was run on 2010–2024:
+
+- pooled OOS \(R^2\): **−0.019**
+- mean monthly rank IC: **0.013** (t = 0.56)
+- shuffled-target mean IC: **−0.004** (t = −0.48)
+
+This is a **null linear signal**, not a final result. The shuffled-target run collapses to zero, so the null is not an obvious leak. The ML layer cannot be assumed to add value; the remaining question is whether epistemic uncertainty improves the DRO portfolio's tail risk even with a weak mean forecast. See [`experiments/baseline_benchmarks.md`](experiments/baseline_benchmarks.md).
 
 ---
 
@@ -106,6 +116,7 @@ No raw data snapshots are included in this repository. `scripts/run_smoke.py` us
 epistemic-dro/
 ├── README.md
 ├── LICENSE                   # MIT (code only; data terms separate)
+├── .env.example              # FRED_API_KEY template; .env is gitignored
 ├── pyproject.toml
 ├── requirements.txt
 ├── configs/
@@ -140,18 +151,21 @@ epistemic-dro/
 ├── notebooks/                # exploration only
 ├── results/                  # gitignored outputs
 ├── scripts/
+│   ├── build_snapshot.py     # frozen ETF/FRED/FF snapshot builder
 │   ├── run_smoke.py          # synthetic-data smoke test
-│   ├── check_data.py         # data-readiness checker
+│   ├── check_data.py         # schema/data-readiness checker
+│   ├── run_diagnostics.py    # G-R1/G-R7 noise-floor and tail diagnostics
+│   ├── run_baseline.py       # Ridge B0 walk-forward baseline
 │   └── profile_pipeline.py   # bottleneck profiling (G-R12)
 ├── src/epistemic_dro/
 │   ├── __init__.py
 │   ├── backtest.py           # walk-forward splits
 │   ├── baselines.py          # mandatory Ridge B0 baseline
 │   ├── config.py             # YAML loader
-│   ├── data.py               # loaders + synthetic smoke panel
+│   ├── data.py               # snapshot loader + synthetic smoke panel
 │   ├── evaluation.py         # counter-metric gate
 │   ├── falsification.py      # target-shuffling harness
-│   ├── features.py           # feature spec (impl pending data)
+│   ├── features.py           # ETF feature builder + targets
 │   ├── leakage.py            # lookahead / group / key guards
 │   ├── metrics.py            # Sharpe, CVaR, drawdown, turnover
 │   ├── models.py             # ensemble prediction + uncertainty
@@ -176,7 +190,16 @@ ruff check .
 python scripts/run_smoke.py
 ```
 
-The smoke test uses **synthetic data**. It proves the optimizer and metrics run; it says nothing about real performance. `python scripts/check_data.py` will fail until the G1 ETF snapshot is placed in `data/raw/`; that failure is the correct behaviour.
+**Snapshot rebuild (requires `FRED_API_KEY` in `.env`):**
+
+```bash
+python scripts/build_snapshot.py --force
+python scripts/check_data.py
+python scripts/run_diagnostics.py
+python scripts/run_baseline.py
+```
+
+The smoke test uses **synthetic data**. The snapshot and baseline scripts use the real frozen data and write to `data/raw/` and `results/tables/` (both gitignored). The B0 baseline is a null result; do not cite it as a strategy result.
 
 ---
 

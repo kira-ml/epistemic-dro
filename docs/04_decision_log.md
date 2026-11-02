@@ -140,9 +140,33 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-005 — G1 snapshot, B0 null result, and robust loss
+
+**Decision:** Accept the 2026-11-02 ETF snapshot; establish the mandatory Ridge B0 baseline; set the LightGBM objective to `huber` because the loss-tail Pareto index is below 4.0; continue the project only as a risk-management/uncertainty test, not as an alpha claim.
+
+**Evidence:**
+- Snapshot: 72/72 ETFs, 19,712 price rows, 19,640 return rows, 2000-01-03 .. 2024-12-31, 68+ eligible ETFs in every 2010+ month; FRED `TB3MS` used (252/252 months).
+- Ridge B0 walk-forward: pooled OOS \(R^2\) = −0.0186; mean rank IC = 0.0128 (t = 0.56); 14 folds; 11,328 OOS rows.
+- Shuffled-target Ridge B0: mean rank IC = −0.0040 (t = −0.48). The null is not an obvious leak.
+- Target tails: excess kurtosis 3.804; Hill loss-tail \(\alpha\) = 3.08; the G-R7 rule requires a robust objective.
+- Cross-sectional target variance: mean 0.001381; median 0.001009.
+
+**Interpretation:** the linear predictive signal is statistically indistinguishable from zero. The ML layer cannot be assumed to add value. The remaining testable claim is whether epistemic uncertainty improves tail risk even with a weak mean forecast. If it does not, that is a clean negative result.
+
+**Alternatives considered:** stop the project now; add features until a signal appears; keep the squared-error objective; claim the ML layer is useful without evidence.
+
+**Rejected:** adding features or capacity to force a signal; keeping MSE when \(\alpha < 4\); claiming alpha from a null linear baseline.
+
+**Reversibility:** Low for the claim. A new feature set requires a new data dictionary, a new G-R1 estimate, and a new pre-registration.
+
+**Review:** 2026-11-07.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |
 |---|---|---|---|---|
 | 2026-11-02 | `EXP-DRO-2026-11-01` | Universe changed from 150–200 US stocks to 50–100 ETFs; stock-selection claim withdrawn; project reclassified as a methods study | G1 deadline missed; no PIT stock access (DEC-20261102-001) | Ken Ira Talingting (owner) |
 | 2026-11-02 | `EXP-DRO-2026-11-01` | Post-freeze rigor addendum: B0 Ridge baseline, MI screening, conditional robust loss, Bayesian optimization, counter-metric gate, ledger, profiling | Adopt `v1.1-rigor` before the first data run; no change to primary metric, splits, constraints, costs, universe, or claim scope (DEC-20261102-004) | Ken Ira Talingting (owner) |
+| 2026-11-02 | `EXP-DRO-2026-11-01` | Snapshot built; B0 null recorded; LightGBM objective changed to `huber`; config hash updated | G1 diagnostics and G-R7 tail rule (DEC-20261102-005); no change to primary metric, splits, constraints, costs, universe, or claim scope | Ken Ira Talingting (owner) |

@@ -43,7 +43,8 @@ features:
 
 model:
   type: lightgbm
-  objective: regression  # switch to huber if the Pareto alpha < 4.0
+  # Diagnostics: Hill alpha = 3.08 < 4.0, so G-R7 requires a robust objective.
+  objective: huber
   robust_objective: huber
   pareto_alpha_threshold: 4.0
   n_estimators: 300

@@ -90,17 +90,62 @@ R^2_{\max} = \frac{\operatorname{Var}_i\left(\mathbb{E}_t[r^{\text{ex}}_{i,t+1}]
 {\operatorname{Var}_i\left(r^{\text{ex}}_{i,t+1}\right)}
 \]
 
-The irreducible noise is the residual variance after the true conditional mean is removed. In monthly ETF returns, the denominator is dominated by factor and idiosyncratic noise, so \(R^2_{\max}\) is expected to be **low single-digit percent at best**. The exact estimate is a G1 deliverable:
+The irreducible noise is the residual variance after the true conditional mean is removed. The structural \(R^2_{\max}\) is not directly identifiable, so the project uses the **mandatory Ridge B0 out-of-sample \(R^2\)** as an empirical upper bound on what the frozen feature set can explain linearly. This is a conservative, falsifiable estimate.
 
-- [ ] Compute the cross-sectional variance of next-month excess returns for every month.
-- [ ] Estimate the factor-explained share with a rolling factor regression.
-- [ ] Estimate the residual (irreducible) variance.
-- [ ] Record the implied \(R^2_{\max}\) and the corresponding expected Sharpe improvement.
-- [ ] Date and sign the estimate **before** the first model fit.
+### 5.1 Snapshot evidence (2026-11-02)
 
-**Rule:** if the estimated \(R^2_{\max}\) is indistinguishable from zero, the ML layer cannot add value. The honest response is to report that and stop — not to add capacity until something appears.
+| Quantity | Value |
+|---|---|
+| Snapshot | `data/raw/` (72 ETFs, 2000-01 .. 2024-12) |
+| Target rows | 19,568 |
+| Months | 298 |
+| Target mean | 0.00644 |
+| Target std | 0.06064 |
+| Target skew | −0.281 |
+| Target excess kurtosis | 3.804 |
+| Target min / max | −0.5526 / 0.6522 |
+| Mean cross-sectional variance | 0.001381 |
+| Median cross-sectional variance | 0.001009 |
+| Breadth min / median / max | 21 / 72 / 72 |
 
-**No numeric claim is made here until the G1 snapshot exists.** A placeholder number would violate the no-fabrication rule.
+### 5.2 Factor variance share (not predictive)
+
+A pooled regression of monthly excess returns on the four Fama-French/momentum factors gives \(R^2 = 0.622\) (coefficients: market 0.994, SMB 0.122, HML 0.151, momentum −0.053). This is the **contemporaneous factor variance share**, not predictive power. Factor returns at \(t+1\) are not known at \(t\), so this number cannot be used as a forecast upper bound.
+
+### 5.3 Linear predictive upper bound (Ridge B0)
+
+Walk-forward Ridge B0, 60-month train, 12-month validation, 12-month test, purge/embargo, 2010–2024 report window:
+
+| Metric | Value |
+|---|---|
+| Folds | 14 |
+| OOS rows / months / tickers | 11,328 / 158 / 72 |
+| Pooled OOS \(R^2\) | **−0.0186** |
+| Mean monthly rank IC | **0.0128** |
+| IC standard deviation | 0.2850 |
+| IC t-statistic | **0.563** |
+| Annualized ICIR | 0.155 |
+| Shuffled-target mean IC | **−0.0040** |
+| Shuffled-target IC t-statistic | −0.480 |
+
+**Interpretation:** the linear predictive signal is statistically indistinguishable from zero. The empirical upper bound on linear predictability is approximately zero. The shuffled-target run collapses the IC, so the null is not caused by an obvious leak.
+
+### 5.4 Tail diagnostic (G-R7)
+
+- Hill tail index of losses (top 10%): **3.08**.
+- Excess kurtosis: **3.80**.
+- Because \(\alpha < 4\), the protocol requires a robust objective. `configs/base.yaml` now uses LightGBM `huber` instead of squared-error regression (`DEC-20261102-005`).
+
+### 5.5 Conclusion and rule
+
+The ML layer **cannot be assumed to add value** on this feature set. The honest interpretation is:
+
+1. Do not claim alpha or predictive skill from the ML mean.
+2. The remaining testable question is whether **epistemic uncertainty** improves the tail-risk/return trade-off of the DRO portfolio even when the mean forecast is weak.
+3. If the uncertainty layer does not separate from the point-estimate baseline, that is a clean negative result and must be reported as such.
+4. Do not add capacity, features, or trials to force a positive signal.
+
+**G-R1 is complete as of 2026-11-02** for the frozen feature set. A future feature set requires a new estimate and a new pre-registration.
 
 ---
 
@@ -136,7 +181,8 @@ This is a risk-management mechanism, not an alpha claim.
 | Data-generating mechanism written | **Done** |
 | Timing and constraints written | **Done** |
 | Bayes-risk estimator specified | **Done** |
-| Bayes-risk estimate computed from G1 data | **Pending** |
+| Bayes-risk estimate computed from G1 data | **Done** — Ridge B0 OOS \(R^2\) = −0.0186; mean IC = 0.0128 (t = 0.56) |
+| Tail diagnostic (G-R7) | **Done** — Hill \(\alpha\) = 3.08; robust objective selected |
 | Owner signature | Ken Ira Talingting, 2026-11-02 |
 
-**G-R1 is not complete until the §5 estimate is filled and dated.** Model code may be written against contracts, but no fit may be reported before that line is complete.
+**G-R1 is complete for the frozen feature set.** The linear signal is indistinguishable from zero; the project proceeds only as a risk-management test, not as an alpha claim. A future feature set requires a new estimate and a new pre-registration.

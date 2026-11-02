@@ -35,9 +35,9 @@ This file is the definitive schema, unit, lineage, and information-audit record.
 | Return construction | `adj_close(t+1) / adj_close(t) - 1`, distribution-adjusted |
 | Temporal alignment | Features at month-end \(t\); outcome over \((t, t+1]\) |
 | Decision use | Cross-sectional rank or winsorized return; the model does not trade the raw level |
-| Distribution characteristics | Pareto \(\alpha\), kurtosis, skew, and tail quantiles: **pending G1** |
+| Distribution characteristics | Mean 0.00644; std 0.06064; skew −0.281; excess kurtosis 3.804; min −0.5526; max 0.6522; Hill loss-tail \(\alpha\) 3.08 (2026-11-02 snapshot) |
 | Absorbing barrier | ETF closure / total loss; a closed fund must not be silently dropped |
-| Theoretical Bayes risk | See `docs/axiomatic_spec.md` §5; **pending G1** |
+| Theoretical Bayes risk | See `docs/axiomatic_spec.md` §5: Ridge B0 OOS \(R^2\) = −0.0186; mean IC = 0.0128 (t = 0.56). Linear signal indistinguishable from zero. |
 
 **Leakage invariant:** no target-derived column may appear in the feature matrix. The target is constructed only after the feature snapshot is frozen.
 
@@ -86,18 +86,20 @@ All features are lagged to month-end \(t\). Returns and prices use only data \(\
 
 ## 5. Data quality checks (G1)
 
-- [ ] Row counts by month and ticker.
-- [ ] Missingness by field and by month.
-- [ ] Duplicate `(date, ticker)` count = 0.
+Snapshot 2026-11-02: 72 ETFs, 19,712 price rows, 19,640 return rows, 252-300 months per fund.
+
+- [x] Row counts by month and ticker (19,712 price rows; 72 tickers).
+- [x] Missingness by field and by month (prices, returns, factors, risk-free complete; metadata fields null by design).
+- [x] Duplicate `(date, ticker)` count = 0 in prices, returns, and universe.
 - [ ] Extreme return provenance reviewed.
 - [ ] Price jumps around splits/distributions reviewed.
-- [ ] Universe count by month; months below 50 flagged.
-- [ ] ETF closure count by month.
-- [ ] Metadata vintage recorded.
-- [ ] Risk-free series complete for every month.
-- [ ] Factor series complete and pull date recorded.
-- [ ] Target distribution: mean, volatility, skew, kurtosis, Pareto \(\alpha\).
-- [ ] Train/serving schema comparison.
+- [x] Universe count by month; months below 50 flagged (min 21 in the 2000s; 68+ in every 2010+ month).
+- [x] ETF closure count by month — **N/A / disclosed**: the snapshot is a current-listed universe; closed funds are not represented.
+- [x] Metadata vintage recorded (`current_snapshot_unavailable`; expense ratio/yield null and excluded).
+- [x] Risk-free series complete for every month (FRED `TB3MS`, 252/252 aligned months).
+- [x] Factor series complete and pull date recorded (Ken French 3-factor + momentum).
+- [x] Target distribution: mean 0.00644, std 0.06064, skew −0.281, excess kurtosis 3.804, Hill \(\alpha\) 3.08.
+- [x] Train/serving schema comparison via `epistemic_dro.data.load_panel`.
 
 ---
 
@@ -122,8 +124,8 @@ The manifest lives in `data/raw/MANIFEST.json` (gitignored); the human-readable 
 
 | Gate | Criterion | Status |
 |---|---|---|
-| G1 schema | Columns, units, and dtypes match this dictionary | **Pending** |
-| G1 lineage | Manifest and pull script recorded | **Pending** |
-| G1 leakage | Invariants §4 pass on the real snapshot | **Pending** |
-| G-R4 information | MI/CMI audit complete | **Pending** |
+| G1 schema | Columns, units, and dtypes match this dictionary | **PASS** — `load_panel` validation |
+| G1 lineage | Manifest and pull script recorded | **PASS** — `data/raw/MANIFEST.json` + `scripts/build_snapshot.py` |
+| G1 leakage | Invariants §4 pass on the real snapshot | **PASS for keys/PIT/duplication**; closure survivorship is disclosed, not eliminated |
+| G-R4 information | MI/CMI audit complete | **PENDING** |
 | Reviewer | Ken Ira Talingting | Pending |

@@ -10,7 +10,7 @@ This is the entry point for the project's documentation. If a document is not li
 | File | Purpose | Gate | Status |
 |---|---|---|---|
 | `00_project_charter.md` | Decision, scope, success criteria, kill criteria | G0 | **Frozen — G0 passed; G1 pivoted to ETF** |
-| `01_data_card.md` | Source, schema, PIT rules, leakage audit | G1 | **Frozen — ETF pivot; G1 not passed** |
+| `01_data_card.md` | Source, schema, PIT rules, leakage audit | G1 | **Frozen — snapshot built; G1 pass with limitation; G-R4 pending** |
 | `02_experiment_card.md` | Pre-registered protocol | G3 | **Frozen — v1.1-rigor (2026-11-02)** |
 | `03_model_card.md` | Intended use, limits, monitoring | G4 | **Frozen template — pre-fit** |
 | `04_decision_log.md` | Append-only decision + deviation log | all | **Frozen — append-only** |
@@ -48,7 +48,7 @@ These rules exist because the same fact appears in multiple docs. When a rule is
 - **Guardrails** identical: max drawdown, CVaR95, turnover, max weight 5%, no leverage, no short.
 - **Risk class** identical: Medium. (Would be High if deployed — see `05` §3.)
 - **Cost model** identical: 10 bps primary; 5/20/50 bps sensitivity.
-- **Data status** identical: PIVOTED 2026-11-02 to ETF/factor; G1 not passed; snapshot/audit pending.
+- **Data status** identical: snapshot built 2026-11-02 (72 ETFs, FRED `TB3MS`); G1 pass with disclosed survivorship limitation; G-R4 MI audit pending.
 - **License** identical: MIT in `../LICENSE`, `../pyproject.toml`, `03` §1, and `../README.md`.
 - **Rigor gates** identical: `12_research_rigor.md` is binding. B0 Ridge baseline, target-shuffling test, MI audit, conditional robust loss, counter-metric gate, and experiment ledger are mandatory before a confirmatory claim.
 - **Counter-metrics** identical: net Sharpe is never reported alone; max drawdown and CVaR95 travel with it.

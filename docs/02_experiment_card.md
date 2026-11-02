@@ -218,7 +218,7 @@ Do not keep tuning until a positive result appears.
 | Frozen by | Ken Ira Talingting (owner) |
 | Freeze date | 2026-11-02 |
 | Hash of config (v1.0-etf) | `2c380990ae02c76c24044f783a5b9b1fb9e90abba67d228e959ebc7714a5cb83` (SHA-256, superseded) |
-| Hash of config (v1.1-rigor) | `77fa7de2e16d6e25cdea96357e4323082591b5b7c9a1a3030ca27c656b753f82` (SHA-256, current) |
+| Hash of config (v1.1-rigor) | `ded5c26d3302676ac5f3a403d3d3284cf564cd8a02500454d5263509b08b4e37` (SHA-256, current) |
 | Git commit | Tag `docs-freeze-v1.1` (resolve with `git rev-parse docs-freeze-v1.1`) |
 | Deviation log | `docs/04_decision_log.md` |
 
