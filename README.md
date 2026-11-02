@@ -1,6 +1,6 @@
 # Epistemic-Aware DRO for Mean-CVaR Portfolios
 
-**Research prototype · November 2026 · v1 final (H1/H3 fail) · v2 stopped before holdout****
+**Research prototype · November 2026 · v1 final (H1/H3 fail) · v2/v3 stopped before holdout****
 
 > Does epistemic uncertainty from an ML return model improve the tail-risk/return trade-off of a distributionally robust mean-CVaR portfolio, net of costs, out-of-sample?
 
@@ -126,6 +126,12 @@ A v2 pre-registration tested a stronger model: 19 features, LightGBM quantile re
 
 **The 2025–2026 holdout was not touched.** v2 stopped before the confirmatory test. See [`docs/15_v2_report.md`](docs/15_v2_report.md). This is the rigor layer working: a calibrated but uninformative uncertainty model was not promoted to a holdout claim.
 
+### v3 attempt: conditional tail risk, also stopped before holdout
+
+v3 tested a different object — a conditional forecast of next-month absolute return, used as DRO sigma. It was well calibrated (mean sigma 4.29% vs realized 4.30%; top-vs-bottom decile spread 3.76 pp), but the **per-date information pass rate was 0.430**, below the frozen 80% gate. It also underperformed trailing volatility on development (Sharpe 0.783 vs 0.840).
+
+**The 2025–2026 holdout remains untouched.** See [`docs/17_v3_report.md`](docs/17_v3_report.md). Three pre-registered attempts, zero promoted to the holdout — the gates worked.
+
 ---
 
 ## Repository layout
@@ -161,6 +167,8 @@ epistemic-dro/
 │   ├── 13_final_report.md    # final memo: H1/H3 fail, H2 pass
 │   ├── 14_v2_preregistration.md # v2 conformal-quantile pre-registration
 │   ├── 15_v2_report.md       # v2 stopped before holdout
+│   ├── 16_v3_preregistration.md # v3 conditional tail-risk pre-registration
+│   ├── 17_v3_report.md       # v3 stopped before holdout
 │   ├── axiomatic_spec.md     # first-principles / Bayes-risk gate
 │   ├── data_dictionary.md    # schema, lineage, MI audit
 │   ├── pre_mortem.md         # falsification and kill criteria
@@ -184,6 +192,8 @@ epistemic-dro/
 │   ├── report_final.py       # cost sensitivity, stress, deflated Sharpe
 │   ├── run_v2_experiment.py  # quantile/conformal v2
 │   ├── run_v2_uncertainty_audit.py # G-R4v2 gate
+│   ├── run_v3_experiment.py  # conditional tail-risk v3
+│   ├── run_v3_sigma_audit.py # G-R4v3 gate
 │   └── profile_pipeline.py   # bottleneck profiling (G-R12)
 ├── src/epistemic_dro/
 │   ├── __init__.py

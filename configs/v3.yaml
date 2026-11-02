@@ -1,0 +1,102 @@
+# Frozen v3 pre-registration. Conditional tail-risk forecast, not epistemic uncertainty.
+# The 2025-2026 holdout is untouched until the G-R4v3 gate passes.
+
+freeze:
+  protocol_version: v3.0-tail
+  parent: v2.0-holdout
+  frozen: 2026-11-02
+  decision: DEC-20261102-011
+  docs_tag: docs-freeze-v3
+
+project:
+  name: epistemic-dro-v3-tail
+  seed: 42
+  timezone: UTC
+
+data:
+  source: public_etf
+  snapshot: data/raw_v2
+  start: 2000-01-01
+  end: 2026-10-01
+  frequency: monthly
+  universe: us_liquid_etf
+  max_assets: 100
+  min_assets: 50
+  min_history_months: 36
+  min_price: 5.0
+  min_adv_usd: 1000000
+  risk_free: FRED:TB3MS
+  benchmark: SPY
+  factors: Fama-French 3-factor + momentum
+
+periods:
+  development_start: 2010-01-01
+  development_end: 2024-11-30
+  holdout_start: 2025-01-01
+  holdout_end: 2026-08-31
+  train_months: 60
+  validation_months: 12
+  purge_months: 1
+  scenario_months: 60
+
+features:
+  momentum_windows: [1, 3, 6, 12]
+  volatility_windows: [3, 12]
+  drawdown_window: 12
+  liquidity_window: 12
+  beta_window: 36
+  skew_window: 12
+  downside_window: 12
+  volume_shock_window: 12
+  corr_window: 36
+  metadata_fields: [expense_ratio, distribution_yield]
+  factor_exposures: [mkt_rf, smb, hml, mom]
+  winsorize: 0.01
+  cross_sectional_rank: true
+
+model:
+  type: lightgbm
+  objective: regression_l1
+  target: abs_next_excess_return
+  n_estimators: 200
+  learning_rate: 0.03
+  num_leaves: 15
+  max_depth: 4
+  min_child_samples: 50
+  subsample: 0.8
+  colsample_bytree: 0.8
+  n_seeds: 3
+
+uncertainty:
+  method: conditional_tail_forecast
+  calibration: validation_scale
+  scale_bounds: [0.5, 2.0]
+  min_sigma: 1.0e-6
+
+optimization:
+  ambiguity: box
+  kappa: 1.0
+  cvar_level: 0.95
+  cvar_penalty: 1.0
+  max_weight: 0.05
+  turnover_penalty: 0.0
+  cost_bps: 10
+  solver: CLARABEL
+
+baselines:
+  comparator: B5_uncond_sigma
+  unconditional_sigma_window: 36
+  ridge_mandatory: true
+  ridge_alpha: 1.0
+
+evaluation:
+  bootstrap_reps: 2000
+  confidence: 0.90
+  metrics:
+    - net_sharpe
+    - max_drawdown
+    - cvar95
+    - sortino
+    - calmar
+    - turnover
+    - cost_drag

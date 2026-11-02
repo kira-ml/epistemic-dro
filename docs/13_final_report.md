@@ -180,10 +180,11 @@ The flagship value is the apparatus: a PIT-tested ETF snapshot, a frozen protoco
 
 ---
 
-## 12. Postscript — v2 attempt (2026-11-02)
+## 12. Postscript — v2/v3 attempts (2026-11-02)
 
-A separate v2 pre-registration (`docs/14_v2_preregistration.md`) tested a stronger uncertainty model on a new 2025–2026 snapshot: 19 features, LightGBM quantile regression, split-conformal calibration, and a non-degenerate trailing-volatility comparator.
+Two separate pre-registrations tested stronger models on a new 2025–2026 snapshot.
 
-It **stopped before the holdout**. Development coverage was acceptable (0.899 validation; 0.859 test), but the uncertainty signal passed only **65.4%** of date-level information tests, below the frozen 80% gate. The holdout was not touched. See `docs/15_v2_report.md` and `DEC-20261102-010`.
+- **v2 — conformalized quantile LightGBM:** development coverage 0.899/0.859, but sigma passed only 65.4% of date-level information tests (< 80%). Holdout untouched.
+- **v3 — conditional tail-risk forecast:** well calibrated (mean sigma 4.29% vs realized 4.30%; decile spread 3.76 pp) but passed only 43.0% of date-level information tests and underperformed trailing volatility on development (Sharpe 0.783 vs 0.840). Holdout untouched.
 
-This does not change the v1 conclusion. It reinforces it: a calibrated uncertainty model is not automatically an informative one.
+See `docs/15_v2_report.md`, `docs/17_v3_report.md`, and `DEC-20261102-010/012`. This does not change the v1 conclusion. It reinforces it: calibration and average spread are not enough; stable conditional information is the binding constraint.

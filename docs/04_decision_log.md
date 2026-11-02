@@ -262,6 +262,42 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-011 — v3 pre-registration (conditional tail-risk forecast)
+
+**Decision:** Open v3 as a **separate, narrower hypothesis**: a conditional forecast of next-month absolute excess return (realized-volatility proxy) used as DRO sigma, compared against trailing 36-month realized volatility on the preserved 2025–2026 holdout. This is **not** an epistemic-uncertainty test; label it accordingly.
+
+**Rationale:** v1 and v2 failed because the epistemic uncertainty signal was not stable. Volatility is persistent and forecastable, so it is the most plausible remaining signal. The holdout was untouched by v2 and is reused only after a new pre-holdout gate passes.
+
+**Protocol:** `docs/16_v3_preregistration.md`, `configs/v3.yaml`, tag `docs-freeze-v3`.
+
+**Review:** 2026-11-30.
+
+---
+
+## DEC-20261102-012 — v3 stopped before holdout (G-R4v3 failure)
+
+**Decision:** Stop v3 before touching the 2025–2026 holdout. The conditional tail forecast failed the pre-registered G-R4v3 information gate: sigma pass rate **0.430** (threshold 0.80, 179 dates, 30 permutations, BH-FDR). Do not relax the gate, do not run the holdout, and do not add features.
+
+**Development evidence:**
+- M1_v3: Sharpe 0.783, MDD −25.87%, CVaR −8.44%, turnover 3.16.
+- B5_uncond_sigma: Sharpe 0.840, MDD −24.76%, CVaR −8.18%, turnover 1.26.
+- B3: Sharpe 0.808, MDD −24.68%, CVaR −8.40%.
+- B1: Sharpe 0.673, MDD −26.61%, CVaR −9.76%.
+- Calibration: mean sigma 4.29% vs realized 4.30%; correlation 0.284; decile spread 3.76 pp.
+- G-R4v3: mean MI 0.121 vs null 0.088; pass rate 0.430; fails.
+
+**Interpretation:** calibration and cross-sectional spread are not enough; the per-date conditional information is not stable. The conditional forecast also underperforms trailing volatility on development. The holdout is preserved.
+
+**Alternatives considered:** relax the 80% rule; run the holdout anyway; add features; use a pooled MI gate.
+
+**Rejected:** post-hoc gate relaxation; consuming the last untouched holdout on a failed gate; another feature search.
+
+**Reversibility:** Closed for v3. A v4 requires a new pre-registration, a stable signal, and an untouched holdout.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |

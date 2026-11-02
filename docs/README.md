@@ -25,6 +25,8 @@ This is the entry point for the project's documentation. If a document is not li
 | `13_final_report.md` | Final decision memo: H1/H3 fail, H2 pass; limitations; close | close | **Final — negative result** |
 | `14_v2_preregistration.md` | v2 conformal-quantile pre-registration; new holdout | v2 | **Frozen — holdout untouched; G-R4v2 failed** |
 | `15_v2_report.md` | v2 development result and pre-holdout stop | v2 | **Final — stopped before holdout** |
+| `16_v3_preregistration.md` | v3 conditional tail-risk pre-registration | v3 | **Frozen — holdout untouched; G-R4v3 failed** |
+| `17_v3_report.md` | v3 development result and pre-holdout stop | v3 | **Final — stopped before holdout** |
 | `axiomatic_spec.md` | First-principles spec, data-generating mechanism, Bayes-risk/noise floor | G-R1 | **Active — estimate pending G1** |
 | `data_dictionary.md` | Schema, units, lineage, MI/CMI audit | G-R4 | **Active — MI audit pending G1** |
 | `pre_mortem.md` | Inversion failure vectors and kill criteria | G-R2 | **Active** |
@@ -57,6 +59,7 @@ These rules exist because the same fact appears in multiple docs. When a rule is
 - **Rigor gates** identical: `12_research_rigor.md` is binding. B0 Ridge baseline, target-shuffling test, MI audit, conditional robust loss, counter-metric gate, and experiment ledger are mandatory before a confirmatory claim.
 - **Final verdict** identical: H1 FAIL, H2 PASS, H3 FAIL; reduced M1 (not LightGBM); no alpha claim; no deployment. See `13_final_report.md`.
 - **v2 verdict** identical: G-R4v2 failed (sigma pass rate 0.654 < 0.80); 2025–2026 holdout untouched; v2 stopped. See `15_v2_report.md`.
+- **v3 verdict** identical: G-R4v3 failed (sigma pass rate 0.430 < 0.80); 2025–2026 holdout untouched; v3 stopped. See `17_v3_report.md`.
 - **Counter-metrics** identical: net Sharpe is never reported alone; max drawdown and CVaR95 travel with it.
 - **Year** consistent throughout: 2026.
 
