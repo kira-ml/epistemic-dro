@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-27<br>
 **Last updated:** 2026-11-02<br>
-**Status:** Frozen v1.0 (ETF pivot; G1 in progress)<br>
+**Status:** Frozen v1.1-rigor (ETF pivot; G1 in progress)<br>
 **Owner:** Ken Ira Talingting
 
 ---
@@ -45,6 +45,7 @@ It is 2026-11-30. The project failed. Why?
 | R15 | Negative result hidden | Medium | High | Only favorable runs reported | Decision log; all trials logged | Publish honestly |
 | R16 | Low cross-sectional breadth | High | High | < 50 eligible ETFs; weak dispersion | Report breadth per month; power limitation; no broad-market claim | Stop if too thin |
 | R17 | Public data revision / provider drift | Medium | Medium | Snapshot cannot be reproduced | Record pull date and SHA-256 manifest; pin the snapshot | Rebuild and disclose |
+| R18 | Rigor theater — gates exist but are not enforced | Medium | High | No ledger entry for a claimed gate; tests skipped | Ledger evidence; CI-style checks; pre-mortem review | Block the claim until evidenced |
 
 ---
 
@@ -83,6 +84,7 @@ Weekly during November:
 |---|---|---|
 | 2026-10-31 | Owner | Data decision (missed → pivot) |
 | 2026-11-02 | Owner | ETF pivot, MIT license, docs freeze; R1–R4 rewritten; R16–R17 added |
+| 2026-11-02 | Owner | Adopt 12-model rigor layer v1.1; R18 (rigor theater) added |
 | 2026-11-07 | Owner | Leakage/baseline review |
 | 2026-11-21 | Owner | Ablation review |
 | 2026-11-30 | Owner | Final claim review |

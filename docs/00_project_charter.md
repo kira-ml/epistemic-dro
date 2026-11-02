@@ -6,7 +6,7 @@
 **Last updated:** 2026-11-02<br>
 **Status:** G0 passed (owner); G1 pivoted to ETF/factor methods study; G2–G4 pending<br>
 **Risk class:** Medium (research prototype; no live capital)<br>
-**Protocol version:** v1.0-etf (frozen 2026-11-02)
+**Protocol version:** v1.1-rigor (v1.0-etf + 12-model addendum, 2026-11-02)
 
 ---
 
@@ -179,7 +179,7 @@ Stop or pivot if:
 | Nov 22–28 | G4 | Stress tests, report, model card, repo polish | Pending |
 | Nov 29–30 | Buffer | Final review | Pending |
 
-Docs were frozen on 2026-11-02 (`docs-freeze-v1`). The freeze protects the protocol; it does not mark G1–G4 as passed.
+Docs were frozen on 2026-11-02 (`docs-freeze-v1`), and the rigor addendum was frozen as `docs-freeze-v1.1`. The freeze protects the protocol; it does not mark G1–G4 as passed.
 
 ---
 
@@ -188,10 +188,11 @@ Docs were frozen on 2026-11-02 (`docs-freeze-v1`). The freeze protects the proto
 - Reproducible Python package with tests.
 - `README.md` with results and reproduction commands.
 - `docs/01_data_card.md`.
-- `docs/02_experiment_card.md` (frozen before confirmatory run; v1.0-etf frozen 2026-11-02).
+- `docs/02_experiment_card.md` (frozen before confirmatory run; v1.1-rigor frozen 2026-11-02).
 - `docs/03_model_card.md`.
 - `docs/04_decision_log.md`.
 - `LICENSE` (MIT).
+- Rigor artifacts: `docs/12_research_rigor.md`, `docs/axiomatic_spec.md`, `docs/data_dictionary.md`, `docs/pre_mortem.md`, `docs/causal_dag.json`, `experiments/ledger.jsonl`.
 - Results tables and figures (net of costs).
 - A clear answer to H1–H3, including limitations and the ETF-pivot scope.
 

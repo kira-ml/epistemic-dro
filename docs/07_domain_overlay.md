@@ -1,6 +1,6 @@
 ﻿# Domain Overlay — Finance
 
-**Status:** Active (frozen v1.0-etf)<br>
+**Status:** Active (frozen v1.1-rigor)<br>
 **Last updated:** 2026-11-02
 
 `AGENTS.md` §9.5 requires a finance overlay for any finance project. This file is that overlay. It lists the finance-specific invariants that must hold, and points to where each is enforced. If a doc contradicts this file, this file wins.
@@ -18,6 +18,9 @@
 | **Transaction costs explicit** — 10 bps primary; 5/20/50 bps sensitivity | `02_experiment_card.md` §2, §10; `configs/base.yaml` `cost_bps` | §3.4, §3.6 |
 | **Explicit risk-free series** — never silently default to zero | `00_project_charter.md` §5; `01_data_card.md` §3 | §3.2, §3.7 |
 | **Tail risk reported** — CVaR95 and max drawdown as guardrails, not afterthoughts | `02_experiment_card.md` §3; `03_model_card.md` §9 | §3.12 |
+| **Mandatory simple baseline** — Ridge B0 before any LightGBM adoption; Diebold-Mariano \(p < 0.01\) | `src/epistemic_dro/baselines.py`; `experiments/baseline_benchmarks.md`; `12_research_rigor.md` G-R6 | §3.6 |
+| **No single-metric claim** — net Sharpe is always paired with max drawdown and CVaR95 | `src/epistemic_dro/evaluation.py`; `12_research_rigor.md` G-R10 | §3.10 |
+| **No causal language** — Rung-1 forecasting only | `docs/causal_dag.json`; `03_model_card.md` §3 | §3.5, §9.1 |
 | **Regime sensitivity** — subperiod analysis (2008, 2020, 2022) required | `02_experiment_card.md` §8 | §3.6, §3.8 |
 | **No look-ahead via costs** — costs use the previous period's weights, not the current | `optimization.py` contract; `02_experiment_card.md` §6.3 | §3.1 |
 | **Licensed/provider data not redistributed** | `.gitignore`; `data/README.md` "Licensing"; `01_data_card.md` §8 | §1.3.3, §5.6 |

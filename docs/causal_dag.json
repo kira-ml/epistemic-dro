@@ -1,0 +1,75 @@
+{
+  "project": "epistemic-dro",
+  "version": "v1.1-rigor",
+  "date": "2026-11-02",
+  "rung": 1,
+  "rung_label": "observational forecasting (P(Y|X))",
+  "intervention": false,
+  "intervention_reason": "The project does not deploy capital or intervene in markets. It forecasts cross-sectional ETF returns and evaluates a portfolio construction method offline.",
+  "treatment": null,
+  "outcome": "forward_excess_return_1m",
+  "claim": "Predictive association only. No causal effect is estimated and no do() claim is made.",
+  "nodes": [
+    {
+      "id": "market_regime",
+      "label": "Market regime / aggregate risk",
+      "type": "latent_confounder",
+      "observed_proxy": "market factor return, VIX-like volatility state"
+    },
+    {
+      "id": "factor_exposures",
+      "label": "ETF factor exposures",
+      "type": "observed",
+      "observed_proxy": "beta, SMB/HML/MOM loadings"
+    },
+    {
+      "id": "etf_features",
+      "label": "ETF price and liquidity features",
+      "type": "observed",
+      "observed_proxy": "momentum, volatility, drawdown, dollar volume"
+    },
+    {
+      "id": "etf_metadata",
+      "label": "ETF metadata and selection",
+      "type": "observed",
+      "observed_proxy": "expense ratio, distribution yield, inception date"
+    },
+    {
+      "id": "flows",
+      "label": "Flows and primary-market arbitrage",
+      "type": "latent",
+      "observed_proxy": "not directly observed; do not claim to measure it"
+    },
+    {
+      "id": "forward_return",
+      "label": "Next-month ETF excess return",
+      "type": "outcome",
+      "observed_proxy": "forward_excess_return_1m"
+    }
+  ],
+  "edges": [
+    {"from": "market_regime", "to": "factor_exposures", "interpretation": "regime changes factor loadings/returns"},
+    {"from": "market_regime", "to": "forward_return", "interpretation": "aggregate risk drives returns"},
+    {"from": "factor_exposures", "to": "forward_return", "interpretation": "compensation for factor exposure"},
+    {"from": "etf_features", "to": "forward_return", "interpretation": "predictive association, not established causation"},
+    {"from": "etf_metadata", "to": "forward_return", "interpretation": "selection/demand proxy, not a causal driver"},
+    {"from": "flows", "to": "forward_return", "interpretation": "latent price pressure"}
+  ],
+  "adjustment": {
+    "needed": false,
+    "reason": "No causal effect is estimated. The project does not claim that changing a feature would change returns."
+  },
+  "colliders": [],
+  "limitations": [
+    "Latent market regime and flows are not fully observed.",
+    "ETF metadata may be a current snapshot, not a point-in-time variable.",
+    "The ETF universe may omit closed funds.",
+    "No live intervention exists, so performative feedback is out of scope.",
+    "Any causal language in the report is a protocol violation."
+  ],
+  "review": {
+    "owner": "Ken Ira Talingting",
+    "date": "2026-11-02",
+    "next_review": "2026-11-30"
+  }
+}

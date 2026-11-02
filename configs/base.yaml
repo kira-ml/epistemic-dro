@@ -1,13 +1,14 @@
-# Frozen 2026-11-02 (protocol v1.0-etf). Any change after the docs freeze
-# requires a deviation entry in docs/04_decision_log.md.
+# Frozen 2026-11-02 (protocol v1.0-etf + v1.1-rigor addendum). Any change
+# after the docs freeze requires a deviation entry in docs/04_decision_log.md.
 # Values marked TBD must be decided on validation data only -- never on the
 # final test period.
 
 freeze:
-  protocol_version: v1.0-etf
+  protocol_version: v1.1-rigor
+  parent_version: v1.0-etf
   frozen: 2026-11-02
-  decision: DEC-20261102-001
-  docs_tag: docs-freeze-v1
+  decision: DEC-20261102-004
+  docs_tag: docs-freeze-v1.1
 
 project:
   name: epistemic-dro
@@ -42,7 +43,9 @@ features:
 
 model:
   type: lightgbm
-  objective: regression
+  objective: regression  # switch to huber if the Pareto alpha < 4.0
+  robust_objective: huber
+  pareto_alpha_threshold: 4.0
   n_estimators: 300
   learning_rate: 0.03
   num_leaves: 15
@@ -51,6 +54,18 @@ model:
   subsample: 0.8
   colsample_bytree: 0.8
   n_seeds: 5
+
+baselines:
+  ridge_mandatory: true
+  ridge_alpha: 1.0
+  dm_p_value_threshold: 0.01
+
+experiments:
+  ledger: experiments/ledger.jsonl
+  tuning: bayesian  # no unguided grid search
+  budget:
+    baseline_share: 0.75
+    exploration_share: 0.25
 
 uncertainty:
   method: ensemble  # ensemble | conformal

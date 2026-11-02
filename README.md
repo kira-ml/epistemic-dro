@@ -109,10 +109,10 @@ epistemic-dro/
 ├── pyproject.toml
 ├── requirements.txt
 ├── configs/
-│   └── base.yaml             # frozen v1.0-etf configuration (2026-11-02)
+│   └── base.yaml             # frozen v1.1-rigor configuration (2026-11-02)
 ├── data/
 │   ├── README.md             # data access, schema, licensing
-│   ├── raw/                  # gitignored vendor data
+│   ├── raw/                  # gitignored data snapshots
 │   └── processed/            # gitignored derived panels
 ├── docs/
 │   ├── README.md             # documentation register
@@ -127,17 +127,30 @@ epistemic-dro/
 │   ├── 08_monitoring_plan.md
 │   ├── 09_deployment_runbook.md
 │   ├── 10_postmortem_template.md
-│   └── 11_lessons_log.md
+│   ├── 11_lessons_log.md
+│   ├── 12_research_rigor.md  # 12-model binding addendum (v1.1)
+│   ├── axiomatic_spec.md     # first-principles / Bayes-risk gate
+│   ├── data_dictionary.md    # schema, lineage, MI audit
+│   ├── pre_mortem.md         # falsification and kill criteria
+│   └── causal_dag.json       # Rung-1 causal classification
+├── experiments/
+│   ├── README.md             # ledger schema and baseline law
+│   ├── ledger.jsonl          # append-only run log
+│   └── baseline_benchmarks.md
 ├── notebooks/                # exploration only
 ├── results/                  # gitignored outputs
 ├── scripts/
 │   ├── run_smoke.py          # synthetic-data smoke test
-│   └── check_data.py         # data-readiness checker
+│   ├── check_data.py         # data-readiness checker
+│   └── profile_pipeline.py   # bottleneck profiling (G-R12)
 ├── src/epistemic_dro/
 │   ├── __init__.py
 │   ├── backtest.py           # walk-forward splits
+│   ├── baselines.py          # mandatory Ridge B0 baseline
 │   ├── config.py             # YAML loader
 │   ├── data.py               # loaders + synthetic smoke panel
+│   ├── evaluation.py         # counter-metric gate
+│   ├── falsification.py      # target-shuffling harness
 │   ├── features.py           # feature spec (impl pending data)
 │   ├── leakage.py            # lookahead / group / key guards
 │   ├── metrics.py            # Sharpe, CVaR, drawdown, turnover
@@ -181,11 +194,30 @@ The frozen details belong in [`docs/02_experiment_card.md`](docs/02_experiment_c
 
 ---
 
+## Research rigor (v1.1)
+
+The project is built against the 12 foundational mental models, not just a backtest checklist. The binding addendum is [`docs/12_research_rigor.md`](docs/12_research_rigor.md). Its main gates:
+
+- **First principles:** an [axiomatic specification](docs/axiomatic_spec.md) with a Bayes-risk/noise-floor estimate before model code.
+- **Inversion:** a target-shuffling harness (`src/epistemic_dro/falsification.py`) and a [pre-mortem](docs/pre_mortem.md) with explicit kill criteria.
+- **Parsimony:** a mandatory Ridge B0 baseline (`src/epistemic_dro/baselines.py`); LightGBM must beat it with a Diebold-Mariano test at \(p < 0.01\).
+- **Information:** a mutual-information audit with a permutation null ([data dictionary](docs/data_dictionary.md)).
+- **Goodhart:** a [counter-metric gate](src/epistemic_dro/evaluation.py) that requires net Sharpe, max drawdown, and CVaR95 to pass together.
+- **Causality:** a [Rung-1 classification](docs/causal_dag.json); no interventional or causal claim.
+- **Fat tails:** a Pareto tail diagnostic; robust loss if \(\alpha < 4\).
+- **Search discipline:** Bayesian optimization over frozen bounds, with every trial in [`experiments/ledger.jsonl`](experiments/ledger.jsonl).
+- **Bottlenecks:** `scripts/profile_pipeline.py` before optimizing any component.
+
+The gates are blocking for a confirmatory claim. A negative result that passes them is a successful project; a positive-looking result that fails them is not.
+
+---
+
 ## Deliverables
 
 - Reproducible Python package and tests.
 - Walk-forward results table and figures.
 - `docs/03_model_card.md` and `docs/01_data_card.md`.
+- Rigor artifacts: axiomatic spec, data dictionary, pre-mortem, causal classification, experiment ledger.
 - Decision memo with limitations and a clear answer to H1–H3.
 - No claim of live readiness.
 

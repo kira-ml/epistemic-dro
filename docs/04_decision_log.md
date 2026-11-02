@@ -126,8 +126,23 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-004 — Adopt the 12-model research rigor layer (v1.1)
+
+**Decision:** Adopt the 12 Foundational Mental Models as a binding research-rigor addendum (`docs/12_research_rigor.md`, `v1.1-rigor`). Add the axiomatic spec, data dictionary, pre-mortem, causal classification, mandatory Ridge B0 baseline, target-shuffling harness, MI screening rule, conditional robust loss, counter-metric gate, experiment ledger, Bayesian-optimization rule, and profiling gate.
+
+**Alternatives considered:** Keep the v1.0 protocol as-is and treat the mental models as advisory; adopt only the leakage and baseline rules; postpone the rigor layer until after the first model run.
+
+**Rationale:** The v1.0 docs already had strong PIT and walk-forward safeguards, but they lacked four things a flagship project needs: (1) an explicit noise-floor argument before model code, (2) a mandatory simple baseline, (3) a target-shuffling falsification test, and (4) a counter-metric gate that prevents a single Sharpe number from being gamed. Adding these before the first data run is cheaper and more credible than retrofitting them after seeing results. The addendum does **not** change the primary metric, split plan, constraints, cost model, universe, or claim scope.
+
+**Reversibility:** Low for the gates. Any weakening requires a dated deviation entry and a new protocol version.
+
+**Review:** 2026-11-07.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |
 |---|---|---|---|---|
 | 2026-11-02 | `EXP-DRO-2026-11-01` | Universe changed from 150–200 US stocks to 50–100 ETFs; stock-selection claim withdrawn; project reclassified as a methods study | G1 deadline missed; no PIT stock access (DEC-20261102-001) | Ken Ira Talingting (owner) |
+| 2026-11-02 | `EXP-DRO-2026-11-01` | Post-freeze rigor addendum: B0 Ridge baseline, MI screening, conditional robust loss, Bayesian optimization, counter-metric gate, ledger, profiling | Adopt `v1.1-rigor` before the first data run; no change to primary metric, splits, constraints, costs, universe, or claim scope (DEC-20261102-004) | Ken Ira Talingting (owner) |

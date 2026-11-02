@@ -1,11 +1,11 @@
 # Experiment Card / Pre-Registration — Epistemic-Aware DRO
 
 **Experiment ID:** `EXP-DRO-2026-11-01`<br>
-**Status:** FROZEN — v1.0-etf (2026-11-02)<br>
+**Status:** FROZEN — v1.1-rigor (2026-11-02)<br>
 **Freeze date:** 2026-11-02<br>
 **Owner:** Ken Ira Talingting<br>
-**Decision record:** `DEC-20261102-001` (ETF pivot), `DEC-20261102-003` (freeze)<br>
-**Tag:** `docs-freeze-v1`
+**Decision record:** `DEC-20261102-001` (ETF pivot), `DEC-20261102-003` (freeze), `DEC-20261102-004` (rigor layer)<br>
+**Tag:** `docs-freeze-v1.1`
 
 > Do not run the confirmatory experiment until this card is frozen and dated. Exploratory runs must be labelled exploratory and may not be cited as confirmation.
 
@@ -63,6 +63,7 @@ All baselines use the same universe, dates, constraints, and cost model.
 
 | ID | Baseline | Definition |
 |---|---|---|
+| **B0** | Ridge return forecast | Standardized features → Ridge(alpha=1.0); same universe, splits, constraints, and costs. Mandatory simple baseline (G-R6). |
 | **B1** | 1/N | Equal weight across eligible assets, monthly rebalance |
 | **B2** | Mean-variance | Sample mean and sample covariance; long-only; same cap |
 | **B3** | CVaR-only | Minimize CVaR; no DRO; same constraints |
@@ -71,7 +72,7 @@ All baselines use the same universe, dates, constraints, and cost model.
 | **M1** | DRO-uncertainty | Box DRO with ML mean and ensemble/conformal uncertainty |
 | **M2** | DRO-ellipsoid | Ellipsoidal DRO with the same uncertainty |
 
-The primary comparison is **M1 vs B5** (does uncertainty help?) and **M1 vs best baseline** (is the method competitive?).
+The primary comparison is **M1 vs B5** (does uncertainty help?), **M1 vs best baseline** (is the method competitive?), and **M1 vs B0** (does the ML layer beat a regularized linear forecast?).
 
 ---
 
@@ -110,6 +111,7 @@ No random splits. No test-period information in feature construction, universe f
   - factor exposures: market, size, value, and momentum loadings;
   - metadata: expense ratio and distribution yield, only if a historical series exists. If only a current snapshot exists, either exclude these fields or disclose that they are not point-in-time.
 - Model: LightGBM regression or ranking; 5 seeds.
+- Feature screening: MI/CMI audit against a permutation null; drop features that fail in at least 80% of training windows (G-R4).
 - Tuning: validation window only; no test data.
 - Feature preprocessing: fit inside each training window.
 
@@ -141,6 +143,8 @@ No random splits. No test-period information in feature construction, universe f
 | `learning_rate` | 0.01, 0.03, 0.05 | Validation only |
 
 Freeze the selected values before the confirmatory run.
+
+**Search procedure (v1.1):** tune within these bounds with Bayesian optimization (G-R11). Every trial is logged in `experiments/ledger.jsonl`. Unguided grid search is prohibited. The 75/25 budget is 75% baseline refinement and 25% high-uncertainty exploration.
 
 ---
 
@@ -210,11 +214,14 @@ Do not keep tuning until a positive result appears.
 
 | Item | Value |
 |---|---|
-| Protocol version | `v1.0-etf` |
+| Protocol version | `v1.0-etf` → `v1.1-rigor` |
 | Frozen by | Ken Ira Talingting (owner) |
 | Freeze date | 2026-11-02 |
-| Hash of config | `2c380990ae02c76c24044f783a5b9b1fb9e90abba67d228e959ebc7714a5cb83` (SHA-256, `configs/base.yaml`) |
-| Git commit | Tag `docs-freeze-v1` (resolve with `git rev-parse docs-freeze-v1`) |
+| Hash of config (v1.0-etf) | `2c380990ae02c76c24044f783a5b9b1fb9e90abba67d228e959ebc7714a5cb83` (SHA-256, superseded) |
+| Hash of config (v1.1-rigor) | `77fa7de2e16d6e25cdea96357e4323082591b5b7c9a1a3030ca27c656b753f82` (SHA-256, current) |
+| Git commit | Tag `docs-freeze-v1.1` (resolve with `git rev-parse docs-freeze-v1.1`) |
 | Deviation log | `docs/04_decision_log.md` |
 
 **No confirmatory run may occur before this record is complete.** The record is complete; the data gate (G1) and the modelling gates (G2–G4) remain open. Frozen protocol ≠ passed gates.
+
+**v1.1-rigor addendum (2026-11-02):** `docs/12_research_rigor.md` adds the 12-model gates, the mandatory Ridge B0 baseline, conditional robust loss, MI screening, Bayesian optimization, the counter-metric gate, and the experiment ledger. It does not change the primary metric, split plan, portfolio constraints, cost model, universe, or claim scope. The v1.0 hash is retained above for audit; the v1.1 hash is the current config.

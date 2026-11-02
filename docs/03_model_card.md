@@ -96,6 +96,8 @@ The uncertainty estimate feeds the DRO ambiguity set. It is not a guarantee of r
 
 Walk-forward, net of costs, bootstrap intervals, deflated Sharpe. See `docs/02_experiment_card.md`.
 
+Every result table must pass the counter-metric gate in `src/epistemic_dro/evaluation.py` (net Sharpe + max drawdown + CVaR95 simultaneously). See `docs/12_research_rigor.md` G-R10.
+
 ---
 
 ## 10. Limitations
@@ -135,9 +137,16 @@ Walk-forward, net of costs, bootstrap intervals, deflated Sharpe. See `docs/02_e
 
 - [ ] Data source and vintage recorded.
 - [ ] Features and labels documented.
+- [ ] Axiomatic spec and Bayes-risk estimate complete (`docs/axiomatic_spec.md` §5).
+- [ ] MI/CMI feature audit complete (`docs/data_dictionary.md` §3).
+- [ ] Ridge B0 baseline logged (`experiments/baseline_benchmarks.md`).
+- [ ] Target-shuffling test passes on the real pipeline.
+- [ ] Model beats Ridge with Diebold-Mariano \(p < 0.01\), or the simpler model is reported.
 - [ ] Model hyperparameters frozen.
 - [ ] Uncertainty calibration reported.
 - [ ] Optimizer constraints verified.
 - [ ] Walk-forward results and ablation complete.
+- [ ] Counter-metric gate passed.
+- [ ] Experiment ledger complete (`experiments/ledger.jsonl`).
 - [ ] Limitations and failure modes written.
 - [ ] No claim beyond the evidence.
