@@ -1,7 +1,7 @@
 ﻿# Deployment Runbook — Epistemic-Aware DRO
 
-**Status:** N/A — research prototype, no deployment
-**Authority:** `04_decision_log.md` DEC-20261027-005 ("No live deployment")
+**Status:** N/A — research prototype, no deployment<br>
+**Authority:** `04_decision_log.md` DEC-20261027-005 ("No live deployment")<br>
 **Last updated:** 2026-11-02
 
 This project does not deploy a model. There is no live trading, no execution, no capital allocation, and no user-facing decision. The v1 universe is ETFs and the claim is a methods study, which does not change the no-deployment scope. This file exists so that the absence is documented rather than forgotten, and so that any future pivot to deployment has a starting checklist.

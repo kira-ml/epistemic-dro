@@ -1,6 +1,6 @@
 ﻿# Domain Overlay — Finance
 
-**Status:** Active (frozen v1.0-etf)
+**Status:** Active (frozen v1.0-etf)<br>
 **Last updated:** 2026-11-02
 
 `AGENTS.md` §9.5 requires a finance overlay for any finance project. This file is that overlay. It lists the finance-specific invariants that must hold, and points to where each is enforced. If a doc contradicts this file, this file wins.

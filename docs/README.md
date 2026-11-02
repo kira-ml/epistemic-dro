@@ -1,8 +1,8 @@
 ﻿# Documentation Register — Epistemic-Aware DRO
 
-**Last reviewed:** 2026-11-02
-**Owner:** Ken Ira Talingting
-**Risk class:** Medium (research prototype; no live capital — see `00_project_charter.md` §12 and `05_risk_register.md`)
+**Last reviewed:** 2026-11-02<br>
+**Owner:** Ken Ira Talingting<br>
+**Risk class:** Medium (research prototype; no live capital — see `00_project_charter.md` §12 and `05_risk_register.md`)<br>
 **Frozen protocol:** `v1.0-etf` (tag `docs-freeze-v1`)
 
 This is the entry point for the project's documentation. If a document is not listed here, it is not part of the operating record.

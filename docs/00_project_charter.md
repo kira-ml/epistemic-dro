@@ -1,11 +1,11 @@
 # Project Charter — Epistemic-Aware DRO for Mean-CVaR Portfolios
 
-**Project ID:** EPI-DRO-2026-11
-**Owner:** Ken Ira Talingting
-**Date:** 2026-10-27
-**Last updated:** 2026-11-02
-**Status:** G0 passed (owner); G1 pivoted to ETF/factor methods study; G2–G4 pending
-**Risk class:** Medium (research prototype; no live capital)
+**Project ID:** EPI-DRO-2026-11<br>
+**Owner:** Ken Ira Talingting<br>
+**Date:** 2026-10-27<br>
+**Last updated:** 2026-11-02<br>
+**Status:** G0 passed (owner); G1 pivoted to ETF/factor methods study; G2–G4 pending<br>
+**Risk class:** Medium (research prototype; no live capital)<br>
 **Protocol version:** v1.0-etf (frozen 2026-11-02)
 
 ---

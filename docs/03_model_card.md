@@ -1,8 +1,8 @@
 # Model Card — Epistemic-Aware DRO
 
-**Status:** Frozen template — pre-fit; no fitted model yet
-**Version:** 0.1
-**Owner:** Ken Ira Talingting
+**Status:** Frozen template — pre-fit; no fitted model yet<br>
+**Version:** 0.1<br>
+**Owner:** Ken Ira Talingting<br>
 **Last updated:** 2026-11-02
 
 ---

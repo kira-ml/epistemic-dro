@@ -1,6 +1,6 @@
 # Literature and Method Notes
 
-**Status:** Frozen working list (v1.0-etf)
+**Status:** Frozen working list (v1.0-etf)<br>
 **Last updated:** 2026-11-02
 
 This is not a literature review. It is the minimum set of references needed to implement and defend the project. Verify bibliographic details before citing in a paper.

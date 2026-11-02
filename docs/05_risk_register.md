@@ -1,8 +1,8 @@
 # Risk Register and Pre-Mortem — Epistemic-Aware DRO
 
-**Date:** 2026-10-27
-**Last updated:** 2026-11-02
-**Status:** Frozen v1.0 (ETF pivot; G1 in progress)
+**Date:** 2026-10-27<br>
+**Last updated:** 2026-11-02<br>
+**Status:** Frozen v1.0 (ETF pivot; G1 in progress)<br>
 **Owner:** Ken Ira Talingting
 
 ---

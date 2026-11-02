@@ -1,10 +1,10 @@
 # Experiment Card / Pre-Registration — Epistemic-Aware DRO
 
-**Experiment ID:** `EXP-DRO-2026-11-01`
-**Status:** FROZEN — v1.0-etf (2026-11-02)
-**Freeze date:** 2026-11-02
-**Owner:** Ken Ira Talingting
-**Decision record:** `DEC-20261102-001` (ETF pivot), `DEC-20261102-003` (freeze)
+**Experiment ID:** `EXP-DRO-2026-11-01`<br>
+**Status:** FROZEN — v1.0-etf (2026-11-02)<br>
+**Freeze date:** 2026-11-02<br>
+**Owner:** Ken Ira Talingting<br>
+**Decision record:** `DEC-20261102-001` (ETF pivot), `DEC-20261102-003` (freeze)<br>
 **Tag:** `docs-freeze-v1`
 
 > Do not run the confirmatory experiment until this card is frozen and dated. Exploratory runs must be labelled exploratory and may not be cited as confirmation.

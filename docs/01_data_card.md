@@ -1,8 +1,8 @@
 # Data Card — Epistemic-Aware DRO
 
-**Status:** PIVOTED — ETF/factor methods study (DEC-20261102-001); G1 in progress
-**Owner:** Ken Ira Talingting
-**Decision date:** 2026-11-02
+**Status:** PIVOTED — ETF/factor methods study (DEC-20261102-001); G1 in progress<br>
+**Owner:** Ken Ira Talingting<br>
+**Decision date:** 2026-11-02<br>
 **Last updated:** 2026-11-02
 
 > **Scope change.** No point-in-time stock-level source was secured by the

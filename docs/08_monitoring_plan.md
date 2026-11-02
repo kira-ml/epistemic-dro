@@ -1,7 +1,7 @@
 ﻿# Monitoring Plan (Research) — Epistemic-Aware DRO
 
-**Status:** Frozen v1.0-etf
-**Last updated:** 2026-11-02
+**Status:** Frozen v1.0-etf<br>
+**Last updated:** 2026-11-02<br>
 **Scope:** Research prototype / ETF methods study. No live deployment (see `04_decision_log.md` DEC-20261027-005). This plan covers re-run, calibration, and deviation tracking, not production monitoring.
 
 ## 1. What is monitored, and why
