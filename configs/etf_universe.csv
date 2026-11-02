@@ -1,0 +1,73 @@
+ticker,name,category,role
+SPY,SPDR S&P 500 ETF Trust,Broad Market,broad
+IVV,iShares Core S&P 500 ETF,Broad Market,broad
+VTI,Vanguard Total Stock Market ETF,Broad Market,broad
+IWM,iShares Russell 2000 ETF,Small Cap,broad
+MDY,SPDR S&P MidCap 400 ETF Trust,Mid Cap,broad
+QQQ,Invesco QQQ Trust,Growth,broad
+DIA,SPDR Dow Jones Industrial Average ETF Trust,Large Cap,broad
+RSP,Invesco S&P 500 Equal Weight ETF,Large Cap,broad
+VV,Vanguard Large-Cap ETF,Large Cap,broad
+IWB,iShares Russell 1000 ETF,Large Cap,broad
+IWV,iShares Russell 3000 ETF,Broad Market,broad
+ITOT,iShares Core S&P Total U.S. Stock Market ETF,Broad Market,broad
+IWF,iShares Russell 1000 Growth ETF,Growth,style
+IWD,iShares Russell 1000 Value ETF,Value,style
+IJH,iShares Core S&P Mid-Cap ETF,Mid Cap,style
+IJR,iShares Core S&P Small-Cap ETF,Small Cap,style
+IJJ,iShares S&P Mid-Cap 400 Value ETF,Mid Cap Value,style
+IJK,iShares S&P Mid-Cap 400 Growth ETF,Mid Cap Growth,style
+IJS,iShares S&P Small-Cap 600 Value ETF,Small Cap Value,style
+IWO,iShares Russell 2000 Growth ETF,Small Cap Growth,style
+IWN,iShares Russell 2000 Value ETF,Small Cap Value,style
+IVE,iShares S&P 500 Value ETF,Large Cap Value,style
+IVW,iShares S&P 500 Growth ETF,Large Cap Growth,style
+VTV,Vanguard Value ETF,Large Cap Value,style
+VUG,Vanguard Growth ETF,Large Cap Growth,style
+VB,Vanguard Small-Cap ETF,Small Cap,style
+VO,Vanguard Mid-Cap ETF,Mid Cap,style
+VBR,Vanguard Small-Cap Value ETF,Small Cap Value,style
+MGK,Vanguard Mega Cap Growth ETF,Large Cap Growth,style
+MGV,Vanguard Mega Cap Value ETF,Large Cap Value,style
+XLB,The Materials Select Sector SPDR Fund,Materials,sector
+XLE,The Energy Select Sector SPDR Fund,Energy,sector
+XLF,The Financial Select Sector SPDR Fund,Financials,sector
+XLI,The Industrial Select Sector SPDR Fund,Industrials,sector
+XLK,The Technology Select Sector SPDR Fund,Technology,sector
+XLP,The Consumer Staples Select Sector SPDR Fund,Consumer Staples,sector
+XLU,The Utilities Select Sector SPDR Fund,Utilities,sector
+XLV,The Health Care Select Sector SPDR Fund,Health Care,sector
+XLY,The Consumer Discretionary Select Sector SPDR Fund,Consumer Discretionary,sector
+SMH,VanEck Semiconductor ETF,Semiconductors,industry
+SOXX,iShares Semiconductor ETF,Semiconductors,industry
+IBB,iShares Biotechnology ETF,Biotechnology,industry
+XBI,SPDR S&P Biotech ETF,Biotechnology,industry
+KRE,SPDR S&P Regional Banking ETF,Regional Banks,industry
+XME,SPDR S&P Metals & Mining ETF,Metals & Mining,industry
+XOP,SPDR S&P Oil & Gas Exploration & Production ETF,Oil & Gas,industry
+OIH,VanEck Oil Services ETF,Oil Services,industry
+ITB,iShares U.S. Home Construction ETF,Home Construction,industry
+IYR,iShares U.S. Real Estate ETF,Real Estate,industry
+XHB,SPDR S&P Homebuilders ETF,Home Construction,industry
+IYT,iShares Transportation Average ETF,Transportation,industry
+DVY,iShares Select Dividend ETF,Dividend,dividend
+SDY,SPDR S&P Dividend ETF,Dividend,dividend
+VIG,Vanguard Dividend Appreciation ETF,Dividend,dividend
+VYM,Vanguard High Dividend Yield ETF,Dividend,dividend
+EFA,iShares MSCI EAFE ETF,International Developed,international
+EEM,iShares MSCI Emerging Markets ETF,International Emerging,international
+VEU,Vanguard FTSE All-World ex-US ETF,International Developed,international
+VWO,Vanguard FTSE Emerging Markets ETF,International Emerging,international
+EWJ,iShares MSCI Japan ETF,International Developed,international
+EWG,iShares MSCI Germany ETF,International Developed,international
+EWU,iShares MSCI United Kingdom ETF,International Developed,international
+EWQ,iShares MSCI France ETF,International Developed,international
+EWA,iShares MSCI Australia ETF,International Developed,international
+EWC,iShares MSCI Canada ETF,International Developed,international
+EWH,iShares MSCI Hong Kong ETF,International Developed,international
+EWT,iShares MSCI Taiwan ETF,International Emerging,international
+EWY,iShares MSCI South Korea ETF,International Emerging,international
+FXI,iShares China Large-Cap ETF,International Emerging,international
+EPI,WisdomTree India Earnings Fund,International Emerging,international
+EZA,iShares MSCI South Africa ETF,International Emerging,international
+EWW,iShares MSCI Mexico ETF,International Emerging,international
