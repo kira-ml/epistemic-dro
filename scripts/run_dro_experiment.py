@@ -108,6 +108,11 @@ def main() -> None:
     parser.add_argument("--train-months", type=int, default=60)
     parser.add_argument("--scenario-months", type=int, default=60)
     parser.add_argument("--seeds", type=int, default=5)
+    parser.add_argument(
+        "--suffix",
+        default="",
+        help="Suffix for output filenames, e.g. _5bp or _20bp.",
+    )
     args = parser.parse_args()
 
     panel = load_panel(args.raw)
@@ -263,15 +268,17 @@ def main() -> None:
         }
 
     args.out.mkdir(parents=True, exist_ok=True)
-    results.to_csv(args.out / "dro_experiment_returns.csv", index=False)
-    weights_frame.to_parquet(args.out / "dro_experiment_weights.parquet", index=False)
-    (args.out / "dro_experiment_summary.json").write_text(
+    results.to_csv(args.out / f"dro_experiment_returns{args.suffix}.csv", index=False)
+    weights_frame.to_parquet(
+        args.out / f"dro_experiment_weights{args.suffix}.parquet", index=False
+    )
+    (args.out / f"dro_experiment_summary{args.suffix}.json").write_text(
         json.dumps(summary, indent=2) + "\n", encoding="utf-8"
     )
 
     print("\nReduced DRO experiment summary")
     print(json.dumps(summary, indent=2))
-    print(f"wrote {args.out / 'dro_experiment_summary.json'}")
+    print(f"wrote {args.out / f'dro_experiment_summary{args.suffix}.json'}")
 
 
 if __name__ == "__main__":

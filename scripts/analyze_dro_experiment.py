@@ -11,6 +11,7 @@ uncertainty ablation separation.
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 from pathlib import Path
@@ -86,7 +87,13 @@ def _bootstrap_diff(
 
 
 def main() -> None:
-    results = pd.read_csv(ROOT / "results" / "tables" / "dro_experiment_returns.csv")
+    parser = argparse.ArgumentParser(description="Paired bootstrap analysis.")
+    parser.add_argument("--suffix", default="", help="Input/output suffix, e.g. _5bp.")
+    args = parser.parse_args()
+
+    results = pd.read_csv(
+        ROOT / "results" / "tables" / f"dro_experiment_returns{args.suffix}.csv"
+    )
     risk_free = pd.read_parquet(ROOT / "data" / "raw" / "risk_free.parquet")
     risk_free = risk_free.set_index("date")["rf"].sort_index()
     pivot = results.pivot(index="date", columns="strategy", values="net_return").sort_index()
@@ -166,7 +173,7 @@ def main() -> None:
             "result, not a reason to add capacity."
         ),
     }
-    out = ROOT / "results" / "tables" / "dro_experiment_analysis.json"
+    out = ROOT / "results" / "tables" / f"dro_experiment_analysis{args.suffix}.json"
     out.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(output, indent=2))
     print(f"wrote {out}")
