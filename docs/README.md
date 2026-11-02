@@ -23,6 +23,8 @@ This is the entry point for the project's documentation. If a document is not li
 | `11_lessons_log.md` | Per-project lessons | close | **Frozen — append-only** |
 | `12_research_rigor.md` | 12-model binding addendum, gates, protocol amendments | all | **Active — v1.1-rigor** |
 | `13_final_report.md` | Final decision memo: H1/H3 fail, H2 pass; limitations; close | close | **Final — negative result** |
+| `14_v2_preregistration.md` | v2 conformal-quantile pre-registration; new holdout | v2 | **Frozen — holdout untouched; G-R4v2 failed** |
+| `15_v2_report.md` | v2 development result and pre-holdout stop | v2 | **Final — stopped before holdout** |
 | `axiomatic_spec.md` | First-principles spec, data-generating mechanism, Bayes-risk/noise floor | G-R1 | **Active — estimate pending G1** |
 | `data_dictionary.md` | Schema, units, lineage, MI/CMI audit | G-R4 | **Active — MI audit pending G1** |
 | `pre_mortem.md` | Inversion failure vectors and kill criteria | G-R2 | **Active** |
@@ -54,6 +56,7 @@ These rules exist because the same fact appears in multiple docs. When a rule is
 - **License** identical: MIT in `../LICENSE`, `../pyproject.toml`, `03` §1, and `../README.md`.
 - **Rigor gates** identical: `12_research_rigor.md` is binding. B0 Ridge baseline, target-shuffling test, MI audit, conditional robust loss, counter-metric gate, and experiment ledger are mandatory before a confirmatory claim.
 - **Final verdict** identical: H1 FAIL, H2 PASS, H3 FAIL; reduced M1 (not LightGBM); no alpha claim; no deployment. See `13_final_report.md`.
+- **v2 verdict** identical: G-R4v2 failed (sigma pass rate 0.654 < 0.80); 2025–2026 holdout untouched; v2 stopped. See `15_v2_report.md`.
 - **Counter-metrics** identical: net Sharpe is never reported alone; max drawdown and CVaR95 travel with it.
 - **Year** consistent throughout: 2026.
 

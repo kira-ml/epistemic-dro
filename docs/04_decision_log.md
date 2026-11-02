@@ -236,6 +236,32 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-010 — v2 stopped before holdout (G-R4v2 failure)
+
+**Decision:** Stop v2 before touching the 2025-2026 holdout. The conformalized quantile uncertainty failed the pre-registered G-R4v2 information gate: sigma pass rate **0.654** (threshold 0.80, 179 dates, 30 permutations, BH-FDR). Do not relax the gate, do not run the holdout, and do not add features to force a signal.
+
+**Context:** v2 was a new pre-registration (`docs/14_v2_preregistration.md`, `v2.0-holdout`) with a 19-feature set, LightGBM quantile regression (q05/q50/q95, 3 seeds), split-conformal calibration, and a non-degenerate comparator (`B5_uncond_sigma`, trailing 36-month realized volatility). Development only: 2010-01..2024-11.
+
+**Development evidence:**
+- M1_v2: Sharpe 0.812, MDD −22.29%, CVaR −8.16%, turnover 3.47, mean sigma 5.27%.
+- B5_uncond_sigma: Sharpe 0.813, MDD −22.96%, CVaR −8.19%, turnover 2.57, mean sigma 5.66%.
+- B3: Sharpe 0.743, MDD −24.30%, CVaR −8.66%.
+- B1: Sharpe 0.673, MDD −26.61%, CVaR −9.76%.
+- Conformal coverage: 0.899 validation, 0.859 development test.
+- G-R4v2: sigma and interval width both pass rate 0.654; not stable enough.
+
+**Interpretation:** the model is calibrated but its uncertainty is not a stable conditional tail signal. The dev tail improvement over trailing volatility is tiny and comes with worse Sharpe and higher turnover. Touching the holdout would consume it without a credible gate.
+
+**Alternatives considered:** relax the 80% rule to 60%; run the holdout anyway; add features; use a different sigma mapping.
+
+**Rejected:** post-hoc gate relaxation; consuming the holdout on a failed pre-holdout gate; adding capacity.
+
+**Reversibility:** Closed for v2. A v3 requires a new pre-registration, a new uncertainty model, and an untouched holdout.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |

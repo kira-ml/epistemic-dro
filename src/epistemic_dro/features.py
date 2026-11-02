@@ -27,6 +27,10 @@ class FeatureSpec:
     drawdown_window: int = 12
     liquidity_window: int = 12
     beta_window: int = 36
+    skew_window: int = 12
+    downside_window: int = 12
+    volume_shock_window: int = 12
+    corr_window: int = 36
     metadata_fields: tuple[str, ...] = ("expense_ratio", "distribution_yield")
     factor_exposures: tuple[str, ...] = ("mkt_rf", "smb", "hml", "mom")
     winsorize: float = 0.01
@@ -142,6 +146,25 @@ def build_features(
     for window in spec.volatility_windows:
         feature_frames[f"vol_{window}m"] = returns.rolling(window).std() * np.sqrt(12.0)
 
+    downside = returns.clip(upper=0.0)
+    feature_frames[f"downside_vol_{spec.downside_window}m"] = (
+        np.sqrt((downside**2).rolling(spec.downside_window).mean()) * np.sqrt(12.0)
+    )
+    feature_frames[f"skew_{spec.skew_window}m"] = returns.rolling(spec.skew_window).skew()
+    feature_frames[f"worst_1m_{spec.downside_window}m"] = returns.rolling(
+        spec.downside_window
+    ).min()
+    if "vol_3m" in feature_frames and "vol_12m" in feature_frames:
+        feature_frames["vol_ratio_3_12"] = (
+            feature_frames["vol_3m"] / feature_frames["vol_12m"]
+        )
+    feature_frames["volume_shock_1m"] = dollar / dollar.rolling(
+        spec.volume_shock_window
+    ).mean()
+    feature_frames[f"corr_market_{spec.corr_window}m"] = returns.rolling(
+        spec.corr_window
+    ).corr(factors["mkt_rf"])
+
     feature_frames[f"mdd_{spec.drawdown_window}m"] = returns.rolling(
         spec.drawdown_window
     ).apply(_max_drawdown, raw=True)
@@ -178,6 +201,7 @@ def build_features(
 
     long = None
     for name, frame in feature_frames.items():
+        frame = frame.replace([np.inf, -np.inf], np.nan)
         series = frame.stack(future_stack=True).rename(name)
         series.index.names = ["date", "ticker"]
         long = (

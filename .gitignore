@@ -26,6 +26,8 @@ htmlcov/
 # Data: never commit vendor data
 data/raw/*
 !data/raw/.gitkeep
+data/raw_v2/*
+!data/raw_v2/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
 *.parquet

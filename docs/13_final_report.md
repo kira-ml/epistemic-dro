@@ -177,3 +177,13 @@ All data snapshots and result tables are gitignored. The code, frozen protocol, 
 The flagship value is the apparatus: a PIT-tested ETF snapshot, a frozen protocol, a mandatory baseline, an information audit, a target-shuffling falsification test, a counter-metric gate, an experiment ledger, and an honest negative finding.
 
 **No live deployment. No investment advice.**
+
+---
+
+## 12. Postscript — v2 attempt (2026-11-02)
+
+A separate v2 pre-registration (`docs/14_v2_preregistration.md`) tested a stronger uncertainty model on a new 2025–2026 snapshot: 19 features, LightGBM quantile regression, split-conformal calibration, and a non-degenerate trailing-volatility comparator.
+
+It **stopped before the holdout**. Development coverage was acceptable (0.899 validation; 0.859 test), but the uncertainty signal passed only **65.4%** of date-level information tests, below the frozen 80% gate. The holdout was not touched. See `docs/15_v2_report.md` and `DEC-20261102-010`.
+
+This does not change the v1 conclusion. It reinforces it: a calibrated uncertainty model is not automatically an informative one.

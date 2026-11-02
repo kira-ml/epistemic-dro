@@ -1,6 +1,6 @@
 # Epistemic-Aware DRO for Mean-CVaR Portfolios
 
-**Research prototype · November 2026 · docs frozen v1.1 · final reduced result: H1/H3 fail, H2 pass****
+**Research prototype · November 2026 · v1 final (H1/H3 fail) · v2 stopped before holdout****
 
 > Does epistemic uncertainty from an ML return model improve the tail-risk/return trade-off of a distributionally robust mean-CVaR portfolio, net of costs, out-of-sample?
 
@@ -120,6 +120,12 @@ The reduced uncertainty-aware DRO experiment (Ridge B0 mean + 5-model bootstrap 
 
 The shuffled-target run collapses to zero, so the null is not an obvious leak. The ML layer cannot be assumed to add value. See [`experiments/baseline_benchmarks.md`](experiments/baseline_benchmarks.md).
 
+### v2 attempt: stopped before the holdout
+
+A v2 pre-registration tested a stronger model: 19 features, LightGBM quantile regression, split-conformal calibration, and a non-degenerate trailing-volatility comparator. Development coverage was 0.899 (validation) and 0.859 (test), but the uncertainty signal passed only **65.4%** of date-level information tests — below the frozen 80% gate.
+
+**The 2025–2026 holdout was not touched.** v2 stopped before the confirmatory test. See [`docs/15_v2_report.md`](docs/15_v2_report.md). This is the rigor layer working: a calibrated but uninformative uncertainty model was not promoted to a holdout claim.
+
 ---
 
 ## Repository layout
@@ -153,6 +159,8 @@ epistemic-dro/
 │   ├── 11_lessons_log.md
 │   ├── 12_research_rigor.md  # 12-model binding addendum (v1.1)
 │   ├── 13_final_report.md    # final memo: H1/H3 fail, H2 pass
+│   ├── 14_v2_preregistration.md # v2 conformal-quantile pre-registration
+│   ├── 15_v2_report.md       # v2 stopped before holdout
 │   ├── axiomatic_spec.md     # first-principles / Bayes-risk gate
 │   ├── data_dictionary.md    # schema, lineage, MI audit
 │   ├── pre_mortem.md         # falsification and kill criteria
@@ -174,6 +182,8 @@ epistemic-dro/
 │   ├── run_dro_experiment.py # reduced M1 vs B5/B3/B1
 │   ├── analyze_dro_experiment.py # paired bootstrap verdict
 │   ├── report_final.py       # cost sensitivity, stress, deflated Sharpe
+│   ├── run_v2_experiment.py  # quantile/conformal v2
+│   ├── run_v2_uncertainty_audit.py # G-R4v2 gate
 │   └── profile_pipeline.py   # bottleneck profiling (G-R12)
 ├── src/epistemic_dro/
 │   ├── __init__.py
