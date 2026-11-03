@@ -4,6 +4,7 @@
 **Current state:** v1 closed (H1/H3 fail, H2 non-inferiority pass); v2 and v3 stopped before holdout; the gate/effect-size study is complete and is a **post-hoc methods audit**; **no v4 on this data**; 2025–2026 holdout **untouched**.
 **Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 54/54; CI green on `7511597`; **GitHub release v1.0.0 published 2026-11-04 with 7 assets** (paper, carousel, card, one-pager, summary, LICENSE, CITATION); claim-precision pass complete.  
 **Repo note:** the 2026-11-04 docs/asset pass is committed and pushed to `main`; the release remains anchored to tag `v1.0.0`.
+**Session close (2026-11-04):** GitHub release is live and verified; claim-precision pass is committed; **LinkedIn launch is paused by owner before upload**. No LinkedIn post was made; verified on the activity/Documents tabs (last document is `V2.1 — The Baseline Audit`, fraud detection). Resume only when the owner chooses.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
 
 ---
@@ -54,13 +55,15 @@
 
 **Definition of done:** a public release exists with the paper and visual assets.
 
-### 3. Publish the LinkedIn package
+### 3. Publish the LinkedIn package — **PAUSED by owner (2026-11-04)**
 
 - [ ] Upload `paper/linkedin_carousel.pdf` as a native document post.
 - [ ] Use **Version 0 — flagship** from `paper/linkedin_post.md`.
 - [ ] Put the release link in the first comment and in the featured section.
 - [ ] Post the 4:5 `paper/linkedin_card.png` 3–7 days later if the carousel performs.
 - [ ] Keep `paper/one_pager.pdf` for email/events, not the primary post.
+
+**Status:** no LinkedIn post was made. The web composer has a **Share a document** modal; the remaining step is the native file picker → `paper/linkedin_carousel.pdf`. The card is a fallback, not the primary post. Resume only on owner request.
 
 **Definition of done:** carousel published; release linked; card scheduled.
 
@@ -171,13 +174,12 @@
 
 ---
 
-## Suggested order for the next session
+## Session status — closed 2026-11-04
 
-1. **DONE:** claim-precision pass and asset rebuild; mobile readability remains.
-2. **DONE:** GitHub `v1.0.0` release published and verified (7 assets, CI green).
-3. Send the paper to one external quant/ML reader; record the strongest objection.
-4. Publish the corrected carousel with Version 0.
-5. Post the card (Version B) and write the essay only if the pull is real.
-6. Optional methods appendix: common-factor size simulation.
+**Closed for the day. No action required.**
 
-**Do not start a v4 on this data. Do not touch the holdout.**
+- GitHub release `v1.0.0` is live and verified: 7 assets, CI green.
+- Claim-precision pass is committed and pushed to `main`.
+- **No LinkedIn post was made.** Verified on the activity/Documents tabs; the last document is `V2.1 — The Baseline Audit` (fraud detection).
+- LinkedIn launch, mobile pass, and external reader are **paused by owner**. Resume only on request.
+- **Do not start a v4 on this data. Do not touch the 2025–2026 holdout.**
