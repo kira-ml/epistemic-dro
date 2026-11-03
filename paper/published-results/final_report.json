@@ -1,0 +1,266 @@
+{
+  "cost_sensitivity": {
+    "5": {
+      "M1_reduced": {
+        "net_sharpe": 0.8298646839050069,
+        "max_drawdown": -0.24263893962554295,
+        "cvar95": -0.08263356144506459,
+        "annualized_turnover": 2.3395427394235435
+      },
+      "B5_DRO_point": {
+        "net_sharpe": 0.8171742968746628,
+        "max_drawdown": -0.24388682288474828,
+        "cvar95": -0.08422601501168119,
+        "annualized_turnover": 2.220315020776511
+      },
+      "B3_CVaR": {
+        "net_sharpe": 0.817174296874723,
+        "max_drawdown": -0.2438868228847525,
+        "cvar95": -0.08422601501168177,
+        "annualized_turnover": 2.220315020775989
+      },
+      "B1_equal_weight": {
+        "net_sharpe": 0.6735669060614781,
+        "max_drawdown": -0.26609308270233656,
+        "cvar95": -0.09755214572914721,
+        "annualized_turnover": 0.11209925699536524
+      }
+    },
+    "10": {
+      "M1_reduced": {
+        "net_sharpe": 0.8159715980381914,
+        "max_drawdown": -0.2417689024958405,
+        "cvar95": -0.08305536471998379,
+        "annualized_turnover": 1.902393808578847
+      },
+      "B5_DRO_point": {
+        "net_sharpe": 0.7978414475120001,
+        "max_drawdown": -0.24281532313001597,
+        "cvar95": -0.08435717735308434,
+        "annualized_turnover": 1.8235173685782253
+      },
+      "B3_CVaR": {
+        "net_sharpe": 0.7978414474298207,
+        "max_drawdown": -0.24281532313002596,
+        "cvar95": -0.08435717735310927,
+        "annualized_turnover": 1.8235173685694828
+      },
+      "B1_equal_weight": {
+        "net_sharpe": 0.6732377521572512,
+        "max_drawdown": -0.26609308270233645,
+        "cvar95": -0.0975538041039399,
+        "annualized_turnover": 0.11209925699536524
+      }
+    },
+    "20": {
+      "M1_reduced": {
+        "net_sharpe": 0.8028475340441642,
+        "max_drawdown": -0.24326198092775675,
+        "cvar95": -0.08376525910330626,
+        "annualized_turnover": 1.3915696395771793
+      },
+      "B5_DRO_point": {
+        "net_sharpe": 0.7893165264981088,
+        "max_drawdown": -0.24364317856831297,
+        "cvar95": -0.08445242093799522,
+        "annualized_turnover": 1.2313132789258923
+      },
+      "B3_CVaR": {
+        "net_sharpe": 0.7893164963012825,
+        "max_drawdown": -0.24364317856776185,
+        "cvar95": -0.08445242191600894,
+        "annualized_turnover": 1.2313140822257718
+      },
+      "B1_equal_weight": {
+        "net_sharpe": 0.6725780298941254,
+        "max_drawdown": -0.26609308270233645,
+        "cvar95": -0.0975571208535253,
+        "annualized_turnover": 0.11209925699536524
+      }
+    },
+    "50": {
+      "M1_reduced": {
+        "net_sharpe": 0.7851603099337,
+        "max_drawdown": -0.24159900597827066,
+        "cvar95": -0.0840707120774567,
+        "annualized_turnover": 0.667984735141856
+      },
+      "B5_DRO_point": {
+        "net_sharpe": 0.7712485476162679,
+        "max_drawdown": -0.24106232119643367,
+        "cvar95": -0.08493616645128477,
+        "annualized_turnover": 0.6167925565457715
+      },
+      "B3_CVaR": {
+        "net_sharpe": 0.7712485161937591,
+        "max_drawdown": -0.24106231878861595,
+        "cvar95": -0.0849361696316436,
+        "annualized_turnover": 0.6167925296953476
+      },
+      "B1_equal_weight": {
+        "net_sharpe": 0.6705875891994051,
+        "max_drawdown": -0.26609308270233656,
+        "cvar95": -0.09756707110228152,
+        "annualized_turnover": 0.11209925699536524
+      }
+    }
+  },
+  "stress_windows": {
+    "2010_2019": {
+      "M1_reduced": {
+        "net_sharpe": 1.0413454989330828,
+        "max_drawdown": -0.14481054829339213,
+        "cvar95": -0.06897512808675857,
+        "months": 120
+      },
+      "B5_DRO_point": {
+        "net_sharpe": 1.0320904521903371,
+        "max_drawdown": -0.1453807995423122,
+        "cvar95": -0.0689624528870274,
+        "months": 120
+      },
+      "B3_CVaR": {
+        "net_sharpe": 1.0320904520429568,
+        "max_drawdown": -0.14538079954231242,
+        "cvar95": -0.06896245288702584,
+        "months": 120
+      },
+      "B1_equal_weight": {
+        "net_sharpe": 0.7929163086259625,
+        "max_drawdown": -0.21434853185179548,
+        "cvar95": -0.08402634021957049,
+        "months": 120
+      }
+    },
+    "2020": {
+      "M1_reduced": {
+        "net_sharpe": 0.6810888105009509,
+        "max_drawdown": -0.12327085975914409,
+        "cvar95": -0.1232708597591442,
+        "months": 12
+      },
+      "B5_DRO_point": {
+        "net_sharpe": 0.633978155472427,
+        "max_drawdown": -0.13241735422442003,
+        "cvar95": -0.13241735422442,
+        "months": 12
+      },
+      "B3_CVaR": {
+        "net_sharpe": 0.6339781554724252,
+        "max_drawdown": -0.13241735422442014,
+        "cvar95": -0.1324173542244201,
+        "months": 12
+      },
+      "B1_equal_weight": {
+        "net_sharpe": 0.6872127240177819,
+        "max_drawdown": -0.17864621468749786,
+        "cvar95": -0.1786462146874979,
+        "months": 12
+      }
+    },
+    "2022": {
+      "M1_reduced": {
+        "net_sharpe": -0.5077137827543275,
+        "max_drawdown": -0.19720939350453082,
+        "cvar95": -0.0962163795293925,
+        "months": 12
+      },
+      "B5_DRO_point": {
+        "net_sharpe": -0.48824369532946976,
+        "max_drawdown": -0.1991877654276627,
+        "cvar95": -0.0963188484403757,
+        "months": 12
+      },
+      "B3_CVaR": {
+        "net_sharpe": -0.48824369532896067,
+        "max_drawdown": -0.1991877654276739,
+        "cvar95": -0.0963188484403744,
+        "months": 12
+      },
+      "B1_equal_weight": {
+        "net_sharpe": -0.04293070295568707,
+        "max_drawdown": -0.19423939228552245,
+        "cvar95": -0.0953026948326772,
+        "months": 12
+      }
+    },
+    "2020_2024": {
+      "M1_reduced": {
+        "net_sharpe": 0.5016330160254553,
+        "max_drawdown": -0.2417689024958407,
+        "cvar95": -0.10299667112339593,
+        "months": 59
+      },
+      "B5_DRO_point": {
+        "net_sharpe": 0.48158176777528366,
+        "max_drawdown": -0.2428153231300163,
+        "cvar95": -0.10600612332707222,
+        "months": 59
+      },
+      "B3_CVaR": {
+        "net_sharpe": 0.48158176777523015,
+        "max_drawdown": -0.24281532313002585,
+        "cvar95": -0.10600612332707186,
+        "months": 59
+      },
+      "B1_equal_weight": {
+        "net_sharpe": 0.5228296113822228,
+        "max_drawdown": -0.2166328497108596,
+        "cvar95": -0.12055576615761505,
+        "months": 59
+      }
+    }
+  },
+  "deflated_sharpe": {
+    "M1_reduced": {
+      "sharpe_monthly": 0.23555071088921922,
+      "sharpe_annualized": 0.8159715980381905,
+      "expected_max_sharpe_monthly": 0.020009266990295222,
+      "deflated_sharpe_probability": 0.9963118227213507,
+      "probabilistic_sharpe_probability": 0.9982947400924459,
+      "skew": -0.4937423282862864,
+      "kurtosis": 3.5674344639164195,
+      "months": 179,
+      "trials": 4
+    },
+    "B5_DRO_point": {
+      "sharpe_monthly": 0.2303169872458469,
+      "sharpe_annualized": 0.7978414475119998,
+      "expected_max_sharpe_monthly": 0.020009266990295222,
+      "deflated_sharpe_probability": 0.9954301013467052,
+      "probabilistic_sharpe_probability": 0.9978467809561499,
+      "skew": -0.5337837800730517,
+      "kurtosis": 3.6866244667386825,
+      "months": 179,
+      "trials": 4
+    },
+    "B3_CVaR": {
+      "sharpe_monthly": 0.23031698722212376,
+      "sharpe_annualized": 0.7978414474298204,
+      "expected_max_sharpe_monthly": 0.020009266990295222,
+      "deflated_sharpe_probability": 0.9954301013433523,
+      "probabilistic_sharpe_probability": 0.9978467809544742,
+      "skew": -0.5337837800046649,
+      "kurtosis": 3.6866244665648953,
+      "months": 179,
+      "trials": 4
+    },
+    "B1_equal_weight": {
+      "sharpe_monthly": 0.19434699871830363,
+      "sharpe_annualized": 0.6732377521572507,
+      "expected_max_sharpe_monthly": 0.020009266990295222,
+      "deflated_sharpe_probability": 0.9864142566433125,
+      "probabilistic_sharpe_probability": 0.9931030099105642,
+      "skew": -0.38797060893686725,
+      "kurtosis": 4.520890785084684,
+      "months": 179,
+      "trials": 4
+    }
+  },
+  "verdict": {
+    "H1": "FAIL",
+    "H2": "PASS",
+    "H3": "FAIL",
+    "note": "Reduced M1; not the original LightGBM M1. Negative result for the uncertainty layer."
+  }
+}

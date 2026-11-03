@@ -1,0 +1,29 @@
+{
+  "snapshot": "data/raw",
+  "target": "forward_excess_return_1m",
+  "rows": 19568,
+  "months": 298,
+  "tickers": 72,
+  "target_mean": 0.006440580700790139,
+  "target_std": 0.06064040588726292,
+  "target_skew": -0.28076130589006437,
+  "target_kurtosis_excess": 3.804149788523817,
+  "target_min": -0.5525799507974953,
+  "target_max": 0.6521631118934861,
+  "cross_sectional_variance_mean": 0.001380940518885633,
+  "cross_sectional_variance_median": 0.001008986853886781,
+  "breadth_min": 21,
+  "breadth_median": 72,
+  "breadth_max": 72,
+  "factor_regression_r2": 0.6217715814192044,
+  "factor_regression_coefficients": {
+    "intercept": -0.0006536140134512043,
+    "mkt_rf": 0.9941672850855874,
+    "smb": 0.12197426737273556,
+    "hml": 0.1508754981535654,
+    "mom": -0.05299100387871178
+  },
+  "hill_tail_index_losses_10pct": 3.0822402920339376,
+  "tail_loss_count": 8075,
+  "note": "factor_regression_r2 is the contemporaneous factor variance share, not predictive R^2; the linear predictive upper bound is the Ridge B0 OOS R^2 in ridge_b0_summary.json."
+}

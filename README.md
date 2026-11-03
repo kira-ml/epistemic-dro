@@ -1,5 +1,7 @@
 # Epistemic-Aware DRO for Mean-CVaR Portfolios
 
+[![CI](https://github.com/kira-ml/epistemic-dro/actions/workflows/ci.yml/badge.svg)](https://github.com/kira-ml/epistemic-dro/actions/workflows/ci.yml)
+
 **Research prototype · November 2026 · v1 final (H1/H3 fail) · v2/v3 stopped before holdout****
 
 > Does epistemic uncertainty from an ML return model improve the tail-risk/return trade-off of a distributionally robust mean-CVaR portfolio, net of costs, out-of-sample?
@@ -231,7 +233,7 @@ The project's operating manual (`AGENTS.md`) is maintained locally and is **not 
 cd D:\quant-finance-ml\epistemic-dro
 python -m venv .venv
 .venv\Scripts\activate
-python -m pip install -e ".[dev,ml]"
+python -m pip install -e ".[dev,ml,paper]"
 pytest -q
 ruff check .
 python scripts/run_smoke.py
@@ -248,6 +250,8 @@ python scripts/run_information_audit.py
 python scripts/run_dro_experiment.py
 python scripts/analyze_dro_experiment.py
 python scripts/report_final.py
+python scripts/build_paper.py
+python scripts/verify_results.py
 ```
 
 The smoke test uses **synthetic data**. The snapshot and baseline scripts use the real frozen data and write to `data/raw/` and `results/tables/` (both gitignored). The B0 baseline is a null result; do not cite it as a strategy result.

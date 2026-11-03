@@ -1,0 +1,160 @@
+{
+  "baseline": "B0 Ridge",
+  "alpha": 1.0,
+  "report_start": "2010-01-01",
+  "folds": 14,
+  "oos_rows": 11328,
+  "oos_months": 158,
+  "oos_tickers": 72,
+  "pooled_oos_r2": -0.018624021694765736,
+  "mean_rank_ic": 0.012764210813721574,
+  "ic_std": 0.2850268384485721,
+  "ic_t_stat": 0.5629071386019676,
+  "icir_monthly": 0.04478248744293126,
+  "icir_annualized": 0.15513108708094436,
+  "hit_rate": 0.5745056497175142,
+  "shuffled_target": false,
+  "shuffle_seed": null,
+  "fold_metrics": [
+    {
+      "fold": 1,
+      "train_start": "2003-01-31",
+      "train_end": "2007-12-31",
+      "test_start": "2009-03-31",
+      "test_end": "2010-02-26",
+      "train_rows": 2660,
+      "test_rows": 794,
+      "mean_ic": 0.098945625768031
+    },
+    {
+      "fold": 2,
+      "train_start": "2004-02-27",
+      "train_end": "2009-01-30",
+      "test_start": "2010-04-30",
+      "test_end": "2011-03-31",
+      "train_rows": 3024,
+      "test_rows": 834,
+      "mean_ic": -0.10945066957077877
+    },
+    {
+      "fold": 3,
+      "train_start": "2005-03-31",
+      "train_end": "2010-02-26",
+      "test_start": "2011-05-31",
+      "test_end": "2012-04-30",
+      "train_rows": 3327,
+      "test_rows": 857,
+      "mean_ic": -0.059365630617801195
+    },
+    {
+      "fold": 4,
+      "train_start": "2006-04-28",
+      "train_end": "2011-03-31",
+      "test_start": "2012-06-29",
+      "test_end": "2013-05-31",
+      "train_rows": 3647,
+      "test_rows": 861,
+      "mean_ic": -0.019287019516343647
+    },
+    {
+      "fold": 5,
+      "train_start": "2007-05-31",
+      "train_end": "2012-04-30",
+      "test_start": "2013-07-31",
+      "test_end": "2014-06-30",
+      "train_rows": 3914,
+      "test_rows": 864,
+      "mean_ic": -0.06666291508564325
+    },
+    {
+      "fold": 6,
+      "train_start": "2008-06-30",
+      "train_end": "2013-05-31",
+      "test_start": "2014-08-29",
+      "test_end": "2015-07-31",
+      "train_rows": 4094,
+      "test_rows": 864,
+      "mean_ic": 0.13184663536776212
+    },
+    {
+      "fold": 7,
+      "train_start": "2009-07-31",
+      "train_end": "2014-06-30",
+      "test_start": "2015-09-30",
+      "test_end": "2016-08-31",
+      "train_rows": 4238,
+      "test_rows": 864,
+      "mean_ic": -0.011038295030499514
+    },
+    {
+      "fold": 8,
+      "train_start": "2010-08-31",
+      "train_end": "2015-07-31",
+      "test_start": "2016-10-31",
+      "test_end": "2017-09-29",
+      "train_rows": 4290,
+      "test_rows": 864,
+      "mean_ic": 0.08755118228396257
+    },
+    {
+      "fold": 9,
+      "train_start": "2011-09-30",
+      "train_end": "2016-08-31",
+      "test_start": "2017-11-30",
+      "test_end": "2018-10-31",
+      "train_rows": 4312,
+      "test_rows": 864,
+      "mean_ic": 0.007797929127275078
+    },
+    {
+      "fold": 10,
+      "train_start": "2012-10-31",
+      "train_end": "2017-09-29",
+      "test_start": "2018-12-31",
+      "test_end": "2019-11-29",
+      "train_rows": 4320,
+      "test_rows": 864,
+      "mean_ic": 0.14239661714579716
+    },
+    {
+      "fold": 11,
+      "train_start": "2013-11-29",
+      "train_end": "2018-10-31",
+      "test_start": "2020-01-31",
+      "test_end": "2020-12-31",
+      "train_rows": 4320,
+      "test_rows": 864,
+      "mean_ic": 0.013331511136836232
+    },
+    {
+      "fold": 12,
+      "train_start": "2014-12-31",
+      "train_end": "2019-11-29",
+      "test_start": "2021-02-26",
+      "test_end": "2022-01-31",
+      "train_rows": 4320,
+      "test_rows": 864,
+      "mean_ic": 0.020813235577850673
+    },
+    {
+      "fold": 13,
+      "train_start": "2016-01-29",
+      "train_end": "2020-12-31",
+      "test_start": "2022-03-31",
+      "test_end": "2023-02-28",
+      "train_rows": 4320,
+      "test_rows": 864,
+      "mean_ic": -0.07263596801509209
+    },
+    {
+      "fold": 14,
+      "train_start": "2017-02-28",
+      "train_end": "2022-01-31",
+      "test_start": "2023-04-28",
+      "test_end": "2024-03-28",
+      "train_rows": 4320,
+      "test_rows": 864,
+      "mean_ic": 0.10651274465667677
+    }
+  ]
+}

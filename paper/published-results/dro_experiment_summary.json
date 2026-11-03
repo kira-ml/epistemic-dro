@@ -1,0 +1,62 @@
+{
+  "M1_reduced": {
+    "net_sharpe": 0.8159715980381914,
+    "max_drawdown": -0.2417689024958405,
+    "cvar95": -0.08305536471998379,
+    "sortino": 1.170650285496061,
+    "calmar": 0.4956544573668004,
+    "months": 179,
+    "mean_net_return": 0.010247987118259503,
+    "annualized_net_return": 0.11983383417474269,
+    "annualized_turnover": 1.902393808578847,
+    "annualized_cost_drag": 0.001902393808578838,
+    "mean_n_assets": 70.37988826815642,
+    "mean_sigma": 0.00540471446415945,
+    "mean_mu": 0.007860451960878466
+  },
+  "B5_DRO_point": {
+    "net_sharpe": 0.7978414475120001,
+    "max_drawdown": -0.24281532313001597,
+    "cvar95": -0.08435717735308434,
+    "sortino": 1.1249346951909147,
+    "calmar": 0.4854257353412952,
+    "months": 179,
+    "mean_net_return": 0.010113532943492378,
+    "annualized_net_return": 0.1178688067825222,
+    "annualized_turnover": 1.8235173685782253,
+    "annualized_cost_drag": 0.001823517368578248,
+    "mean_n_assets": 70.37988826815642,
+    "mean_sigma": 1.0000000000000002e-06,
+    "mean_mu": 0.007860451960878466
+  },
+  "B3_CVaR": {
+    "net_sharpe": 0.7978414474298207,
+    "max_drawdown": -0.24281532313002596,
+    "cvar95": -0.08435717735310927,
+    "sortino": 1.124934695166602,
+    "calmar": 0.48542573529324695,
+    "months": 179,
+    "mean_net_return": 0.010113532942628359,
+    "annualized_net_return": 0.1178688067708602,
+    "annualized_turnover": 1.8235173685694828,
+    "annualized_cost_drag": 0.0018235173685695258,
+    "mean_n_assets": 70.37988826815642,
+    "mean_sigma": 1.0000000000000002e-06,
+    "mean_mu": 0.007860451960878466
+  },
+  "B1_equal_weight": {
+    "net_sharpe": 0.6732377521572512,
+    "max_drawdown": -0.26609308270233645,
+    "cvar95": -0.0975538041039399,
+    "sortino": 0.9393194590599927,
+    "calmar": 0.42045610061130856,
+    "months": 179,
+    "mean_net_return": 0.009938194017362715,
+    "annualized_net_return": 0.11188045995266682,
+    "annualized_turnover": 0.11209925699536524,
+    "annualized_cost_drag": 0.000112099256995353,
+    "mean_n_assets": 70.37988826815642,
+    "mean_sigma": 1.0000000000000002e-06,
+    "mean_mu": 0.007860451960878466
+  }
+}

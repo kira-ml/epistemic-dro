@@ -1,0 +1,30 @@
+{
+  "dates": 179,
+  "permutations": 30,
+  "fdr": "BH q<0.05",
+  "survival_rule": "pass_rate>=0.80",
+  "features": [
+    {
+      "feature": "sigma",
+      "mean_mi": 0.16223235536637803,
+      "mean_null_95": 0.08697846354761628,
+      "median_qvalue": 0.03225806451612903,
+      "pass_rate": 0.6536312849162011,
+      "survives": false
+    },
+    {
+      "feature": "interval_width",
+      "mean_mi": 0.16223235536637803,
+      "mean_null_95": 0.08697846354761628,
+      "median_qvalue": 0.03225806451612903,
+      "pass_rate": 0.6536312849162011,
+      "survives": false
+    }
+  ],
+  "coverage": {
+    "mean_validation_coverage": 0.8985956077604721,
+    "mean_test_coverage": 0.8588251140175975
+  },
+  "holdout_allowed": false,
+  "note": "Development-only audit. If no uncertainty feature survives, v2 stops before the 2025-2026 holdout."
+}

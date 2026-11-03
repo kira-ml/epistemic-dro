@@ -1,0 +1,23 @@
+{
+  "dates": 179,
+  "permutations": 30,
+  "fdr": "BH q<0.05",
+  "survival_rule": "pass_rate>=0.80",
+  "sigma": {
+    "mean_mi": 0.12128587204371809,
+    "mean_null_95": 0.08754161358581401,
+    "median_qvalue": 0.06451612903225806,
+    "pass_rate": 0.4301675977653631,
+    "survives": false
+  },
+  "calibration": {
+    "mean_sigma": 0.04294445114328441,
+    "mean_realized_abs": 0.04301600849253883,
+    "correlation": 0.283924137023733,
+    "top_decile_realized_abs": 0.06517035010135705,
+    "bottom_decile_realized_abs": 0.027531212774079446,
+    "decile_spread": 0.037639137327277604
+  },
+  "holdout_allowed": false,
+  "note": "Development-only tail-forecast information audit. If the gate fails, the 2025-2026 holdout remains untouched."
+}

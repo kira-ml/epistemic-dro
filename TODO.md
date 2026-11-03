@@ -3,6 +3,7 @@
 **Last updated:** 2026-11-03
 **Current state:** v1 closed (H1/H3 fail, H2 pass); v2 and v3 stopped before holdout; 2025–2026 holdout **untouched**; paper, carousel, card, and one-pager built.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
+**Progress 2026-11-03:** P0.1–P0.3 complete; `v1.0.0` tagged; GitHub release still needs the web UI; LinkedIn publication pending.
 
 ---
 
@@ -21,7 +22,7 @@
 
 ### 1. Publish aggregate result tables
 
-- [ ] Create `paper/published-results/` with aggregate-only files:
+- [x] Create `paper/published-results/` with aggregate-only files:
   - `ridge_b0_summary.json`
   - `ridge_b0_summary_shuffled.json`
   - `diagnostics.json`
@@ -35,53 +36,53 @@
   - `v3_sigma_audit.json`
   - `v3_sigma_dev.parquet` (needed for the calibration figure)
   - `final_report.json`
-- [ ] Add `paper/published-results/README.md` stating: aggregate metrics only; no raw prices; no holdout result.
-- [ ] Change `scripts/build_paper.py` to read `paper/published-results/` first, with `results/tables/` as a local fallback.
-- [ ] Rebuild and verify `paper/mini_paper.pdf`, `paper/linkedin_carousel.pdf`, `paper/one_pager.pdf`, `paper/linkedin_card.png` from the published tables.
-- [ ] Commit the published tables and regenerated assets.
+- [x] Add `paper/published-results/README.md` stating: aggregate metrics only; no raw prices; no holdout result.
+- [x] Change `scripts/build_paper.py` to read `paper/published-results/` first, with `results/tables/` as a local fallback.
+- [x] Rebuild and verify `paper/mini_paper.pdf`, `paper/linkedin_carousel.pdf`, `paper/one_pager.pdf`, `paper/linkedin_card.png` from the published tables.
+- [x] Commit the published tables and regenerated assets.
 
 **Definition of done:** a fresh clone can run `python scripts/build_paper.py` and rebuild the paper without rerunning the models.
 
 ### 2. Add a verifier
 
-- [ ] Create `scripts/verify_results.py` that checks:
+- [x] Create `scripts/verify_results.py` that checks:
   - v1 verdicts: H1 FAIL, H2 PASS, H3 FAIL;
   - v2 gate < 0.80 and `holdout_allowed == false`;
   - v3 gate < 0.80 and `holdout_allowed == false`;
   - no v2/v3 holdout result files exist;
   - `paper/mini_paper.pdf`, `linkedin_carousel.pdf`, `one_pager.pdf`, and `linkedin_card.png` exist;
   - the paper’s headline numbers match the published JSONs.
-- [ ] Make it exit non-zero on any mismatch.
-- [ ] Add it to `paper/README.md` and the root README.
+- [x] Make it exit non-zero on any mismatch.
+- [x] Add it to `paper/README.md` and the root README.
 
 **Definition of done:** `python scripts/verify_results.py` prints PASS and fails if a verdict or gate is tampered with.
 
 ### 3. Add CI
 
-- [ ] Create `.github/workflows/ci.yml`:
+- [x] Create `.github/workflows/ci.yml`:
   - Ubuntu, Python 3.10;
-  - `pip install -e ".[dev]"` + `typst`;
+  - `pip install -e ".[dev,paper]"`;
   - `pytest -q`;
   - `ruff check .`;
   - `python scripts/verify_results.py`;
   - `python scripts/build_paper.py`;
   - assert `paper/mini_paper.pdf` exists.
-- [ ] Add `typst` to a `paper` optional dependency or document it in `paper/README.md`.
-- [ ] Confirm the workflow is green.
+- [x] Add `typst` to a `paper` optional dependency or document it in `paper/README.md`.
+- [ ] Confirm the workflow is green on GitHub (first push triggers it).
 
 **Definition of done:** every push runs tests, lint, verifier, and paper build.
 
 ### 4. Create `v1.0.0`
 
-- [ ] Tag `v1.0.0` (separate from the docs freeze tags).
+- [x] Tag `v1.0.0` (separate from the docs freeze tags).
 - [ ] Create a GitHub release with:
   - `paper/mini_paper.pdf`
   - `paper/linkedin_carousel.pdf`
   - `paper/linkedin_card.png`
   - `paper/one_pager.pdf`
   - `paper/one_page_summary.md`
-- [ ] Write release notes: three pre-registered attempts, one closed negative, two pre-holdout stops, holdout untouched.
-- [ ] Do **not** attach raw data.
+- [x] Write release notes: three pre-registered attempts, one closed negative, two pre-holdout stops, holdout untouched.
+- [x] Do **not** attach raw data.
 
 **Definition of done:** a public release exists with the paper and visual assets.
 

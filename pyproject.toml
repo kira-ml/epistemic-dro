@@ -32,6 +32,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.6"]
 ml = ["lightgbm>=4.3", "mapie>=0.8", "optuna>=3.6"]
+paper = ["typst>=0.11"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

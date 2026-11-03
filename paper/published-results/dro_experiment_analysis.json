@@ -1,0 +1,151 @@
+{
+  "months": 179,
+  "point_estimates": {
+    "B1_equal_weight": {
+      "net_sharpe": 0.6732377521572507,
+      "max_drawdown": -0.26609308270233645,
+      "cvar95": -0.09755380410393986
+    },
+    "B3_CVaR": {
+      "net_sharpe": 0.7978414474298204,
+      "max_drawdown": -0.24281532313002607,
+      "cvar95": -0.08435717735310921
+    },
+    "B5_DRO_point": {
+      "net_sharpe": 0.7978414475119998,
+      "max_drawdown": -0.2428153231300164,
+      "cvar95": -0.08435717735308429
+    },
+    "M1_reduced": {
+      "net_sharpe": 0.8159715980381905,
+      "max_drawdown": -0.2417689024958406,
+      "cvar95": -0.08305536471998373
+    }
+  },
+  "comparisons": {
+    "B5_DRO_point": {
+      "sharpe_diff_mean": 0.017871957273079785,
+      "sharpe_diff_ci90": [
+        -3.1463359398962164e-07,
+        0.036900272740236904
+      ],
+      "sharpe_diff_positive_share": 0.95,
+      "mdd_diff_mean": 0.00545400031371325,
+      "mdd_diff_ci90": [
+        -0.002397041245194076,
+        0.01604012047901317
+      ],
+      "relative_mdd_mean": -0.02142567961213699,
+      "relative_mdd_ci90": [
+        -0.061984325316245724,
+        0.010830252645348376
+      ],
+      "cvar_diff_mean": 0.001249480497538706,
+      "cvar_diff_ci90": [
+        -0.00010013396636445737,
+        0.0030828143814386247
+      ],
+      "relative_cvar_mean": -0.014489730795364966,
+      "relative_cvar_ci90": [
+        -0.03336615681676206,
+        0.0012358633826243354
+      ]
+    },
+    "B3_CVaR": {
+      "sharpe_diff_mean": 0.0178719573579699,
+      "sharpe_diff_ci90": [
+        -3.1426940809151645e-07,
+        0.0369002729140953
+      ],
+      "sharpe_diff_positive_share": 0.95,
+      "mdd_diff_mean": 0.005454000325636567,
+      "mdd_diff_ci90": [
+        -0.0023970412400963425,
+        0.01604012048055805
+      ],
+      "relative_mdd_mean": -0.021425679657844136,
+      "relative_mdd_ci90": [
+        -0.061984325316460025,
+        0.010830252645344268
+      ],
+      "cvar_diff_mean": 0.001249480497553772,
+      "cvar_diff_ci90": [
+        -0.00010013396636335826,
+        0.0030828143814421232
+      ],
+      "relative_cvar_mean": -0.014489730795557584,
+      "relative_cvar_ci90": [
+        -0.0333661568168932,
+        0.0012358633826428708
+      ]
+    },
+    "B1_equal_weight": {
+      "sharpe_diff_mean": 0.1431172182511342,
+      "sharpe_diff_ci90": [
+        0.020015406693525563,
+        0.2662442356254019
+      ],
+      "sharpe_diff_positive_share": 0.9705,
+      "mdd_diff_mean": 0.0599957612240455,
+      "mdd_diff_ci90": [
+        0.0016455474565263309,
+        0.1372026076617139
+      ],
+      "relative_mdd_mean": -0.190060944163645,
+      "relative_mdd_ci90": [
+        -0.3599829348986613,
+        -0.007833051735162553
+      ],
+      "cvar_diff_mean": 0.014617262498584764,
+      "cvar_diff_ci90": [
+        0.004283047095336487,
+        0.026363906100209195
+      ],
+      "relative_cvar_mean": -0.1483994742388167,
+      "relative_cvar_ci90": [
+        -0.24410652677395478,
+        -0.04902357420586218
+      ]
+    }
+  },
+  "verdict": {
+    "H1_tail_improvement": {
+      "mdd_improvement_observed": -0.0010464206341758153,
+      "relative_mdd_ci90": [
+        -0.061984325316245724,
+        0.010830252645348376
+      ],
+      "cvar_diff_ci90": [
+        -0.00010013396636445737,
+        0.0030828143814386247
+      ],
+      "passes_20pct_mdd": false,
+      "passes_cvar_excludes_zero": false,
+      "verdict": "FAIL"
+    },
+    "H2_sharpe_non_inferiority": {
+      "best_baseline": "B5_DRO_point",
+      "sharpe_diff": 0.018130150526190714,
+      "sharpe_diff_ci90": [
+        -3.1463359398962164e-07,
+        0.036900272740236904
+      ],
+      "margin": -0.2,
+      "verdict": "PASS"
+    },
+    "H3_uncertainty_ablation": {
+      "mdd_diff_ci90": [
+        -0.002397041245194076,
+        0.01604012047901317
+      ],
+      "cvar_diff_ci90": [
+        -0.00010013396636445737,
+        0.0030828143814386247
+      ],
+      "passes_mdd_separation": false,
+      "passes_cvar_separation": false,
+      "verdict": "FAIL"
+    }
+  },
+  "note": "Reduced M1 uses Ridge B0 mean + bootstrap ensemble sigma. It is not the original LightGBM M1. H1/H3 failure is a negative result, not a reason to add capacity."
+}

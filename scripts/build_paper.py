@@ -18,13 +18,15 @@ from matplotlib.patches import FancyBboxPatch, Rectangle
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLES = ROOT / "results" / "tables"
+PUBLISHED = ROOT / "paper" / "published-results"
+DATA = PUBLISHED if (PUBLISHED / "final_report.json").exists() else TABLES
 PAPER = ROOT / "paper"
 FIGURES = PAPER / "figures"
 GENERATED = PAPER / "generated"
 
 
 def _load(name: str) -> dict:
-    return json.loads((TABLES / name).read_text(encoding="utf-8"))
+    return json.loads((DATA / name).read_text(encoding="utf-8"))
 
 
 def _fmt(value: float, digits: int = 3) -> str:
@@ -100,7 +102,7 @@ def build_figures() -> None:
     _style()
     FIGURES.mkdir(parents=True, exist_ok=True)
 
-    returns = pd.read_csv(TABLES / "dro_experiment_returns.csv")
+    returns = pd.read_csv(DATA / "dro_experiment_returns.csv")
     rf = pd.read_parquet(ROOT / "data" / "raw" / "risk_free.parquet")
     rf = rf.set_index("date")["rf"].sort_index()
     pivot = returns.pivot(index="date", columns="strategy", values="net_return").sort_index()
@@ -145,7 +147,7 @@ def build_figures() -> None:
     fig.savefig(FIGURES / "gate_pass_rates.png", bbox_inches="tight")
     plt.close(fig)
 
-    sigma = pd.read_parquet(TABLES / "v3_sigma_dev.parquet").dropna(subset=["sigma", "realized_abs"])
+    sigma = pd.read_parquet(DATA / "v3_sigma_dev.parquet").dropna(subset=["sigma", "realized_abs"])
     sigma["decile"] = pd.qcut(sigma["sigma"], 10, labels=False, duplicates="drop")
     decile = sigma.groupby("decile")["realized_abs"].mean()
     fig, ax = plt.subplots(figsize=(6.6, 3.4), dpi=200)

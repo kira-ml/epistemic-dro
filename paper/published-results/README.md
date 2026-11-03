@@ -1,0 +1,29 @@
+# Published aggregate results
+
+These files are the aggregate outputs behind `paper/mini_paper.pdf` and the LinkedIn assets. They contain **no raw prices** and **no holdout result**.
+
+They are committed so a fresh clone can rebuild the paper without rerunning the models:
+
+```bash
+python scripts/build_paper.py
+```
+
+| File | Contents |
+|---|---|
+| `ridge_b0_summary.json` | Ridge B0 walk-forward forecast metrics |
+| `ridge_b0_summary_shuffled.json` | Target-shuffling falsification run |
+| `diagnostics.json` | Target distribution, factor variance share, Hill tail index |
+| `information_audit.json` / `.csv` | v1 feature MI audit |
+| `dro_experiment_summary.json` | v1 reduced DRO metrics |
+| `dro_experiment_analysis.json` | v1 paired bootstrap and H1–H3 verdicts |
+| `dro_experiment_returns.csv` | v1 monthly net returns by strategy |
+| `v2_summary_dev.json` | v2 development metrics |
+| `v2_uncertainty_audit.json` | v2 pre-holdout gate |
+| `v3_summary_dev.json` | v3 development metrics |
+| `v3_sigma_audit.json` | v3 pre-holdout gate |
+| `v3_sigma_dev.parquet` | v3 per-asset sigma and realized absolute return |
+| `final_report.json` | Cost sensitivity, stress windows, deflated Sharpe |
+
+**No v2/v3 holdout result exists.** The 2025–2026 holdout was never run.
+
+**Licensing:** aggregate results only. Raw vendor data is not redistributed; see the root README and `data/README.md`.

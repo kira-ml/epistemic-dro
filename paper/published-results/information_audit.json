@@ -1,0 +1,115 @@
+{
+  "dates_evaluated": 259,
+  "permutations": 30,
+  "fdr": "Benjamini-Hochberg, q < 0.05",
+  "survival_rule": "pass_rate >= 0.80",
+  "survivors": [],
+  "conditional_mi_proxy": {},
+  "features": [
+    {
+      "feature": "mom_1m",
+      "mean_mi": 0.19106483026058174,
+      "mean_null_95": 0.0902926572575237,
+      "median_qvalue": 0.05241935483870967,
+      "pass_rate": 0.47104247104247104,
+      "survives": false
+    },
+    {
+      "feature": "mom_3m",
+      "mean_mi": 0.20133331612194807,
+      "mean_null_95": 0.09004689237921057,
+      "median_qvalue": 0.04659498207885304,
+      "pass_rate": 0.5135135135135135,
+      "survives": false
+    },
+    {
+      "feature": "mom_6m",
+      "mean_mi": 0.20983433977654814,
+      "mean_null_95": 0.092008513529604,
+      "median_qvalue": 0.04659498207885304,
+      "pass_rate": 0.5057915057915058,
+      "survives": false
+    },
+    {
+      "feature": "mom_12m",
+      "mean_mi": 0.20530086248423984,
+      "mean_null_95": 0.0906419377771378,
+      "median_qvalue": 0.05241935483870967,
+      "pass_rate": 0.47876447876447875,
+      "survives": false
+    },
+    {
+      "feature": "vol_3m",
+      "mean_mi": 0.19447615092759565,
+      "mean_null_95": 0.09037342579500741,
+      "median_qvalue": 0.04659498207885304,
+      "pass_rate": 0.5019305019305019,
+      "survives": false
+    },
+    {
+      "feature": "vol_12m",
+      "mean_mi": 0.256670696762573,
+      "mean_null_95": 0.09141392484583144,
+      "median_qvalue": 0.04659498207885304,
+      "pass_rate": 0.5521235521235521,
+      "survives": false
+    },
+    {
+      "feature": "mdd_12m",
+      "mean_mi": 0.2262982653432741,
+      "mean_null_95": 0.09104195193681189,
+      "median_qvalue": 0.04659498207885304,
+      "pass_rate": 0.5444015444015444,
+      "survives": false
+    },
+    {
+      "feature": "dollar_vol_12m",
+      "mean_mi": 0.017155519954539948,
+      "mean_null_95": 0.09063089830534973,
+      "median_qvalue": 1.0,
+      "pass_rate": 0.023166023166023165,
+      "survives": false
+    },
+    {
+      "feature": "beta_36m",
+      "mean_mi": 0.21858668839802511,
+      "mean_null_95": 0.09112130266293977,
+      "median_qvalue": 0.04659498207885304,
+      "pass_rate": 0.5328185328185329,
+      "survives": false
+    },
+    {
+      "feature": "exp_mkt_rf",
+      "mean_mi": 0.20566686322079042,
+      "mean_null_95": 0.09158646513896883,
+      "median_qvalue": 0.05241935483870967,
+      "pass_rate": 0.4980694980694981,
+      "survives": false
+    },
+    {
+      "feature": "exp_smb",
+      "mean_mi": 0.18197828526580856,
+      "mean_null_95": 0.09152822581187095,
+      "median_qvalue": 0.059907834101382486,
+      "pass_rate": 0.41312741312741313,
+      "survives": false
+    },
+    {
+      "feature": "exp_hml",
+      "mean_mi": 0.19073569304194637,
+      "mean_null_95": 0.09340138905223706,
+      "median_qvalue": 0.05241935483870967,
+      "pass_rate": 0.44787644787644787,
+      "survives": false
+    },
+    {
+      "feature": "exp_mom",
+      "mean_mi": 0.17902425031253244,
+      "mean_null_95": 0.0890041729925968,
+      "median_qvalue": 0.05241935483870967,
+      "pass_rate": 0.46332046332046334,
+      "survives": false
+    }
+  ],
+  "note": "Per-date MI is noisy at 68-72 assets. A null result is evidence that the frozen feature set is weak, not proof of zero information."
+}

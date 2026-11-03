@@ -31,6 +31,7 @@ data/raw_v2/*
 data/processed/*
 !data/processed/.gitkeep
 *.parquet
+!paper/published-results/*.parquet
 *.feather
 *.pkl
 *.joblib

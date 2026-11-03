@@ -40,6 +40,11 @@
 
 ```bash
 python scripts/build_paper.py
+python scripts/verify_results.py
 ```
 
-This regenerates the numbers, figures, card, carousel, one-pager, and paper from the committed result tables. If a number changes in `results/tables/`, the PDF changes with it.
+`verify_results.py` checks the published verdicts, gates, paper assets, and the
+headline numbers in `paper/generated/numbers.typ` against the committed aggregate
+tables. CI runs it on every push.
+
+This regenerates the numbers, figures, card, carousel, one-pager, and paper from the committed result tables. If a number changes in `paper/published-results/`, the PDF changes with it.
