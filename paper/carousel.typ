@@ -22,7 +22,7 @@
 #let pct(x, digits) = fmt(x * 100, digits) + "%"
 
 #set page(width: 540pt, height: 675pt, margin: 38pt, fill: paper)
-#set text(font: "New Computer Modern", size: 14pt, fill: ink, lang: "en")
+#set text(font: "Libertinus Serif", size: 14pt, fill: ink, lang: "en")
 #set par(justify: false, leading: 0.65em, spacing: 0.9em)
 
 #let eyebrow(x) = text(size: 9pt, fill: muted, tracking: 1.2pt)[#x]

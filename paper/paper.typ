@@ -32,7 +32,7 @@
     )
   ],
 )
-#set text(font: "New Computer Modern", size: 10.4pt, lang: "en", hyphenate: true)
+#set text(font: "Libertinus Serif", size: 10.4pt, lang: "en", hyphenate: true)
 #set par(justify: true, leading: 0.68em, spacing: 1.0em)
 #set heading(numbering: "1.1")
 #show heading.where(level: 1): it => block(above: 1.5em, below: 0.5em)[
