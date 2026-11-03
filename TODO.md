@@ -3,7 +3,7 @@
 **Last updated:** 2026-11-03
 **Current state:** v1 closed (H1/H3 fail, H2 pass); v2 and v3 stopped before holdout; 2025–2026 holdout **untouched**; paper, carousel, card, and one-pager built.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
-**Progress 2026-11-03:** P0.1–P0.3 complete; `v1.0.0` tagged (`fe81092`); CI green; first-post strategy memo and flagship caption added; gate power study complete (80% gate zero power at 20% R²; iid pooled 20/21, block-aware 3/21; v2/v3 sigma do not survive); paper and carousel updated to 7 pages/slides; GitHub release still needs the web UI; LinkedIn publication pending.
+**Progress 2026-11-03:** P0.1–P0.3 complete; `v1.0.0` tagged (`7511597`); CI green; first-post strategy memo and flagship caption added; gate/effect-size study complete (80% gate zero power at 20% R²; iid pooled 20/21, block-aware 3/21; survivors' IC CIs include zero; trailing volatility dominates sigma; **no v4**); paper and carousel updated to 7 pages/slides; GitHub release still needs the web UI; LinkedIn publication pending.
 
 ---
 
