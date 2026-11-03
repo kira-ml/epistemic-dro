@@ -24,6 +24,14 @@ jobs:
       - name: Verify published results and paper numbers
         run: python scripts/verify_results.py
       - name: Build paper and visual assets
-        run: python scripts/build_paper.py
+        run: |
+          python scripts/build_paper.py 2>&1 | tee paper_build.log
+      - name: Publish build log on failure
+        if: failure()
+        run: |
+          echo "## Paper build log" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          tail -100 paper_build.log >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
       - name: Check paper artifact
         run: test -s paper/mini_paper.pdf
