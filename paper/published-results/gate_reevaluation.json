@@ -1,0 +1,148 @@
+{
+  "v1_features": [
+    {
+      "feature": "mom_1m",
+      "pooled_mi": 0.04486604711003661,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "mom_3m",
+      "pooled_mi": 0.048897614373556664,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "mom_6m",
+      "pooled_mi": 0.0595972672830527,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "mom_12m",
+      "pooled_mi": 0.05436755181509678,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "vol_3m",
+      "pooled_mi": 0.05624833285465325,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "vol_12m",
+      "pooled_mi": 0.08350968630454503,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "downside_vol_12m",
+      "pooled_mi": 0.06514722977829823,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "skew_12m",
+      "pooled_mi": 0.01862705742304449,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "worst_1m_12m",
+      "pooled_mi": 0.05997312377093156,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "vol_ratio_3_12",
+      "pooled_mi": 0.012182362902564137,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "volume_shock_1m",
+      "pooled_mi": 0.0060366014602992735,
+      "pvalue": 0.16129032258064516,
+      "bh_q": 0.16129032258064516,
+      "passes": false
+    },
+    {
+      "feature": "corr_market_36m",
+      "pooled_mi": 0.12037765633260555,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "mdd_12m",
+      "pooled_mi": 0.06348739212757426,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "dollar_vol_12m",
+      "pooled_mi": 0.02027160266469963,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "beta_36m",
+      "pooled_mi": 0.05454933471036938,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "exp_mkt_rf",
+      "pooled_mi": 0.05917157557767183,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "exp_smb",
+      "pooled_mi": 0.028497776901014404,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "exp_hml",
+      "pooled_mi": 0.04550691782259886,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    },
+    {
+      "feature": "exp_mom",
+      "pooled_mi": 0.05010580616399629,
+      "pvalue": 0.03225806451612903,
+      "bh_q": 0.034050179211469536,
+      "passes": true
+    }
+  ],
+  "v2_sigma": {
+    "pooled_mi": 0.07000484586878031,
+    "pvalue": 0.03225806451612903,
+    "passes": true
+  },
+  "v3_sigma": {
+    "pooled_mi": 0.053908392152673734,
+    "pvalue": 0.03225806451612903,
+    "passes": true
+  },
+  "note": "Development only. The original 80% date-level gate is not the same test as this pooled gate; a pass here does not retroactively promote v2/v3 to the holdout. It measures whether the development signal was detectable at all."
+}

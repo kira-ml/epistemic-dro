@@ -188,3 +188,9 @@ Two separate pre-registrations tested stronger models on a new 2025–2026 snaps
 - **v3 — conditional tail-risk forecast:** well calibrated (mean sigma 4.29% vs realized 4.30%; decile spread 3.76 pp) but passed only 43.0% of date-level information tests and underperformed trailing volatility on development (Sharpe 0.783 vs 0.840). Holdout untouched.
 
 See `docs/15_v2_report.md`, `docs/17_v3_report.md`, and `DEC-20261102-010/012`. This does not change the v1 conclusion. It reinforces it: calibration and average spread are not enough; stable conditional information is the binding constraint.
+
+### Gate power postscript
+
+A follow-up simulation tested the **gate**, not the models. At 72 assets and 179 dates, the 80% date-level MI gate had **zero power** even at a 20% \(R^2\) signal; a pooled, date-blocked test detected the same signal in 100% of seeds. The actual v1 features and v2/v3 sigma also pass the pooled test on development data.
+
+That does **not** promote v1/v2/v3: the pooled test is not a stability test, and its p-values sit at the 30-permutation floor. The correct reading is that the stops were evidence of **instability**, not proof that no signal exists. The 2025–2026 holdout remains untouched. See `docs/18_gate_power_study.md` and `DEC-20261102-014`.

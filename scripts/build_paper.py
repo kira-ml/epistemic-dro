@@ -13,6 +13,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 from matplotlib.patches import FancyBboxPatch, Rectangle
 
@@ -42,6 +43,24 @@ def build_numbers() -> None:
     v3 = _load("v3_summary_dev.json")
     v3_gate = _load("v3_sigma_audit.json")
     final = _load("final_report.json")
+    gate_summary = pd.read_csv(DATA / "gate_power_summary.csv")
+    gate_reeval = _load("gate_reevaluation.json")
+
+    def gate_row(assets: int, beta: float) -> dict:
+        match = gate_summary[
+            (gate_summary["n_assets"] == assets)
+            & (gate_summary["n_dates"] == 179)
+            & (gate_summary["beta"] == beta)
+            & (gate_summary["signal"] == "linear")
+        ]
+        return match.iloc[0].to_dict()
+
+    g00 = gate_row(72, 0.0)
+    g02 = gate_row(72, 0.2)
+    g05 = gate_row(72, 0.5)
+    v1_passes = sum(1 for row in gate_reeval["v1_features"] if row["passes"])
+    v1_total = len(gate_reeval["v1_features"])
+    p_min = min(row["pvalue"] for row in gate_reeval["v1_features"])
 
     def strategy(summary: dict, name: str) -> dict:
         row = summary[name]
@@ -76,6 +95,7 @@ def build_numbers() -> None:
         f"#let v3 = (m1_sharpe: {v3['M1_v3']['net_sharpe']:.12f}, m1_mdd: {v3['M1_v3']['max_drawdown']:.12f}, m1_cvar: {v3['M1_v3']['cvar95']:.12f}, b5_sharpe: {v3['B5_uncond_sigma']['net_sharpe']:.12f}, b5_mdd: {v3['B5_uncond_sigma']['max_drawdown']:.12f}, b5_cvar: {v3['B5_uncond_sigma']['cvar95']:.12f})",
         f"#let v3_gate = (pass: {v3_gate['sigma']['pass_rate']:.12f}, mean_sigma: {v3_gate['calibration']['mean_sigma']:.12f}, mean_realized: {v3_gate['calibration']['mean_realized_abs']:.12f}, corr: {v3_gate['calibration']['correlation']:.12f}, decile_spread: {v3_gate['calibration']['decile_spread']:.12f})",
         f"#let dsr = (m1: {final['deflated_sharpe']['M1_reduced']['deflated_sharpe_probability']:.12f}, b5: {final['deflated_sharpe']['B5_DRO_point']['deflated_sharpe_probability']:.12f}, b1: {final['deflated_sharpe']['B1_equal_weight']['deflated_sharpe_probability']:.12f})",
+        f"#let gate = (mi_pass_00_72: {g00['mi_pass_rate']:.12f}, mi_pass_02_72: {g02['mi_pass_rate']:.12f}, mi_pass_05_72: {g05['mi_pass_rate']:.12f}, mi_power_00_72: {g00['mi_power']:.12f}, mi_power_02_72: {g02['mi_power']:.12f}, mi_power_05_72: {g05['mi_power']:.12f}, pooled_power_00_72: {g00['pooled_power']:.12f}, pooled_power_02_72: {g02['pooled_power']:.12f}, pooled_power_05_72: {g05['pooled_power']:.12f}, decile_pass_00_72: {g00['decile_pass_rate']:.12f}, decile_pass_05_72: {g05['decile_pass_rate']:.12f}, decile_power_00_72: {g00['decile_power']:.12f}, decile_power_05_72: {g05['decile_power']:.12f}, v1_passes: {v1_passes}, v1_total: {v1_total}, v2_pooled_p: {gate_reeval['v2_sigma']['pvalue']:.12f}, v3_pooled_p: {gate_reeval['v3_sigma']['pvalue']:.12f}, p_min: {p_min:.12f})",
     ]
     GENERATED.mkdir(parents=True, exist_ok=True)
     (GENERATED / "numbers.typ").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -159,6 +179,44 @@ def build_figures() -> None:
     ax.tick_params(labelsize=8)
     fig.tight_layout()
     fig.savefig(FIGURES / "v3_calibration.png", bbox_inches="tight")
+    plt.close(fig)
+
+    gate = pd.read_csv(DATA / "gate_power_summary.csv")
+    gate = gate[
+        (gate["n_assets"] == 72)
+        & (gate["n_dates"] == 179)
+        & (gate["signal"] == "linear")
+    ].sort_values("beta")
+    fig, axes = plt.subplots(1, 2, figsize=(9.0, 3.6), dpi=200, gridspec_kw={"width_ratios": [1.1, 1.0]})
+    axes[0].plot(gate["beta"], gate["mi_pass_rate"], marker="o", color="#1f5c99", label="80% MI gate")
+    axes[0].plot(gate["beta"], gate["decile_pass_rate"], marker="s", color="#c46a1b", label="decile gate")
+    axes[0].axhline(0.80, color="#9c3527", linestyle="--", linewidth=1.2)
+    axes[0].text(0.02, 0.82, "80% threshold", color="#9c3527", fontsize=7.5)
+    axes[0].set_xlabel("Signal strength β")
+    axes[0].set_ylabel("Date-level pass rate")
+    axes[0].set_ylim(0, 1.0)
+    axes[0].set_title("Per-date pass rate (72 assets)", fontsize=9.5, loc="left")
+    axes[0].legend(frameon=False, fontsize=7.5, loc="upper left")
+    axes[0].grid(axis="y", color="#e6e6e6", linewidth=0.8)
+
+    betas = [0.2, 0.5]
+    labels = ["β=0.2\n(R²≈3.8%)", "β=0.5\n(R²≈20%)"]
+    x = np.arange(len(betas))
+    width = 0.24
+    mi = [gate[gate["beta"] == b]["mi_power"].iloc[0] for b in betas]
+    pooled = [gate[gate["beta"] == b]["pooled_power"].iloc[0] for b in betas]
+    decile = [gate[gate["beta"] == b]["decile_power"].iloc[0] for b in betas]
+    axes[1].bar(x - width, mi, width, label="80% MI", color="#9a9a9a")
+    axes[1].bar(x, pooled, width, label="pooled MI", color="#1f5c99")
+    axes[1].bar(x + width, decile, width, label="decile", color="#c46a1b")
+    axes[1].set_xticks(x, labels, fontsize=8)
+    axes[1].set_ylim(0, 1.05)
+    axes[1].set_ylabel("Gate power")
+    axes[1].set_title("Gate power (72 assets)", fontsize=9.5, loc="left")
+    axes[1].legend(frameon=False, fontsize=7.5, loc="upper right")
+    axes[1].grid(axis="y", color="#e6e6e6", linewidth=0.8)
+    fig.tight_layout()
+    fig.savefig(FIGURES / "gate_power.png", bbox_inches="tight")
     plt.close(fig)
 
 

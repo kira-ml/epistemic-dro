@@ -137,6 +137,12 @@ v3 tested a different object — a conditional forecast of next-month absolute r
 
 **The 2025–2026 holdout remains untouched.** See [`docs/17_v3_report.md`](docs/17_v3_report.md). Three pre-registered attempts, zero promoted to the holdout — the gates worked.
 
+### But the gate itself was underpowered
+
+A synthetic power study tested the 80% date-level information gate. At 72 assets and 179 dates, it had **zero power** even at a 20% \(R^2\) signal; a pooled, date-blocked test detected the same signal in 100% of seeds. The actual development features and v2/v3 sigma also pass the pooled test.
+
+That does **not** promote v1/v2/v3: the pooled test is not a stability test, and its p-values sit at the 30-permutation floor. The honest reading is that the stops were evidence of **instability**, not proof that no signal exists. The holdout remains untouched. See [`docs/18_gate_power_study.md`](docs/18_gate_power_study.md).
+
 ---
 
 ## Repository layout
@@ -185,7 +191,7 @@ epistemic-dro/
 │   └── dro_experiment.md     # reduced DRO result and verdict
 ├── paper/
 │   ├── mini_paper.pdf        # 6-page working paper
-│   ├── linkedin_carousel.pdf # 6-slide native document post
+│   ├── linkedin_carousel.pdf # 7-slide native document post
 │   ├── linkedin_card.png     # 4:5 visual card
 │   ├── one_pager.pdf         # one-page leave-behind
 │   └── README.md             # publishing strategy and assets

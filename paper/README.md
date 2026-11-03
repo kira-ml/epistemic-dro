@@ -12,11 +12,12 @@
 | **One-page summary** | [`one_pager.pdf`](one_pager.pdf) | Leave-behind / print | Email, attachment, event handout |
 | **Short post** | [`linkedin_post.md`](linkedin_post.md) | Context and CTA | Post caption |
 | **Career strategy** | [`career_post_strategy.md`](career_post_strategy.md) | 12-model lens, positioning, pre-post checklist | Read before posting |
+| **Gate power study** | [`../docs/18_gate_power_study.md`](../docs/18_gate_power_study.md) | Why the 80% gate was underpowered | Methods appendix |
 | **Traditional one-pager** | [`one_page_summary.md`](one_page_summary.md) | Plain-text summary if you need one | Doc/PDF export |
 
 ## Why this order
 
-- **LinkedIn rewards dwell time.** A 6-page carousel keeps the reader on the post; a single block of text does not.
+- **LinkedIn rewards dwell time.** A 7-slide carousel keeps the reader on the post; a single block of text does not.
 - **The paper carries the technical claim.** The carousel cannot defend the method; the paper can.
 - **The negative result is the hook.** “Three pre-registered attempts. The holdout is still untouched.” is more distinctive than another “I built a strategy” post.
 - **The one-pager is still useful**, but as a leave-behind after someone has already clicked. It is not the acquisition layer.

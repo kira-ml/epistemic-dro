@@ -1,0 +1,223 @@
+{
+  "design": {
+    "assets": [
+      50,
+      72,
+      150
+    ],
+    "dates": [
+      179
+    ],
+    "betas": [
+      0.0,
+      0.2,
+      0.5
+    ],
+    "signals": [
+      "linear",
+      "quadratic"
+    ],
+    "seeds": 2
+  },
+  "rows": [
+    {
+      "n_assets": 50,
+      "n_dates": 179,
+      "beta": 0.0,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.036312849162011177,
+      "pooled_power": 0.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.019553072625698324
+    },
+    {
+      "n_assets": 50,
+      "n_dates": 179,
+      "beta": 0.0,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.036312849162011177,
+      "pooled_power": 0.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.019553072625698324
+    },
+    {
+      "n_assets": 50,
+      "n_dates": 179,
+      "beta": 0.2,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.0782122905027933,
+      "pooled_power": 0.5,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.08659217877094971
+    },
+    {
+      "n_assets": 50,
+      "n_dates": 179,
+      "beta": 0.2,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.05307262569832402,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.025139664804469275
+    },
+    {
+      "n_assets": 50,
+      "n_dates": 179,
+      "beta": 0.5,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.33798882681564246,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.5446927374301676
+    },
+    {
+      "n_assets": 50,
+      "n_dates": 179,
+      "beta": 0.5,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.3100558659217877,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.06983240223463687
+    },
+    {
+      "n_assets": 72,
+      "n_dates": 179,
+      "beta": 0.0,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.0335195530726257,
+      "pooled_power": 0.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.025139664804469275
+    },
+    {
+      "n_assets": 72,
+      "n_dates": 179,
+      "beta": 0.0,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.0335195530726257,
+      "pooled_power": 0.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.025139664804469275
+    },
+    {
+      "n_assets": 72,
+      "n_dates": 179,
+      "beta": 0.2,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.06424581005586592,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.16759776536312848
+    },
+    {
+      "n_assets": 72,
+      "n_dates": 179,
+      "beta": 0.2,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.0893854748603352,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.04189944134078212
+    },
+    {
+      "n_assets": 72,
+      "n_dates": 179,
+      "beta": 0.5,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.3966480446927374,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.7374301675977654
+    },
+    {
+      "n_assets": 72,
+      "n_dates": 179,
+      "beta": 0.5,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.45810055865921784,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.08100558659217877
+    },
+    {
+      "n_assets": 150,
+      "n_dates": 179,
+      "beta": 0.0,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.027932960893854747,
+      "pooled_power": 0.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.04189944134078212
+    },
+    {
+      "n_assets": 150,
+      "n_dates": 179,
+      "beta": 0.0,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.027932960893854747,
+      "pooled_power": 0.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.04189944134078212
+    },
+    {
+      "n_assets": 150,
+      "n_dates": 179,
+      "beta": 0.2,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.0670391061452514,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.388268156424581
+    },
+    {
+      "n_assets": 150,
+      "n_dates": 179,
+      "beta": 0.2,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.09776536312849163,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.04748603351955307
+    },
+    {
+      "n_assets": 150,
+      "n_dates": 179,
+      "beta": 0.5,
+      "signal": "linear",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.6480446927374302,
+      "pooled_power": 1.0,
+      "decile_power": 1.0,
+      "decile_pass_rate": 0.9636871508379888
+    },
+    {
+      "n_assets": 150,
+      "n_dates": 179,
+      "beta": 0.5,
+      "signal": "quadratic",
+      "mi_power": 0.0,
+      "mi_pass_rate": 0.7541899441340782,
+      "pooled_power": 1.0,
+      "decile_power": 0.0,
+      "decile_pass_rate": 0.0782122905027933
+    }
+  ],
+  "note": "Synthetic study. mi_power is the fraction of seeds where the 80% date-level MI gate passes. beta is the signal coefficient; noise is standard normal."
+}

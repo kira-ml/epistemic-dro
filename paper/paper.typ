@@ -61,7 +61,7 @@
   #text(size: 20pt, weight: "bold")[The holdout is still untouched]
   #v(0.25em)
   #text(size: 11pt)[
-    Three pre-registered tests of uncertainty-aware DRO on 72 US ETFs
+    Three pre-registered tests of uncertainty-aware DRO on 72 US ETFs — and a gate that was too strict
   ]
   #v(0.85em)
   #text(size: 10pt)[Ken Ira Lacson Talingting]
@@ -93,17 +93,21 @@
   *Abstract.* Does epistemic uncertainty improve the tail-risk/return trade-off of a distributionally
   robust mean-CVaR portfolio? This paper reports three pre-registered attempts on a point-in-time
   universe of 72 US ETFs. In v1, a Ridge baseline has no detectable out-of-sample linear signal
-  (#fmt(b0.r2, 3) pooled $R^2$; mean rank IC #fmt(b0.ic, 3), $t = #fmt(b0.t, 2)$), a mutual-information
-  audit finds no surviving feature, and a reduced uncertainty-aware DRO does not separate from
+  (#fmt(b0.r2, 3) pooled $R^2$; mean rank IC #fmt(b0.ic, 3), $t = #fmt(b0.t, 2)$), the original 80% date-level
+  mutual-information audit finds no surviving feature (a pooled re-evaluation finds weak average
+  dependence but not stability), and a reduced uncertainty-aware DRO does not separate from
   point-estimate DRO: H1 fails, H2 passes, H3 fails. v2 replaces bootstrap sigma with conformalized
   LightGBM return quantiles; calibration is good (validation coverage #pct(v2_gate.coverage_val, 1),
   test #pct(v2_gate.coverage_test, 1)), but the uncertainty signal passes only #pct(v2_gate.pass, 1) of
   date-level information tests against an 80% gate. v3 replaces return quantiles with a conditional
   forecast of next-month absolute return; calibration is excellent (#pct(v3_gate.mean_sigma, 2) vs
   #pct(v3_gate.mean_realized, 2)), but the signal passes only #pct(v3_gate.pass, 1) and underperforms
-  trailing volatility on development. The contribution is the apparatus: a frozen protocol, a
-  mandatory baseline, an information gate, a non-degenerate comparator, a preserved holdout, and a
-  clean negative result.
+  trailing volatility on development. A synthetic power study shows the 80% date-level gate has
+  **zero power** at a 20% $R^2$ signal, while a pooled test detects the same signal. The v1/v2/v3
+  stops are therefore evidence of **instability**, not proof that no signal exists. The contribution
+  is the apparatus: a frozen protocol, a mandatory baseline, an information gate, a non-degenerate
+  comparator, a preserved holdout, and a clean negative result — plus evidence that the gate itself
+  needs a power analysis.
 ]
 
 #v(0.5em)
@@ -260,12 +264,59 @@ passed #pct(v3_gate.pass, 1) of date-level tests. The holdout was not touched.
 // 6
 // ---------------------------------------------------------------------------
 
+= Was the gate too strict?
+
+The v2/v3 stops were driven by a pre-holdout gate that required a signal to beat a date-blocked
+permutation null in at least 80% of dates. That rule controls false positives, but its power was never
+tested. We simulated panels with a known linear signal $y = beta x + epsilon$, 179 dates, and 50–150
+assets; $beta = 0.2$ is $R^2 approx 3.8$ percent, $beta = 0.5$ is $R^2 approx 20$ percent.
+
+#figure(
+  table(
+    columns: (auto, auto, auto, auto, auto, auto),
+    align: (right, right, right, right, right, right),
+    inset: 5pt,
+    stroke: none,
+    [*$beta$*], [*$R^2$*], [*MI pass rate*], [*80% MI gate*], [*Pooled gate*], [*Decile gate*],
+    [0.0], [0%], [#pct(gate.mi_pass_00_72, 1)], [#pct(gate.mi_power_00_72, 0)], [#pct(gate.pooled_power_00_72, 0)], [#pct(gate.decile_power_00_72, 0)],
+    [0.2], [3.8%], [#pct(gate.mi_pass_02_72, 1)], [#pct(gate.mi_power_02_72, 0)], [#pct(gate.pooled_power_02_72, 0)], [0%],
+    [0.5], [20%], [#pct(gate.mi_pass_05_72, 1)], [#pct(gate.mi_power_05_72, 0)], [#pct(gate.pooled_power_05_72, 0)], [#pct(gate.decile_power_05_72, 0)],
+  ),
+  caption: [Gate power at 72 assets and 179 dates, linear signal, 2 seeds. The 80% gate has zero power even at a 20% $R^2$ signal. The pooled gate detects the same signal in every seed. The decile gate is more powerful than the MI gate but still fails at 72 assets.]
+)
+
+At 72 assets, a 20% $R^2$ signal passes only #pct(gate.mi_pass_05_72, 1) of dates; the gate requires
+80%, so it never passes. At 150 assets the per-date pass rate rises to 64.8%, still below the threshold.
+The pooled gate detects the same signal in 100% of seeds at every breadth. The failure is not false
+positives — the gate has 0% size under the null — it is **power**.
+
+The actual development signals tell the same story. Under a pooled, date-blocked MI test, #gate.v1_passes
+of #gate.v1_total v1 features pass at BH q < 0.05; the v2 sigma passes at $p = #fmt(gate.v2_pooled_p, 3)$
+and the v3 sigma at $p = #fmt(gate.v3_pooled_p, 3)$.
+But the pooled test is not a stability test. It can detect weak average dependence that is not stable
+date by date. It does **not** retroactively promote v1/v2/v3, and the holdout remains untouched.
+
+*The gate is a stability filter, not a signal-existence test.* The v1/v2/v3 stops are evidence of
+**instability**, not proof that no signal exists. A v4 protocol should pre-register two gates: an
+average-information gate with a minimum effect size and a block-aware null, and a stability gate with a
+power justification.
+
+#figure(
+  image("figures/gate_power.png", width: 100%),
+  caption: [Left: per-date pass rate versus signal strength at 72 assets. Right: gate power at $beta=0.2$ and $beta=0.5$. The 80% MI gate and the decile gate fail; the pooled gate succeeds. The gate is measuring stability, not average signal.]
+)
+
+// ---------------------------------------------------------------------------
+// 7
+// ---------------------------------------------------------------------------
+
 = Synthesis: why the answer is no
 
 Three mechanisms explain the result.
 
-*The mean signal is weak.* Ridge B0 has no detectable linear OOS signal, and the information audit finds
-no surviving feature. If the conditional mean is not predictable, the uncertainty layer has little to
+*The mean signal is weak.* Ridge B0 has no detectable linear OOS signal. The original 80% information
+audit finds no surviving feature; a pooled re-evaluation finds weak average dependence but not
+stability. If the conditional mean is not reliably predictable, the uncertainty layer has little to
 shrink. The binding constraint is the feature set, not the optimizer.
 
 *Uncertainty is easy to calibrate and hard to make informative.* v2 and v3 are both calibrated. v3 has a

@@ -122,6 +122,30 @@
 #pagebreak()
 
 // 6 -------------------------------------------------------------------------
+#eyebrow[THE GATE ITSELF]
+#v(14pt)
+#text(size: 24pt, weight: "bold")[I tested the gate, not just the models.]
+#v(14pt)
+#text(size: 13pt)[The 80% date-level MI gate had **zero power** at 72 assets — even at a 20% $R^2$ signal. A pooled test detected the same signal in 100% of seeds.]
+#v(14pt)
+#table(
+  columns: (auto, auto, auto),
+  align: (right, right, right),
+  inset: 5pt,
+  stroke: none,
+  [*Signal*], [*80% MI gate*], [*Pooled gate*],
+  [3.8% R²], [#pct(gate.mi_power_02_72, 0)], [#pct(gate.pooled_power_02_72, 0)],
+  [20% R²], [#pct(gate.mi_power_05_72, 0)], [#pct(gate.pooled_power_05_72, 0)],
+)
+#v(10pt)
+#text(size: 11pt, fill: muted)[Synthetic, 72 assets, 179 dates, linear signal, 2 seeds.]
+#v(14pt)
+#text(size: 13pt, fill: accent, weight: "bold")[The stops were about stability, not proof of no signal.]
+#footer
+
+#pagebreak()
+
+// 7 -------------------------------------------------------------------------
 #eyebrow[WHAT I LEARNED]
 #v(18pt)
 #text(size: 27pt, weight: "bold")[Calibration ≠ information.]

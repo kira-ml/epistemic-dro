@@ -6,7 +6,7 @@
 ## What this release contains
 
 - A 6-page working paper: `paper/mini_paper.pdf`
-- A 6-slide LinkedIn carousel: `paper/linkedin_carousel.pdf`
+- A 7-slide LinkedIn carousel: `paper/linkedin_carousel.pdf`
 - A 4:5 visual card: `paper/linkedin_card.png`
 - A one-page leave-behind: `paper/one_pager.pdf`
 - Aggregate published results: `paper/published-results/`

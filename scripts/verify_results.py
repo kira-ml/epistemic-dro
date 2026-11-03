@@ -10,6 +10,7 @@ It reads the committed aggregate files in ``paper/published-results/``.
 
 from __future__ import annotations
 
+import csv
 import json
 import re
 import sys
@@ -70,6 +71,30 @@ def main() -> int:
     check("final H1 FAIL", final["verdict"]["H1"] == "FAIL")
     check("final H2 PASS", final["verdict"]["H2"] == "PASS")
     check("final H3 FAIL", final["verdict"]["H3"] == "FAIL")
+
+    with (PUBLISHED / "gate_power_summary.csv").open(encoding="utf-8") as handle:
+        gate_rows = list(csv.DictReader(handle))
+    gate_row = next(
+        (
+            row
+            for row in gate_rows
+            if row["n_assets"] == "72"
+            and row["n_dates"] == "179"
+            and row["signal"] == "linear"
+            and row["beta"] == "0.5"
+        ),
+        None,
+    )
+    check("gate power row exists", gate_row is not None)
+    if gate_row is not None:
+        check("80% MI gate zero power at 20% R2", float(gate_row["mi_power"]) == 0.0)
+        check("pooled gate full power at 20% R2", float(gate_row["pooled_power"]) == 1.0)
+
+    gate_reeval = _load("gate_reevaluation.json")
+    v1_passes = sum(1 for row in gate_reeval["v1_features"] if row["passes"])
+    check("pooled v1 features pass", v1_passes >= 15, str(v1_passes))
+    check("v2 pooled sigma passes", gate_reeval["v2_sigma"]["passes"] is True)
+    check("v3 pooled sigma passes", gate_reeval["v3_sigma"]["passes"] is True)
 
     for pattern in ("*holdout*", "*v2_holdout*", "*v3_holdout*"):
         for directory in (ROOT / "results" / "tables", PUBLISHED):

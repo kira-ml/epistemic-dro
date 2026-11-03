@@ -27,6 +27,7 @@ This is the entry point for the project's documentation. If a document is not li
 | `15_v2_report.md` | v2 development result and pre-holdout stop | v2 | **Final — stopped before holdout** |
 | `16_v3_preregistration.md` | v3 conditional tail-risk pre-registration | v3 | **Frozen — holdout untouched; G-R4v3 failed** |
 | `17_v3_report.md` | v3 development result and pre-holdout stop | v3 | **Final — stopped before holdout** |
+| `18_gate_power_study.md` | Gate power study: the 80% rule was underpowered | methods | **Final — methods result** |
 | `axiomatic_spec.md` | First-principles spec, data-generating mechanism, Bayes-risk/noise floor | G-R1 | **Active — estimate pending G1** |
 | `data_dictionary.md` | Schema, units, lineage, MI/CMI audit | G-R4 | **Active — MI audit pending G1** |
 | `pre_mortem.md` | Inversion failure vectors and kill criteria | G-R2 | **Active** |
@@ -61,6 +62,7 @@ These rules exist because the same fact appears in multiple docs. When a rule is
 - **Final verdict** identical: H1 FAIL, H2 PASS, H3 FAIL; reduced M1 (not LightGBM); no alpha claim; no deployment. See `13_final_report.md`.
 - **v2 verdict** identical: G-R4v2 failed (sigma pass rate 0.654 < 0.80); 2025–2026 holdout untouched; v2 stopped. See `15_v2_report.md`.
 - **v3 verdict** identical: G-R4v3 failed (sigma pass rate 0.430 < 0.80); 2025–2026 holdout untouched; v3 stopped. See `17_v3_report.md`.
+- **Gate study** identical: the 80% date-level gate has zero power at a 20% R² signal; the stops are evidence of instability, not absence of signal. See `18_gate_power_study.md`.
 - **Counter-metrics** identical: net Sharpe is never reported alone; max drawdown and CVaR95 travel with it.
 - **Year** consistent throughout: 2026.
 

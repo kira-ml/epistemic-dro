@@ -3,7 +3,7 @@
 **Last updated:** 2026-11-03
 **Current state:** v1 closed (H1/H3 fail, H2 pass); v2 and v3 stopped before holdout; 2025–2026 holdout **untouched**; paper, carousel, card, and one-pager built.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
-**Progress 2026-11-03:** P0.1–P0.3 complete; `v1.0.0` tagged; CI run #4 green at https://github.com/kira-ml/epistemic-dro/actions/runs/41578819540; first-post strategy memo and flagship caption added; GitHub release still needs the web UI; LinkedIn publication pending.
+**Progress 2026-11-03:** P0.1–P0.3 complete; `v1.0.0` tagged; CI run #4 green; first-post strategy memo and flagship caption added; gate power study complete (80% gate zero power at 20% R²; pooled test detects it); paper and carousel updated to 7 pages/slides; GitHub release still needs the web UI; LinkedIn publication pending.
 
 ---
 
@@ -96,6 +96,18 @@
 - [ ] Keep `paper/one_pager.pdf` for email/events, not the primary post.
 
 **Definition of done:** carousel published; paper linked; card scheduled.
+
+### 6. Gate power study — completed 2026-11-03
+
+- [x] Simulate known linear/quadratic signals at 50/72/150 assets.
+- [x] Measure size and power of the 80% date-level MI gate.
+- [x] Compare a pooled MI gate and a decile-spread gate.
+- [x] Re-evaluate actual v1/v2/v3 development signals under the pooled test.
+- [x] Add `docs/18_gate_power_study.md`, a paper section, and a carousel slide.
+- [ ] Add autocorrelated/block-bootstrap nulls to the pooled gate.
+- [ ] Decide the v4 two-part gate only after the block-aware null is tested.
+
+**Key result:** at 72 assets and 179 dates, the 80% gate has **zero power at a 20% R² signal**; the pooled gate detects the same signal in 100% of seeds. The v1/v2/v3 stops are evidence of **instability**, not proof of no signal. The holdout remains untouched.
 
 ---
 

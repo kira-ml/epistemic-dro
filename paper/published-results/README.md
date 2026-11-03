@@ -19,9 +19,13 @@ python scripts/build_paper.py
 | `dro_experiment_returns.csv` | v1 monthly net returns by strategy |
 | `v2_summary_dev.json` | v2 development metrics |
 | `v2_uncertainty_audit.json` | v2 pre-holdout gate |
+| `v2_uncertainty_dev.parquet` | v2 per-asset sigma and interval width |
 | `v3_summary_dev.json` | v3 development metrics |
 | `v3_sigma_audit.json` | v3 pre-holdout gate |
 | `v3_sigma_dev.parquet` | v3 per-asset sigma and realized absolute return |
+| `gate_power_summary.csv` | Synthetic gate size/power grid |
+| `gate_power_study.json` | Gate power study design and summary |
+| `gate_reevaluation.json` | Actual development signals under a pooled MI test |
 | `final_report.json` | Cost sensitivity, stress windows, deflated Sharpe |
 
 **No v2/v3 holdout result exists.** The 2025–2026 holdout was never run.

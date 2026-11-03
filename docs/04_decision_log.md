@@ -312,6 +312,30 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 
 ---
 
+## DEC-20261102-014 — The 80% gate was underpowered
+
+**Decision:** Record the gate power study as a methods result: the 80% date-level MI gate has **zero power** at a 20% \(R^2\) signal at 72 assets, while a pooled, date-blocked MI test detects the same signal in 100% of seeds. The v1/v2/v3 stops are evidence of **instability**, not proof that no signal exists. Do not retroactively promote any model to the holdout.
+
+**Evidence (synthetic, 179 dates, 2 seeds, 30 permutations):**
+
+| Assets | \(\beta=0.2\) (\(R^2\approx3.8\%\)) | \(\beta=0.5\) (\(R^2\approx20\%\)) |
+|---|---|---|
+| 50 | MI gate 0%; pooled 50–100% | MI gate 0%; pooled 100% |
+| 72 | MI gate 0%; pooled 100% | MI gate 0%; pooled 100% |
+| 150 | MI gate 0%; pooled 100% | MI gate 0%; pooled 100% |
+
+At 72 assets, the per-date MI pass rate at \(\beta=0.5\) is 39.7%, below the 80% threshold. The gate has 0% false positives under the null; the problem is power, not size.
+
+**Actual development re-evaluation (pooled, date-blocked):** 18 of 19 v1 features pass at BH q = 0.034; v2 sigma p = 0.032; v3 sigma p = 0.032. The p-values are at the 30-permutation floor, and the pooled test is not a stability test; this does not promote v1/v2/v3.
+
+**Implication:** the original protocol conflated “signal exists on average” with “signal is detectable in 80% of dates.” A v4 protocol should pre-register two gates: an average-information gate with a minimum effect size and a block-aware null, and a stability gate with a power justification.
+
+**Holdout:** still untouched. No retrospective run.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |

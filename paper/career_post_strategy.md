@@ -14,7 +14,7 @@ It should **not** read as “I tried three strategies and none worked.” It sho
 | Secondary audience | General ML/data-science practitioners interested in uncertainty and evaluation |
 | Not the audience | Retail trading, “best stock picks,” growth-hacking LinkedIn |
 | Identity signal | Research engineer who pre-registers, falsifies, and ships reproducible artifacts |
-| Proof | 5-page paper, 6-slide carousel, public repo, CI, verifier, preserved holdout |
+| Proof | 7-page paper, 7-slide carousel, public repo, CI, verifier, preserved holdout |
 | CTA | “If you work on uncertainty, DRO, or conformal prediction, I’d like to compare notes.” Optional: open to research roles. |
 
 The project is a **research-engineering portfolio piece**, not an alpha claim. The post should make that explicit in the first three lines.
@@ -30,7 +30,7 @@ The project is a **research-engineering portfolio piece**, not an alpha claim. T
 | **3. Bayesian** | The audience’s prior on “another trading project” is low. Evidence must be concrete and checkable. | Show the paper, CI, verifier, and holdout discipline. |
 | **4. Shannon information** | Every slide must add new information. | One idea per slide; cut redundant metrics. |
 | **5. Causal hierarchy** | The post cannot claim it will cause job offers. It is a signal, not an intervention. | Say what the work demonstrates, not what it will produce. |
-| **6. Parsimony** | One hook, three attempts, one lesson. | Keep the carousel at 6 slides; do not add a fourth model. |
+| **6. Parsimony** | One hook, three attempts, one lesson. | Keep the carousel at 7 slides; do not add a fourth model. |
 | **7. Fat tails / career risk** | The downside is being read as “no result.” | Frame the negative result as a deliberate, costly-to-fake capability signal. |
 | **8. Convexity** | The post should have capped downside and open-ended upside. | Low-cost artifact; no exaggerated claims; link to verifiable work. |
 | **9. Reflexivity** | The post sets expectations for future work. | Do not claim more than the repo can defend; keep the holdout untouched. |
@@ -45,8 +45,9 @@ The project is a **research-engineering portfolio piece**, not an alpha claim. T
 - The hook: **“Three pre-registered attempts. The holdout is still untouched.”**
 - The negative-result discipline: three attempts, zero holdout touches.
 - The apparatus: frozen protocol, mandatory baseline, information gate, counter-metric gate, CI, verifier.
-- The visual narrative: six slides, one idea each.
+- The visual narrative: seven slides, one idea each.
 - The paper: short, honest, with limitations and reproduction commands.
+- The gate power study: the 80% date-level rule had **zero power** at a 20% R² signal; the stops are evidence of instability, not proof of no signal.
 
 ## 4. What is missing before the first post
 
@@ -117,4 +118,4 @@ Do not optimize for likes, impressions, or “great post” comments.
 
 ## 8. The one-line thesis
 
-> **I build pre-registered research pipelines that can tell the difference between a signal and noise — and I’m willing to publish the no.**
+> **I build pre-registered research pipelines that test the gate, not just the model — and I’m willing to publish the no.**
