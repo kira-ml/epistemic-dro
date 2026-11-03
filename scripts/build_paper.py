@@ -246,13 +246,13 @@ def build_linkedin_card() -> None:
     fig.patch.set_facecolor("#f7f5f0")
     ax.add_patch(Rectangle((0, 0), 1, 1, facecolor="#f7f5f0", edgecolor="none"))
 
-    ax.text(0.07, 0.94, "EPISTEMIC-AWARE DRO  ·  72 US ETFs  ·  2010–2024", fontsize=9, color="#6b6b6b", family="DejaVu Sans")
+    ax.text(0.07, 0.94, "EPISTEMIC-AWARE DRO  ·  72 US ETFs  ·  2010–2024  ·  WORKING PAPER", fontsize=9, color="#6b6b6b", family="DejaVu Sans")
     ax.text(0.07, 0.865, "Three pre-registered attempts.", fontsize=26, fontweight="bold", color="#1a1a1a")
     ax.text(0.07, 0.815, "The holdout is still untouched.", fontsize=26, fontweight="bold", color="#1f5c99")
     ax.text(0.07, 0.765, "What I learned trying to make uncertainty pay.", fontsize=12, color="#4a4a4a")
 
     boxes = [
-        ("v1  Epistemic uncertainty", "H1 / H3 fail  ·  H2 pass", "Ridge mean + bootstrap σ\nno stable mean or uncertainty signal", "#9c3527"),
+        ("v1  Epistemic uncertainty", "H1 / H3 fail  ·  H2 non-inferiority pass", "Ridge mean + bootstrap σ\nno stable mean or uncertainty signal", "#9c3527"),
         ("v2  Conformal quantiles", "Stopped before holdout", "coverage 0.899 / 0.859\ninformation gate 65.4% < 80%", "#b07a1e"),
         ("v3  Conditional tail risk", "Stopped before holdout", "calibration 4.29% vs 4.30%\ninformation gate 43.0% < 80%", "#b07a1e"),
     ]
@@ -266,10 +266,12 @@ def build_linkedin_card() -> None:
 
     ax.add_patch(FancyBboxPatch((0.07, 0.13), 0.86, 0.12, boxstyle="round,pad=0.012,rounding_size=0.012", facecolor="#1f5c99", edgecolor="none"))
     ax.text(0.10, 0.205, "Calibration ≠ information.  Gates > narratives.", fontsize=14, fontweight="bold", color="white")
-    ax.text(0.10, 0.165, "Three negative results. Zero holdout touches. The apparatus is the result.", fontsize=9.3, color="#dce8f3")
+    ax.text(0.10, 0.170, "One completed result. Two pre-holdout stops. Zero holdout touches.", fontsize=9.3, color="#dce8f3")
+    ax.text(0.10, 0.143, "The apparatus is the result.", fontsize=9.3, color="#dce8f3")
 
     ax.text(0.07, 0.075, "Paper + code: github.com/kira-ml/epistemic-dro", fontsize=8.5, color="#6b6b6b")
-    ax.text(0.07, 0.045, "Not investment advice. No alpha claim. No live deployment.", fontsize=7.8, color="#8a8a8a")
+    ax.text(0.93, 0.075, "Paper CC BY 4.0", fontsize=8.5, color="#6b6b6b", family="DejaVu Sans", ha="right")
+    ax.text(0.07, 0.045, "Not investment advice. No alpha claim. No live deployment. Current-listed; not survivorship-free.", fontsize=7.8, color="#8a8a8a")
     fig.savefig(PAPER / "linkedin_card.png", bbox_inches="tight", facecolor=fig.get_facecolor())
     plt.close(fig)
 

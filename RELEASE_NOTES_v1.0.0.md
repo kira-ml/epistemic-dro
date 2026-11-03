@@ -1,11 +1,11 @@
 # v1.0.0 — Epistemic-Aware DRO
 
-**Release date:** 2026-11-03
-**Status:** Research prototype; negative results; no live deployment.
+**Release date:** 2026-11-04
+**Status:** Research prototype; one completed negative result, two pre-holdout stops; no live deployment.
 
 ## What this release contains
 
-- A 6-page working paper: `paper/mini_paper.pdf`
+- A 7-page working paper: `paper/mini_paper.pdf`
 - A 7-slide LinkedIn carousel: `paper/linkedin_carousel.pdf`
 - A 4:5 visual card: `paper/linkedin_card.png`
 - A one-page leave-behind: `paper/one_pager.pdf`
@@ -16,7 +16,7 @@
 
 | Attempt | Object of uncertainty | Outcome |
 |---|---|---|
-| **v1** | Epistemic uncertainty (Ridge mean + bootstrap sigma) | **H1/H3 fail, H2 pass.** 0.4% relative MDD improvement; CVaR CI includes zero; Sharpe non-inferior. |
+| **v1** | Epistemic uncertainty (Ridge mean + bootstrap sigma) | **H1/H3 fail, H2 non-inferiority pass.** 0.4% relative MDD improvement; CVaR CI includes zero; Sharpe non-inferior. |
 | **v2** | Conformalized LightGBM return quantiles | **Stopped before holdout.** Coverage 89.9% / 85.9%; information gate 65.4% < 80%. |
 | **v3** | Conditional tail-risk forecast | **Stopped before holdout.** Calibration 4.29% vs 4.30%, decile spread 3.76 pp; gate 43.0% < 80%; underperformed trailing volatility. |
 
@@ -34,13 +34,13 @@ The verifier checks the published verdicts, gates, assets, and the headline numb
 
 ```bash
 python -m pip install -e ".[dev,ml,paper]"
-python scripts/build_paper.py
-pytest -q
-ruff check .
+python scripts/reproduce_all.py
 ```
+
+`reproduce_all.py` runs the tests, lint, result verifier, and paper build from the committed aggregate tables. Raw vendor snapshots are external and are not rebuilt.
 
 Raw vendor data is **not** included. `paper/published-results/` contains aggregate metrics only.
 
 ## Licence and data
 
-Code: MIT. The paper text and figures are research artefacts; decide a separate paper licence before redistribution. Yahoo Finance data is not redistributed. No investment advice. No alpha claim.
+Code: MIT. Paper text and figures: **CC BY 4.0** (see `paper/LICENSE`). Yahoo Finance data is not redistributed. No investment advice. No alpha claim.

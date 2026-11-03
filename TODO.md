@@ -1,8 +1,9 @@
 # TODO — Epistemic-Aware DRO
 
-**Last updated:** 2026-11-03
-**Current state:** v1 closed (H1/H3 fail, H2 pass); v2 and v3 stopped before holdout; the gate/effect-size study is complete; **no v4 on this data**; 2025–2026 holdout **untouched**.
-**Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 54/54; CI green on `7511597`; GitHub release still needs the web UI.
+**Last updated:** 2026-11-04
+**Current state:** v1 closed (H1/H3 fail, H2 non-inferiority pass); v2 and v3 stopped before holdout; the gate/effect-size study is complete and is a **post-hoc methods audit**; **no v4 on this data**; 2025–2026 holdout **untouched**.
+**Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 54/54; CI green on `7511597`; **GitHub release v1.0.0 published 2026-11-04 with 7 assets** (paper, carousel, card, one-pager, summary, LICENSE, CITATION); claim-precision pass complete.  
+**Repo note:** the 2026-11-04 docs/asset pass is committed and pushed to `main`; the release remains anchored to tag `v1.0.0`.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
 
 ---
@@ -32,19 +33,24 @@
 
 ### 2. Create the GitHub release — **manual web UI**
 
-- [ ] Open GitHub → Releases → **Draft a new release**.
-- [ ] Choose tag `v1.0.0`.
-- [ ] Title: `v1.0.0 — Epistemic-Aware DRO`.
-- [ ] Body: paste `RELEASE_NOTES_v1.0.0.md`.
-- [ ] Attach:
+- [x] Open GitHub → Releases → **Draft a new release**.
+- [x] Choose tag `v1.0.0`.
+- [x] Title: `v1.0.0 — Epistemic-Aware DRO`.
+- [x] Body: paste `RELEASE_NOTES_v1.0.0.md`.
+- [x] Attach:
   - `paper/mini_paper.pdf`
   - `paper/linkedin_carousel.pdf`
   - `paper/linkedin_card.png`
   - `paper/one_pager.pdf`
   - `paper/one_page_summary.md`
-- [ ] Verify the release page loads and every asset downloads.
-- [ ] Verify `https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.0` resolves.
-- [ ] Do **not** attach raw data.
+  - `paper/LICENSE`
+  - `CITATION.cff`
+- [x] Verify the release page loads and every asset downloads.
+- [x] Verify `https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.0` resolves.
+- [x] Do **not** attach raw data.
+- [x] CI check on `7511597` is green; all 7 assets return HTTP 200.
+
+**Release:** https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.0
 
 **Definition of done:** a public release exists with the paper and visual assets.
 
@@ -57,6 +63,56 @@
 - [ ] Keep `paper/one_pager.pdf` for email/events, not the primary post.
 
 **Definition of done:** carousel published; release linked; card scheduled.
+
+---
+
+## P0.5 — LinkedIn launch gate (model-driven, started 2026-11-04)
+
+**Positioning:** research-engineering credential, not an alpha product. The post should make a skeptical reader conclude: *this person can build a process that kills weak ideas before they consume a holdout.*
+
+**Go/no-go:** do not publish until (1) the `v1.0.0` release resolves, (2) one external quant/ML reader has attacked the claims, and (3) the claim-precision pass below is complete.
+
+**Strategic bet:** convex — low-cost public artifact, capped reputational downside, open-ended research-credential upside. The claims must stay smaller than the evidence.
+
+### Launch gate — 12 models applied
+
+- **01 First principles:** narrow methods study; 72 current-listed ETFs; low SNR. Do not imply market-wide generality.
+- **02 Inversion:** pre-mortem the launch: broken release link, "three failures" reading, overclaimed H2, mobile unreadability, missing survivorship/working-paper labels.
+- **03 Bayesian:** low prior on "another trading project"; shrink claims; label the working paper; one completed result + two pre-holdout stops.
+- **04 Shannon:** one idea per slide; cut redundant metrics; mobile legibility.
+- **05 Causal hierarchy:** observational/predictive only; use "did not separate," never "improves."
+- **06 Parsimony:** keep the 7-slide, three-attempt story; no v4; no new model search.
+- **07 Fat tails / non-ergodicity:** research prototype, no live deployment; preserve the holdout; keep CVaR/MDD framing.
+- **08 Payoff asymmetry:** publish after inversion fixes; capped downside, open-ended credential upside.
+- **09 Feedback loops:** target quant/ML peers; monitor qualified comments; prepare a response memo for objections.
+- **10 Goodhart:** success = saves, qualified comments, paper downloads, inbound conversations; not likes/impressions.
+- **11 Exploration/exploitation:** 75% flagship paper/carousel; 25% card/essay/video; stop unpromising formats.
+- **12 Theory of constraints:** the bottleneck is release proof + external falsifier + claim precision, not content.
+
+### Must-fix claims before publishing
+
+- [x] "Three negative results" → "one completed negative result; two pre-holdout stops."
+- [x] "H2 pass" → "H2 non-inferiority guardrail pass."
+- [x] "Each stopped by a gate" → v1 closed after the reduced test; v2/v3 stopped before the holdout.
+- [x] B5/B3 zero-sigma collapse disclosed; DRO-vs-no-DRO comparison marked uninformative.
+- [x] Gate study labeled post-hoc methods audit; stops defensible ex post, not ex ante.
+- [x] Slide 1/card/caption: working paper; current-listed ETF universe; not survivorship-free.
+- [x] Added `scripts/reproduce_all.py` as a one-command result-level reproduction gate.
+- [x] Release link live; CI green; assets attached.
+- [ ] Mobile accessibility pass: body text at least 16pt at 540pt; one idea per slide.
+- [ ] One external reader; record strongest objection and factual fixes.
+
+**Claim-precision pass completed 2026-11-04:** paper, carousel, card, one-page summary, README, release notes, and post drafts corrected; assets rebuilt; 7-page paper, 7-slide carousel, verifier 54/54. **Release v1.0.0 published and verified:** 7 assets, all HTTP 200, CI success. Remaining gates: mobile readability and one external reader.
+
+### Launch sequence
+
+1. **Day 0:** create/verify the release; one external reader; fix factual errors only.
+2. **Day 1:** carousel + Version 0 caption; release link in the first comment.
+3. **Day 3–7:** card + Version B only if the carousel produces saves/qualified comments.
+4. **Week 2:** essay only if the pull is real; keep the 75/25 split.
+5. Record objections and fixes in `docs/11_lessons_log.md` or a short response memo.
+
+**Definition of done:** a truthful, link-complete carousel published to the target audience, with one external objection recorded and no overclaim left unfixed.
 
 ---
 
@@ -75,13 +131,13 @@
 
 ## P2 — Documentation polish and licensing (Nov 8–14)
 
-- [ ] Document the v2 snapshot (`data/raw_v2/`) in `docs/01_data_card.md` or a short addendum: 72 ETFs, 2000-01..2026-09, FRED `TB3MS`, 21,224 price rows.
-- [ ] Add a one-paragraph “how to read the three attempts + gate study” to `paper/README.md` or `docs/13_final_report.md`.
-- [ ] Verify all links in `README.md`, `paper/README.md`, and `docs/README.md`.
-- [ ] Confirm `paper/README.md` accurately describes the 7-page paper and 7-slide carousel.
-- [ ] Decide the **paper/figures license**: MIT covers code; the paper text/figures may need a separate license (e.g., CC BY 4.0) or an explicit “all rights reserved” note.
-- [ ] Add `CITATION.cff` with author, title, year, repo URL, and paper title.
-- [ ] Add a short “Data and licensing” note to the paper/repo: Yahoo terms, no raw redistribution, aggregate results only.
+- [x] Document the v2 snapshot (`data/raw_v2/`) in `docs/01_data_card.md` or a short addendum: 72 ETFs, 2000-01..2026-09, FRED `TB3MS`, 21,224 price rows.
+- [x] Add a one-paragraph "how to read the three attempts + gate study" to `paper/README.md` or `docs/13_final_report.md`.
+- [x] Verify all links in `README.md`, `paper/README.md`, and `docs/README.md`.
+- [x] Confirm `paper/README.md` accurately describes the 7-page paper and 7-slide carousel.
+- [x] Decide the **paper/figures license**: MIT covers code; the paper text/figures may need a separate license (e.g., CC BY 4.0) or an explicit "all rights reserved" note.
+- [x] Add `CITATION.cff` with author, title, year, repo URL, and paper title.
+- [x] Add a short "Data and licensing" note to the paper/repo: Yahoo terms, no raw redistribution, aggregate results only.
 
 **Definition of done:** a reader can tell what is licensed, what data is included, and how to cite the paper.
 
@@ -103,7 +159,7 @@
 
 ## Completed (for context)
 
-- [x] v1 closed: H1/H3 fail, H2 pass; reduced M1 results and bootstrap intervals.
+- [x] v1 closed: H1/H3 fail, H2 non-inferiority pass; reduced M1 results and bootstrap intervals.
 - [x] v2 pre-registered, developed, stopped before holdout (gate 0.654).
 - [x] v3 pre-registered, developed, stopped before holdout (gate 0.430).
 - [x] 2025–2026 holdout preserved.
@@ -117,11 +173,11 @@
 
 ## Suggested order for the next session
 
-1. Create the GitHub `v1.0.0` release and verify the link.
-2. Publish the carousel with Version 0.
-3. Add `CITATION.cff` and the paper/figures license.
-4. Send the paper to one external reader.
-5. Write the 1,200-word essay.
+1. **DONE:** claim-precision pass and asset rebuild; mobile readability remains.
+2. **DONE:** GitHub `v1.0.0` release published and verified (7 assets, CI green).
+3. Send the paper to one external quant/ML reader; record the strongest objection.
+4. Publish the corrected carousel with Version 0.
+5. Post the card (Version B) and write the essay only if the pull is real.
 6. Optional methods appendix: common-factor size simulation.
 
 **Do not start a v4 on this data. Do not touch the holdout.**

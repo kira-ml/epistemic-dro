@@ -121,7 +121,7 @@ The reduced uncertainty-aware DRO experiment (Ridge B0 mean + 5-model bootstrap 
 | B5_DRO_point | 0.798 | −24.28% | −8.44% |
 | B1_equal_weight | 0.673 | −26.61% | −9.76% |
 
-**Verdict: H1 fails, H2 passes, H3 fails.** The DRO/CVaR optimizer beats 1/N, but the epistemic-uncertainty layer does not separate from point-estimate DRO. This is a clean negative result for the uncertainty hypothesis; it is not a claim of alpha. See [`experiments/dro_experiment.md`](experiments/dro_experiment.md) and the final memo [`docs/13_final_report.md`](docs/13_final_report.md).
+**Verdict: H1 fails, H2 passes its non-inferiority guardrail, H3 fails.** The DRO/CVaR optimizer beats 1/N, but the epistemic-uncertainty layer does not separate from B5, the zero-sigma comparator. B5 is identical to B3 (CVaR-only), so the DRO-vs-no-DRO comparison is uninformative; the relevant test is M1 versus B5. This is a clean negative result for the uncertainty hypothesis; it is not a claim of alpha. See [`experiments/dro_experiment.md`](experiments/dro_experiment.md) and the final memo [`docs/13_final_report.md`](docs/13_final_report.md).
 
 The shuffled-target run collapses to zero, so the null is not an obvious leak. The ML layer cannot be assumed to add value. See [`experiments/baseline_benchmarks.md`](experiments/baseline_benchmarks.md).
 
@@ -175,7 +175,7 @@ epistemic-dro/
 │   ├── 10_postmortem_template.md
 │   ├── 11_lessons_log.md
 │   ├── 12_research_rigor.md  # 12-model binding addendum (v1.1)
-│   ├── 13_final_report.md    # final memo: H1/H3 fail, H2 pass
+│   ├── 13_final_report.md    # final memo: H1/H3 fail, H2 non-inferiority pass
 │   ├── 14_v2_preregistration.md # v2 conformal-quantile pre-registration
 │   ├── 15_v2_report.md       # v2 stopped before holdout
 │   ├── 16_v3_preregistration.md # v3 conditional tail-risk pre-registration
@@ -243,6 +243,12 @@ python -m pip install -e ".[dev,ml,paper]"
 pytest -q
 ruff check .
 python scripts/run_smoke.py
+```
+
+**Result-level reproduction (uses committed aggregates; no vendor data required):**
+
+```bash
+python scripts/reproduce_all.py
 ```
 
 **Snapshot rebuild (requires `FRED_API_KEY` in `.env`):**
@@ -322,7 +328,7 @@ The gates are blocking for a confirmatory claim. A negative result that passes t
 
 ## License and data
 
-Code license: **MIT** (see [`LICENSE`](LICENSE)). Third-party data are **not** distributed and remain subject to their provider terms. See [`data/README.md`](data/README.md).
+Code license: **MIT** (see [`LICENSE`](LICENSE)). Paper text and figures: **CC BY 4.0** (see [`paper/LICENSE`](paper/LICENSE)). Third-party data are **not** distributed and remain subject to their provider terms. See [`data/README.md`](data/README.md).
 
 ---
 

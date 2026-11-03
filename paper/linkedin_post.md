@@ -4,9 +4,9 @@
 
 I build pre-registered research pipelines for ML-driven portfolio construction.
 
-This one ended with three negative results — and I’m publishing it because the process is the point.
+This one ended with one completed negative result and two pre-holdout stops — and I’m publishing it because the process is the point.
 
-**v1 — epistemic uncertainty (reduced M1).** Ridge mean + bootstrap sigma. A Ridge baseline had no detectable out-of-sample linear signal (−0.019 pooled R²; mean rank IC 0.013, t = 0.56). The uncertainty-aware DRO did not separate from point-estimate DRO. The tail-risk hypothesis failed; the non-inferiority test passed.
+**v1 — epistemic uncertainty (reduced M1).** Ridge mean + bootstrap sigma. A Ridge baseline had no detectable out-of-sample linear signal (−0.019 pooled R²; mean rank IC 0.013, t = 0.56). The uncertainty-aware DRO did not separate from the zero-sigma comparator (B5). The tail-risk hypothesis failed; the non-inferiority test passed.
 
 **v2 — conformal quantiles.** Calibration worked: 89.9% validation coverage, 85.9% test coverage. The uncertainty signal still passed only 65.4% of date-level information tests against an 80% gate. Stopped before the holdout.
 
@@ -24,7 +24,7 @@ Paper + code: https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.0
 
 If you work on uncertainty quantification, DRO, or conformal prediction, I’d like to compare notes.
 
-Not investment advice. No alpha claim. No live deployment.
+Not investment advice. No alpha claim. No live deployment. Working paper; current-listed ETF universe; not survivorship-free.
 
 #QuantResearch #MachineLearning #PortfolioOptimization #ResearchIntegrity #PreRegistration
 
@@ -36,7 +36,7 @@ Not investment advice. No alpha claim. No live deployment.
 
 I tried to make uncertainty pay three times. The holdout is still untouched.
 
-**v1 — epistemic uncertainty.** A Ridge baseline had no detectable out-of-sample linear signal (−0.019 pooled R²; mean rank IC 0.013, t = 0.56). The uncertainty-aware DRO did not separate from point-estimate DRO. H1 and H3 failed; H2 passed.
+**v1 — epistemic uncertainty.** A Ridge baseline had no detectable out-of-sample linear signal (−0.019 pooled R²; mean rank IC 0.013, t = 0.56). The uncertainty-aware DRO did not separate from the zero-sigma comparator (B5). H1 and H3 failed; H2 passed its non-inferiority guardrail.
 
 **v2 — conformal quantiles.** Calibration worked: 89.9% validation coverage, 85.9% test coverage. The uncertainty signal still passed only 65.4% of date-level information tests against an 80% gate. Stopped before the holdout.
 
@@ -57,13 +57,14 @@ Not investment advice. No alpha claim. No live deployment.
 
 Three pre-registered attempts. Zero holdout touches.
 
-v1: epistemic uncertainty — H1/H3 failed, H2 passed.
+v1: epistemic uncertainty — H1/H3 failed, H2 non-inferiority passed.
 v2: conformal quantiles — calibrated, stopped before holdout (gate 65.4%).
 v3: conditional tail risk — calibrated, stopped before holdout (gate 43.0%).
 
 Calibration is not information. Gates > narratives.
 
 Paper + code: github.com/kira-ml/epistemic-dro
+Working paper; current-listed ETF universe; not survivorship-free.
 Not investment advice.
 
 #QuantResearch #MachineLearning #PortfolioOptimization
@@ -74,7 +75,7 @@ Not investment advice.
 
 The most useful result in my last project was a “no.”
 
-I ran three pre-registered tests of uncertainty-aware DRO on 72 US ETFs. All three failed their pre-holdout information gate. The 2025–2026 holdout was never touched.
+I ran three pre-registered attempts of uncertainty-aware DRO on 72 US ETFs. v1's feature audit found no survivor; v2 and v3 were stopped by their pre-holdout information gates. The 2025–2026 holdout was never touched.
 
 The part I keep thinking about: v2 and v3 were both *calibrated*. v3 had a clean 3.76 pp decile spread. That still was not enough to justify spending the holdout.
 
@@ -89,4 +90,6 @@ Paper + code in the comments. Not investment advice.
 - Put the paper link in the first comment, not the post body, if reach matters.
 - Do not say “the model works” or “beats the market.” It does not.
 - Do not call v2/v3 “confirmatory.” They never reached the holdout.
+- Say “one completed result, two pre-holdout stops,” not “three negative results.”
+- Label the artifact: working paper; current-listed ETF universe; not survivorship-free.
 - If you post the card alone, use Version B. If you post the carousel, use Version A.

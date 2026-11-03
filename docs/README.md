@@ -10,7 +10,8 @@ This is the entry point for the project's documentation. If a document is not li
 | File | Purpose | Gate | Status |
 |---|---|---|---|
 | `00_project_charter.md` | Decision, scope, success criteria, kill criteria | G0 | **Frozen — G0 passed; G1 pivoted to ETF** |
-| `01_data_card.md` | Source, schema, PIT rules, leakage audit | G1 | **Frozen — snapshot built; G1 pass with limitation; G-R4 pending** |
+| `01_data_card.md` | Source, schema, PIT rules, leakage audit | G1 | **Frozen - snapshot built; G1 pass with limitation; G-R4 pending** |
+| `19_v2_data_addendum.md` | v2 development snapshot record; no holdout result | v2 | **Addendum - v2 snapshot documented** |
 | `02_experiment_card.md` | Pre-registered protocol | G3 | **Frozen — v1.1-rigor (2026-11-02)** |
 | `03_model_card.md` | Intended use, limits, monitoring | G4 | **Frozen template — reduced experiment completed** |
 | `04_decision_log.md` | Append-only decision + deviation log | all | **Frozen — append-only** |
@@ -57,7 +58,7 @@ These rules exist because the same fact appears in multiple docs. When a rule is
 - **Risk class** identical: Medium. (Would be High if deployed — see `05` §3.)
 - **Cost model** identical: 10 bps primary; 5/20/50 bps sensitivity.
 - **Data status** identical: snapshot built 2026-11-02 (72 ETFs, FRED `TB3MS`); G1 pass with disclosed survivorship limitation; G-R4 MI audit pending.
-- **License** identical: MIT in `../LICENSE`, `../pyproject.toml`, `03` §1, and `../README.md`.
+- **License** identical: MIT for code (`../LICENSE`, `../pyproject.toml`, `03` §1, `../README.md`); CC BY 4.0 for paper text and figures (`../paper/LICENSE`, `../paper/README.md`).
 - **Rigor gates** identical: `12_research_rigor.md` is binding. B0 Ridge baseline, target-shuffling test, MI audit, conditional robust loss, counter-metric gate, and experiment ledger are mandatory before a confirmatory claim.
 - **Final verdict** identical: H1 FAIL, H2 PASS, H3 FAIL; reduced M1 (not LightGBM); no alpha claim; no deployment. See `13_final_report.md`.
 - **v2 verdict** identical: G-R4v2 failed (sigma pass rate 0.654 < 0.80); 2025–2026 holdout untouched; v2 stopped. See `15_v2_report.md`.

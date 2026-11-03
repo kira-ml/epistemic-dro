@@ -26,7 +26,7 @@
 #set par(justify: false, leading: 0.65em, spacing: 0.9em)
 
 #let eyebrow(x) = text(size: 9pt, fill: muted, tracking: 1.2pt)[#x]
-#let footer = place(bottom + left, text(size: 8pt, fill: muted)[github.com/kira-ml/epistemic-dro · not investment advice])
+#let footer = place(bottom + left, text(size: 8pt, fill: muted)[github.com/kira-ml/epistemic-dro · CC BY 4.0 · not investment advice])
 
 // 1 -------------------------------------------------------------------------
 #v(70pt)
@@ -37,7 +37,9 @@
 #text(size: 31pt, weight: "bold", fill: accent)[The holdout is still untouched.]
 #v(22pt)
 #text(size: 17pt, fill: muted)[A research-engineering portfolio project — and what I learned trying to make uncertainty pay.]
-#v(95pt)
+#v(10pt)
+#text(size: 9.5pt, fill: muted)[Working paper · current-listed ETF universe · not survivorship-free]
+#v(72pt)
 #text(size: 11pt, fill: accent, weight: "bold")[Swipe →]
 #footer
 
@@ -50,10 +52,10 @@
 #v(16pt)
 #text(size: 14pt)[A mean-CVaR optimizer can shrink bets when the forecast is uncertain. The hypothesis: an ML uncertainty layer should improve the tail-risk / return trade-off, net of costs.]
 #v(12pt)
-#text(size: 14pt)[I tested it three ways. Each was frozen before the holdout. Each was stopped by a gate.]
+#text(size: 14pt)[I tested it three ways. v1 was closed after a reduced test. v2 and v3 were stopped before the holdout by their information gates.]
 #v(18pt)
 #block(fill: white, stroke: 0.6pt + rgb("#dddddd"), inset: 12pt)[
-  #text(size: 12pt)[*v1* epistemic uncertainty → H1/H3 fail, H2 pass]
+  #text(size: 12pt)[*v1* epistemic uncertainty → H1/H3 fail, H2 non-inferiority pass]
   #v(4pt)
   #text(size: 12pt)[*v2* conformal quantiles → gate 65.4%]
   #v(4pt)
@@ -70,7 +72,7 @@
 #v(14pt)
 #text(size: 13pt)[Ridge B0, 2010–2024: pooled OOS #fmt(b0.r2, 3) $R^2$; mean rank IC #fmt(b0.ic, 3), $t = #fmt(b0.t, 2)$.]
 #v(8pt)
-#text(size: 13pt)[A date-blocked information audit found no feature surviving the 80% rule. The reduced DRO did not separate from point-estimate DRO.]
+#text(size: 13pt)[A date-blocked information audit found no feature surviving the 80% rule. The reduced DRO did not separate from the zero-sigma comparator (B5).]
 #v(16pt)
 #table(
   columns: (1.6fr, auto, auto, auto),
@@ -79,11 +81,14 @@
   stroke: none,
   [*Strategy*], [*Sharpe*], [*Max DD*], [*CVaR95*],
   [M1 reduced], [#fmt(v1.m1.sharpe, 3)], [#pct(v1.m1.mdd, 1)], [#pct(v1.m1.cvar, 1)],
-  [B5 point DRO], [#fmt(v1.b5.sharpe, 3)], [#pct(v1.b5.mdd, 1)], [#pct(v1.b5.cvar, 1)],
+  [B5 zero-sigma DRO], [#fmt(v1.b5.sharpe, 3)], [#pct(v1.b5.mdd, 1)], [#pct(v1.b5.cvar, 1)],
   [1/N], [#fmt(v1.b1.sharpe, 3)], [#pct(v1.b1.mdd, 1)], [#pct(v1.b1.cvar, 1)],
 )
+#v(6pt)
+#text(size: 8.5pt, fill: muted)[B5 uses zero sigma and is identical to B3 CVaR-only; the DRO-vs-no-DRO comparison is uninformative.]
 #v(10pt)
-#text(size: 12pt, fill: red, weight: "bold")[H1 / H3 fail · H2 pass]
+#text(size: 12pt, fill: red, weight: "bold")[H1 / H3 fail · H2 non-inferiority pass]
+#linebreak()
 #text(size: 11pt, fill: muted)[No alpha claim. The DRO/CVaR optimizer beat 1/N; the uncertainty layer did not separate.]
 #footer
 
@@ -143,6 +148,8 @@
 #text(size: 13pt)[A block-aware null cut **20/21** apparent passes to **3/21**. The v2 and v3 sigma did not survive.]
 #v(10pt)
 #text(size: 13pt, fill: accent, weight: "bold")[Too strict is not the same as too permissive. The stops were about stability.]
+#linebreak()
+#text(size: 9pt, fill: muted)[Post-hoc methods audit: the block-aware/effect-size checks support the stops ex post; they do not prove no signal exists.]
 #footer
 
 #pagebreak()
@@ -158,7 +165,7 @@
 #v(8pt)
 #text(size: 13pt)[*Stability is the hard part.* Average calibration and a decile spread are not enough.]
 #v(8pt)
-#text(size: 13pt)[*Preserve the holdout.* Three attempts, zero holdout touches. The apparatus is the result.]
+#text(size: 13pt)[*Preserve the holdout.* One completed result, two pre-holdout stops, zero holdout touches. The apparatus is the result.]
 #v(8pt)
 #text(size: 13pt)[*Effect size decides.* The survivors' IC intervals included zero; trailing volatility dominated the conditional sigma. No v4 on this data.]
 #v(10pt)

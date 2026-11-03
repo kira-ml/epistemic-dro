@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "Code is MIT; the paper text and figures are CC BY 4.0. If you use this work, cite the repository and the working paper."
+type: software
+title: "Epistemic-Aware DRO for Mean-CVaR Portfolios"
+abstract: >-
+  A pre-registered research apparatus for testing whether ML epistemic
+  uncertainty improves the tail-risk/return trade-off of a distributionally
+  robust mean-CVaR ETF portfolio. v1 completed with H1/H3 failing and H2
+  passing; v2 and v3 were stopped before the holdout when their information
+  gates failed. The 2025-2026 holdout remains untouched. No alpha claim, no
+  live deployment, and no investment advice.
+authors:
+  - family-names: Talingting
+    given-names: Ken Ira Lacson
+version: 1.0.0
+date-released: 2026-11-03
+url: "https://github.com/kira-ml/epistemic-dro"
+repository-code: "https://github.com/kira-ml/epistemic-dro"
+license: MIT
+keywords:
+  - quantitative-finance
+  - machine-learning
+  - distributionally-robust-optimization
+  - cvar
+  - epistemic-uncertainty
+  - negative-results
+  - pre-registration
+  - etfs
+preferred-citation:
+  type: article
+  title: "The holdout is still untouched: three pre-registered tests of uncertainty-aware DRO"
+  authors:
+    - family-names: Talingting
+      given-names: Ken Ira Lacson
+  year: 2026
+  url: "https://github.com/kira-ml/epistemic-dro/blob/main/paper/mini_paper.pdf"
