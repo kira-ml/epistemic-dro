@@ -104,6 +104,20 @@ def main() -> int:
     check("v2 sigma does not survive block null", v2_block["passes_all_blocks"] is False)
     check("v3 sigma does not survive block null", v3_block["passes_all_blocks"] is False)
 
+    effect = _load("effect_size_audit.json")
+    check(
+        "no survivor clears 0.02 with CI",
+        effect["summary"]["any_survivor_clears_002_and_ci"] is False,
+    )
+    check(
+        "trailing volatility dominates v2 sigma",
+        effect["summary"]["v2_trailing_vol_mean_ic"] > effect["summary"]["v2_sigma_mean_ic"],
+    )
+    check(
+        "trailing volatility dominates v3 sigma",
+        effect["summary"]["v3_trailing_vol_mean_ic"] > effect["summary"]["v3_sigma_mean_ic"],
+    )
+
     for pattern in ("*holdout*", "*v2_holdout*", "*v3_holdout*"):
         for directory in (ROOT / "results" / "tables", PUBLISHED):
             matches = list(directory.glob(pattern)) if directory.exists() else []

@@ -348,6 +348,27 @@ At 72 assets, the per-date MI pass rate at \(\beta=0.5\) is 39.7%, below the 80%
 
 ---
 
+## DEC-20261102-016 — Effect-size audit: no v4 on this data
+
+**Decision:** Close the v4 question. The three block-aware survivors (`mom_6m`, `vol_12m`, `downside_vol_12m`) have mean rank ICs whose 90% block-bootstrap intervals include zero. The v2/v3 sigma are strong predictors of absolute return, but trailing 36-month volatility is stronger (IC 0.279 vs 0.247 and 0.204). The conditional uncertainty is redundant with the simple benchmark.
+
+**Evidence:**
+
+| Signal | Mean IC | 90% block CI |
+|---|---:|---|
+| `mom_6m` | 0.020 | [−0.018, 0.061] |
+| `vol_12m` | −0.033 | [−0.061, 0.011] |
+| `downside_vol_12m` | −0.039 | [−0.069, 0.011] |
+| v2 sigma | 0.247 | [0.221, 0.291] |
+| v3 sigma | 0.204 | [0.186, 0.236] |
+| trailing 36m vol | 0.279 | [0.251, 0.329] |
+
+**Interpretation:** statistical detection is not economic significance. The gate study explains why the original stops were too strict; the effect-size audit explains why a v4 is still not justified. The project is closed for this data. The 2025–2026 holdout remains untouched.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |

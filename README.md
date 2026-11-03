@@ -141,7 +141,7 @@ v3 tested a different object — a conditional forecast of next-month absolute r
 
 A synthetic power study tested the 80% date-level information gate. At 72 assets and 179 dates, it had **zero power** even at a 20% \(R^2\) signal; an iid pooled test detected the same signal. But the iid pooled test was too permissive: a **block-aware null** cut 20/21 apparent passes to **3/21**, and the v2/v3 sigma did not survive.
 
-That does **not** promote v1/v2/v3. The 80% gate was too strict; the iid pooled test was too permissive. The defensible gate is a block-aware pooled gate with a minimum effect size. The holdout remains untouched. See [`docs/18_gate_power_study.md`](docs/18_gate_power_study.md).
+That does **not** promote v1/v2/v3. The 80% gate was too strict; the iid pooled test was too permissive. The defensible gate is a block-aware pooled gate with a minimum effect size. An effect-size audit then finds the three block-aware survivors have IC intervals including zero, and trailing volatility dominates the conditional sigma. **No v4 is justified on this data.** The holdout remains untouched. See [`docs/18_gate_power_study.md`](docs/18_gate_power_study.md).
 
 ---
 

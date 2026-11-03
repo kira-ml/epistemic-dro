@@ -90,7 +90,7 @@
 ### 5. Publish the LinkedIn package
 
 - [ ] Upload `paper/linkedin_carousel.pdf` as a native document post.
-- [ ] Use **Version A** from `paper/linkedin_post.md`.
+- [ ] Use **Version 0 — flagship** from `paper/linkedin_post.md`.
 - [ ] Put the paper link in the first comment and in the featured section.
 - [ ] Post the 4:5 `paper/linkedin_card.png` 3–7 days later if the carousel performs.
 - [ ] Keep `paper/one_pager.pdf` for email/events, not the primary post.
@@ -105,11 +105,11 @@
 - [x] Re-evaluate actual v1/v2/v3 development signals under the pooled test.
 - [x] Add `docs/18_gate_power_study.md`, a paper section, and a carousel slide.
 - [x] Add a block-aware null: iid pooled passes 20/21; block-aware passes **3/21**; v2/v3 sigma do not survive.
-- [ ] Add a **minimum effect size** to the gate, not just a p-value.
-- [ ] Add a common-factor/autocorrelated size simulation to validate the block-aware null itself.
-- [ ] Decide the v4 two-part gate only after the block-aware null and effect-size gate are fixed.
+- [x] Add an **effect-size audit**: the three survivors' 90% IC intervals include zero; trailing volatility dominates the conditional sigma.
+- [ ] Optional: add a common-factor/autocorrelated size simulation to validate the block-aware null itself.
+- [x] Decide: **no v4 on this data.**
 
-**Key result:** the 80% gate has **zero power at a 20% R² signal**; the iid pooled gate is too permissive (20/21 passes) and the block-aware gate is the middle (3/21). The v1/v2/v3 stops are evidence of **instability**, not proof of no signal. The holdout remains untouched.
+**Key result:** the 80% gate has **zero power at a 20% R² signal**; the iid pooled gate is too permissive (20/21 passes) and the block-aware gate is the middle (3/21). The survivors have no meaningful effect size; trailing volatility dominates the conditional sigma. No v4. The holdout remains untouched.
 
 ---
 

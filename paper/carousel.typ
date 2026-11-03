@@ -159,6 +159,8 @@
 #text(size: 13pt)[*Stability is the hard part.* Average calibration and a decile spread are not enough.]
 #v(8pt)
 #text(size: 13pt)[*Preserve the holdout.* Three attempts, zero holdout touches. The apparatus is the result.]
+#v(8pt)
+#text(size: 13pt)[*Effect size decides.* The survivors' IC intervals included zero; trailing volatility dominated the conditional sigma. No v4 on this data.]
 #v(10pt)
 #text(size: 10pt, fill: muted)[Stack: purged walk-forward · Ridge · LightGBM quantiles · conformal · cvxpy · CI + verifier.]
 #v(12pt)

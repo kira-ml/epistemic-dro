@@ -27,6 +27,7 @@ python scripts/build_paper.py
 | `gate_power_study.json` | Gate power study design and summary |
 | `gate_reevaluation.json` | Actual development signals under a pooled MI test |
 | `block_gate_study.json` | Block-aware null: 3/21 signals survive; v2/v3 sigma do not |
+| `effect_size_audit.json` | Rank IC and block bootstrap for survivors, sigma, and trailing vol |
 | `final_report.json` | Cost sensitivity, stress windows, deflated Sharpe |
 
 **No v2/v3 holdout result exists.** The 2025–2026 holdout was never run.

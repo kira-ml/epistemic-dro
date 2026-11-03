@@ -47,7 +47,8 @@ The project is a **research-engineering portfolio piece**, not an alpha claim. T
 - The apparatus: frozen protocol, mandatory baseline, information gate, counter-metric gate, CI, verifier.
 - The visual narrative: seven slides, one idea each.
 - The paper: short, honest, with limitations and reproduction commands.
-- The gate study: the 80% rule was too strict (zero power at 20% R²), but the iid pooled test was too permissive (20/21 apparent passes fell to 3/21 under a block-aware null; v2/v3 sigma did not survive).
+- The gate study: the 80% rule was too strict (zero power at 20% R²), but the iid pooled test was too permissive (20/21 apparent passes fell to 3/21 under a block-aware null; v2/v3 sigma did not survive). The effect-size audit found the survivors' IC intervals included zero; trailing volatility dominated the conditional sigma.
+- The decision: no v4 on this data; the holdout is preserved.
 
 ## 4. What is missing before the first post
 
@@ -118,4 +119,4 @@ Do not optimize for likes, impressions, or “great post” comments.
 
 ## 8. The one-line thesis
 
-> **I build pre-registered research pipelines that test the gate in both directions — and I’m willing to publish the no.**
+> **I build pre-registered research pipelines that test the gate and the effect size — and I’m willing to publish the no.**

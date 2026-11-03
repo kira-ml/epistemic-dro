@@ -101,6 +101,23 @@ This is the key correction: the iid pooled test was too permissive. Most of the 
 
 The right gate is therefore neither the 80% date-level rule (too strict) nor the iid pooled test (too permissive). It is a **block-aware pooled gate with a minimum effect size**, plus a stability criterion whose power is declared.
 
+### 4.3 Effect size
+
+A statistically detectable signal is not necessarily economically meaningful. We computed per-date rank IC with 90% block-bootstrap intervals.
+
+| Signal | Mean rank IC | 90% block CI | Clears 0.02 and CI? |
+|---|---:|---|---|
+| `mom_6m` | 0.020 | [−0.018, 0.061] | No |
+| `vol_12m` | −0.033 | [−0.061, 0.011] | No |
+| `downside_vol_12m` | −0.039 | [−0.069, 0.011] | No |
+| v2 sigma | 0.247 | [0.221, 0.291] | Yes |
+| v3 sigma | 0.204 | [0.186, 0.236] | Yes |
+| trailing 36m vol | **0.279** | [0.251, 0.329] | Yes |
+
+The three block-aware survivors have intervals that include zero. The v2/v3 sigma are strong predictors of absolute return, but **trailing volatility is stronger**. The conditional uncertainty is redundant with the simple benchmark.
+
+**Conclusion:** no v4 is justified on this data. The surviving signals do not clear an effect-size bar, and the conditional sigma is dominated by trailing volatility.
+
 ---
 
 ## 5. Interpretation
@@ -112,7 +129,8 @@ The right gate is therefore neither the 80% date-level rule (too strict) nor the
    - an **average-information gate** with a minimum effect size and a block-aware null;
    - a **stability gate** with a power justification.
 5. **Neither gate is right alone.** The 80% rule is too strict; the iid pooled test is too permissive. The block-aware pooled gate is the defensible middle.
-6. **Do not run the holdout retrospectively.** The gate change is a new pre-registration, not a reason to consume the preserved sample.
+6. **Effect size closes the v4 question.** The three block-aware survivors have IC intervals including zero; v2/v3 sigma are dominated by trailing volatility. No v4 on this data.
+7. **Do not run the holdout retrospectively.** The gate change is a new pre-registration, not a reason to consume the preserved sample.
 
 ---
 
@@ -129,11 +147,9 @@ The right gate is therefore neither the 80% date-level rule (too strict) nor the
 ## 7. Next steps
 
 1. ~~Add autocorrelated and block-bootstrap nulls to the pooled gate.~~ **Done:** block lengths 6/12/24; only 3/21 signals survive; v2/v3 sigma do not.
-2. Add a **minimum effect size** to the gate, not just a p-value.
-3. Add a common-factor/autocorrelated **size simulation** to validate the block-aware null itself.
-4. Pre-register a two-part gate for any v4:
-   - average information with a minimum effect size and a block-aware null;
-   - stability with a power-justified threshold.
-5. Keep the 2025–2026 holdout untouched until the new gate passes.
+2. ~~Add a minimum effect size to the gate.~~ **Done:** survivors' IC intervals include zero; trailing vol dominates the conditional sigma.
+3. **No v4 on this data.** The effect-size audit closes the question.
+4. Optional: add a common-factor/autocorrelated **size simulation** to validate the block-aware null itself. This is a methods refinement, not a reason to touch the holdout.
+5. Keep the 2025–2026 holdout untouched for a genuinely new dataset/model.
 
 **This is a methods result, not a licence to promote v1/v2/v3.**

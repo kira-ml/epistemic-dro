@@ -50,6 +50,17 @@ def build_numbers() -> None:
     v3_block = next(row for row in block_gate["results"] if row["signal"] == "v3:sigma")
     v2_block_max = max(v2_block["block_pvalues"].values())
     v3_block_max = max(v3_block["block_pvalues"].values())
+    effect = _load("effect_size_audit.json")
+
+    def signal_row(name: str) -> dict:
+        return next(row for row in effect["results"] if row["signal"] == name)
+
+    e_mom = signal_row("v1:mom_6m")
+    e_vol = signal_row("v1:vol_12m")
+    e_down = signal_row("v1:downside_vol_12m")
+    e_v2 = signal_row("v2:sigma")
+    e_v3 = signal_row("v3:sigma")
+    e_trail = signal_row("v2:trailing_vol")
 
     def gate_row(assets: int, beta: float) -> dict:
         match = gate_summary[
@@ -101,6 +112,7 @@ def build_numbers() -> None:
         f"#let v3_gate = (pass: {v3_gate['sigma']['pass_rate']:.12f}, mean_sigma: {v3_gate['calibration']['mean_sigma']:.12f}, mean_realized: {v3_gate['calibration']['mean_realized_abs']:.12f}, corr: {v3_gate['calibration']['correlation']:.12f}, decile_spread: {v3_gate['calibration']['decile_spread']:.12f})",
         f"#let dsr = (m1: {final['deflated_sharpe']['M1_reduced']['deflated_sharpe_probability']:.12f}, b5: {final['deflated_sharpe']['B5_DRO_point']['deflated_sharpe_probability']:.12f}, b1: {final['deflated_sharpe']['B1_equal_weight']['deflated_sharpe_probability']:.12f})",
         f"#let gate = (mi_pass_00_72: {g00['mi_pass_rate']:.12f}, mi_pass_02_72: {g02['mi_pass_rate']:.12f}, mi_pass_05_72: {g05['mi_pass_rate']:.12f}, mi_power_00_72: {g00['mi_power']:.12f}, mi_power_02_72: {g02['mi_power']:.12f}, mi_power_05_72: {g05['mi_power']:.12f}, pooled_power_00_72: {g00['pooled_power']:.12f}, pooled_power_02_72: {g02['pooled_power']:.12f}, pooled_power_05_72: {g05['pooled_power']:.12f}, decile_pass_00_72: {g00['decile_pass_rate']:.12f}, decile_pass_05_72: {g05['decile_pass_rate']:.12f}, decile_power_00_72: {g00['decile_power']:.12f}, decile_power_05_72: {g05['decile_power']:.12f}, v1_passes: {v1_passes}, v1_total: {v1_total}, v2_pooled_p: {gate_reeval['v2_sigma']['pvalue']:.12f}, v3_pooled_p: {gate_reeval['v3_sigma']['pvalue']:.12f}, p_min: {p_min:.12f}, block_passes: {block_gate['summary']['block_passes']}, block_total: {block_gate['summary']['total']}, iid_passes: {block_gate['summary']['iid_passes']}, v2_block_max: {v2_block_max:.12f}, v3_block_max: {v3_block_max:.12f})",
+        f"#let effect = (mom_ic: {e_mom['mean_ic']:.12f}, mom_ci: ({e_mom['block_ci90'][0]:.12f}, {e_mom['block_ci90'][1]:.12f}), vol_ic: {e_vol['mean_ic']:.12f}, vol_ci: ({e_vol['block_ci90'][0]:.12f}, {e_vol['block_ci90'][1]:.12f}), down_ic: {e_down['mean_ic']:.12f}, down_ci: ({e_down['block_ci90'][0]:.12f}, {e_down['block_ci90'][1]:.12f}), v2_ic: {e_v2['mean_ic']:.12f}, v2_ci: ({e_v2['block_ci90'][0]:.12f}, {e_v2['block_ci90'][1]:.12f}), v3_ic: {e_v3['mean_ic']:.12f}, v3_ci: ({e_v3['block_ci90'][0]:.12f}, {e_v3['block_ci90'][1]:.12f}), trail_ic: {e_trail['mean_ic']:.12f}, trail_ci: ({e_trail['block_ci90'][0]:.12f}, {e_trail['block_ci90'][1]:.12f}))",
     ]
     GENERATED.mkdir(parents=True, exist_ok=True)
     (GENERATED / "numbers.typ").write_text("\n".join(lines) + "\n", encoding="utf-8")

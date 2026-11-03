@@ -14,6 +14,8 @@ This one ended with three negative results — and I’m publishing it because t
 
 **Then I tested the gate itself.** At 72 assets, the 80% date-level rule had **zero power** even at a 20% R² signal. An iid pooled test detected it in every seed — but a block-aware null cut 20/21 apparent passes to 3/21, and v2/v3 sigma did not survive. The 80% gate was too strict; the iid pooled test was too permissive. The stops were about **stability**, not proof that no signal exists.
 
+**Then effect size.** The three block-aware survivors had 90% IC intervals that included zero. Trailing volatility had a higher IC (0.279) than v2 sigma (0.247) or v3 sigma (0.204). The conditional uncertainty was redundant with the simple benchmark. No v4 on this data.
+
 The result is not a Sharpe ratio. It is a pipeline that can tell the difference between a signal and noise — and a 2025–2026 holdout that is still untouched.
 
 Stack: purged walk-forward · Ridge baseline · LightGBM quantile regression · split conformal · cvxpy/CLARABEL · DRO/CVaR · CI + verifier.

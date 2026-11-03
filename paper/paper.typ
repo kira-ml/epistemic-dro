@@ -105,11 +105,12 @@
   trailing volatility on development. A synthetic power study shows the 80% date-level gate has
   **zero power** at a 20% $R^2$ signal, while an iid pooled test detects the same signal. But the iid
   pooled test is too permissive: under a block-aware null it cuts 20/21 apparent passes to 3/21, and
-  the v2/v3 sigma do not survive. The v1/v2/v3 stops are evidence of **instability**, not proof that no
-  signal exists; and a pooled test is not a substitute for a block-aware gate. The contribution is the
-  apparatus: a frozen protocol, a mandatory baseline, an information gate, a non-degenerate comparator,
-  a preserved holdout, and a clean negative result — plus evidence that the gate itself needs a power
-  analysis.
+  the v2/v3 sigma do not survive. An effect-size audit finds the three block-aware survivors have rank
+  IC intervals that include zero; trailing volatility dominates the conditional sigma. No v4 is justified
+  on this data. The v1/v2/v3 stops are evidence of **instability**, not proof that no signal exists; and a
+  pooled test is not a substitute for a block-aware gate. The contribution is the apparatus: a frozen
+  protocol, a mandatory baseline, an information gate, a non-degenerate comparator, a preserved holdout,
+  and a clean negative result — plus evidence that the gate itself needs a power and effect-size analysis.
 ]
 
 #v(0.5em)
@@ -303,10 +304,32 @@ The iid pooled gate is also too permissive. Under a block-permutation null that 
 block p-value of #fmt(gate.v2_block_max, 3); the v3 sigma #fmt(gate.v3_block_max, 3). Neither survives.
 The apparent pooled passes were largely time-series artifacts.
 
-*The 80% gate is too strict; the iid pooled gate is too permissive.* A block-aware pooled gate with a
-minimum effect size is the defensible middle. The v1/v2/v3 stops remain evidence of **instability**, not
-proof that no signal exists. A v4 protocol should pre-register that two-part gate: average information
-with a minimum effect size and a block-aware null, plus a stability gate with a power justification.
+Effect size closes the question. The three block-aware survivors have rank ICs whose 90% block-bootstrap
+intervals include zero. The v2 and v3 sigma have strong ICs against future absolute return, but trailing
+36-month volatility is stronger still. The conditional uncertainty is redundant with the simple
+benchmark.
+
+#figure(
+  table(
+    columns: (1.2fr, auto, auto),
+    align: (left, right, right),
+    inset: 5pt,
+    stroke: none,
+    [*Signal*], [*Mean rank IC*], [*90% block CI*],
+    [mom_6m], [#fmt(effect.mom_ic, 3)], [#ci(effect.mom_ci.at(0), effect.mom_ci.at(1), 3)],
+    [vol_12m], [#fmt(effect.vol_ic, 3)], [#ci(effect.vol_ci.at(0), effect.vol_ci.at(1), 3)],
+    [downside_vol_12m], [#fmt(effect.down_ic, 3)], [#ci(effect.down_ci.at(0), effect.down_ci.at(1), 3)],
+    [v2 sigma], [#fmt(effect.v2_ic, 3)], [#ci(effect.v2_ci.at(0), effect.v2_ci.at(1), 3)],
+    [v3 sigma], [#fmt(effect.v3_ic, 3)], [#ci(effect.v3_ci.at(0), effect.v3_ci.at(1), 3)],
+    [trailing 36m vol], [#fmt(effect.trail_ic, 3)], [#ci(effect.trail_ci.at(0), effect.trail_ci.at(1), 3)],
+  ),
+  caption: [Development rank IC with 90% block-bootstrap intervals. The three block-aware survivors have intervals that include zero. The conditional sigma is dominated by trailing volatility. No v4 is justified on this data.]
+)
+
+*The 80% gate is too strict; the iid pooled gate is too permissive; the survivors have no economic
+effect size.* A block-aware pooled gate with a minimum effect size is the defensible middle, and the
+effect-size audit says the same thing as the portfolio result: no v4 on this data. The v1/v2/v3 stops
+remain evidence of instability, not proof that no signal exists, and the holdout stays untouched.
 
 #figure(
   image("figures/gate_power.png", width: 100%),
