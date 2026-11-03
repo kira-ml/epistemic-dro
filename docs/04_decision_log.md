@@ -336,6 +336,18 @@ At 72 assets, the per-date MI pass rate at \(\beta=0.5\) is 39.7%, below the 80%
 
 ---
 
+## DEC-20261102-015 — Block-aware null corrects the pooled gate
+
+**Decision:** Add a block-permutation null to the pooled MI test. The iid pooled gate is too permissive under autocorrelation: it passes 20/21 development signals, but a block-aware null that preserves 6/12/24-month blocks passes only **3/21**. The v2 sigma fails every block length (max p = 0.119); the v3 sigma fails every block length (max p = 0.396). The v2/v3 stops remain defensible.
+
+**Interpretation:** the original 80% date-level gate was too strict (zero power at 20% R²), and the iid pooled gate was too permissive (most passes were time-series artifacts). The defensible gate is a **block-aware pooled gate with a minimum effect size**, plus a stability criterion with declared power. The surviving v1 features are `mom_6m`, `vol_12m`, and `downside_vol_12m`; this is not enough to justify a v4 on the same data.
+
+**Holdout:** still untouched. No retrospective run.
+
+**Review:** 2026-11-30.
+
+---
+
 ## Deviation log
 
 | Date | Experiment | Deviation | Reason | Approved by |

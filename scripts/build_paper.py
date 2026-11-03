@@ -45,6 +45,11 @@ def build_numbers() -> None:
     final = _load("final_report.json")
     gate_summary = pd.read_csv(DATA / "gate_power_summary.csv")
     gate_reeval = _load("gate_reevaluation.json")
+    block_gate = _load("block_gate_study.json")
+    v2_block = next(row for row in block_gate["results"] if row["signal"] == "v2:sigma")
+    v3_block = next(row for row in block_gate["results"] if row["signal"] == "v3:sigma")
+    v2_block_max = max(v2_block["block_pvalues"].values())
+    v3_block_max = max(v3_block["block_pvalues"].values())
 
     def gate_row(assets: int, beta: float) -> dict:
         match = gate_summary[
@@ -95,7 +100,7 @@ def build_numbers() -> None:
         f"#let v3 = (m1_sharpe: {v3['M1_v3']['net_sharpe']:.12f}, m1_mdd: {v3['M1_v3']['max_drawdown']:.12f}, m1_cvar: {v3['M1_v3']['cvar95']:.12f}, b5_sharpe: {v3['B5_uncond_sigma']['net_sharpe']:.12f}, b5_mdd: {v3['B5_uncond_sigma']['max_drawdown']:.12f}, b5_cvar: {v3['B5_uncond_sigma']['cvar95']:.12f})",
         f"#let v3_gate = (pass: {v3_gate['sigma']['pass_rate']:.12f}, mean_sigma: {v3_gate['calibration']['mean_sigma']:.12f}, mean_realized: {v3_gate['calibration']['mean_realized_abs']:.12f}, corr: {v3_gate['calibration']['correlation']:.12f}, decile_spread: {v3_gate['calibration']['decile_spread']:.12f})",
         f"#let dsr = (m1: {final['deflated_sharpe']['M1_reduced']['deflated_sharpe_probability']:.12f}, b5: {final['deflated_sharpe']['B5_DRO_point']['deflated_sharpe_probability']:.12f}, b1: {final['deflated_sharpe']['B1_equal_weight']['deflated_sharpe_probability']:.12f})",
-        f"#let gate = (mi_pass_00_72: {g00['mi_pass_rate']:.12f}, mi_pass_02_72: {g02['mi_pass_rate']:.12f}, mi_pass_05_72: {g05['mi_pass_rate']:.12f}, mi_power_00_72: {g00['mi_power']:.12f}, mi_power_02_72: {g02['mi_power']:.12f}, mi_power_05_72: {g05['mi_power']:.12f}, pooled_power_00_72: {g00['pooled_power']:.12f}, pooled_power_02_72: {g02['pooled_power']:.12f}, pooled_power_05_72: {g05['pooled_power']:.12f}, decile_pass_00_72: {g00['decile_pass_rate']:.12f}, decile_pass_05_72: {g05['decile_pass_rate']:.12f}, decile_power_00_72: {g00['decile_power']:.12f}, decile_power_05_72: {g05['decile_power']:.12f}, v1_passes: {v1_passes}, v1_total: {v1_total}, v2_pooled_p: {gate_reeval['v2_sigma']['pvalue']:.12f}, v3_pooled_p: {gate_reeval['v3_sigma']['pvalue']:.12f}, p_min: {p_min:.12f})",
+        f"#let gate = (mi_pass_00_72: {g00['mi_pass_rate']:.12f}, mi_pass_02_72: {g02['mi_pass_rate']:.12f}, mi_pass_05_72: {g05['mi_pass_rate']:.12f}, mi_power_00_72: {g00['mi_power']:.12f}, mi_power_02_72: {g02['mi_power']:.12f}, mi_power_05_72: {g05['mi_power']:.12f}, pooled_power_00_72: {g00['pooled_power']:.12f}, pooled_power_02_72: {g02['pooled_power']:.12f}, pooled_power_05_72: {g05['pooled_power']:.12f}, decile_pass_00_72: {g00['decile_pass_rate']:.12f}, decile_pass_05_72: {g05['decile_pass_rate']:.12f}, decile_power_00_72: {g00['decile_power']:.12f}, decile_power_05_72: {g05['decile_power']:.12f}, v1_passes: {v1_passes}, v1_total: {v1_total}, v2_pooled_p: {gate_reeval['v2_sigma']['pvalue']:.12f}, v3_pooled_p: {gate_reeval['v3_sigma']['pvalue']:.12f}, p_min: {p_min:.12f}, block_passes: {block_gate['summary']['block_passes']}, block_total: {block_gate['summary']['total']}, iid_passes: {block_gate['summary']['iid_passes']}, v2_block_max: {v2_block_max:.12f}, v3_block_max: {v3_block_max:.12f})",
     ]
     GENERATED.mkdir(parents=True, exist_ok=True)
     (GENERATED / "numbers.typ").write_text("\n".join(lines) + "\n", encoding="utf-8")

@@ -47,7 +47,7 @@ The project is a **research-engineering portfolio piece**, not an alpha claim. T
 - The apparatus: frozen protocol, mandatory baseline, information gate, counter-metric gate, CI, verifier.
 - The visual narrative: seven slides, one idea each.
 - The paper: short, honest, with limitations and reproduction commands.
-- The gate power study: the 80% date-level rule had **zero power** at a 20% R² signal; the stops are evidence of instability, not proof of no signal.
+- The gate study: the 80% rule was too strict (zero power at 20% R²), but the iid pooled test was too permissive (20/21 apparent passes fell to 3/21 under a block-aware null; v2/v3 sigma did not survive).
 
 ## 4. What is missing before the first post
 
@@ -118,4 +118,4 @@ Do not optimize for likes, impressions, or “great post” comments.
 
 ## 8. The one-line thesis
 
-> **I build pre-registered research pipelines that test the gate, not just the model — and I’m willing to publish the no.**
+> **I build pre-registered research pipelines that test the gate in both directions — and I’m willing to publish the no.**

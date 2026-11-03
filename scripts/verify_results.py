@@ -96,6 +96,14 @@ def main() -> int:
     check("v2 pooled sigma passes", gate_reeval["v2_sigma"]["passes"] is True)
     check("v3 pooled sigma passes", gate_reeval["v3_sigma"]["passes"] is True)
 
+    block_gate = _load("block_gate_study.json")
+    check("iid pooled passes 20/21", block_gate["summary"]["iid_passes"] == 20)
+    check("block-aware passes 3/21", block_gate["summary"]["block_passes"] == 3)
+    v2_block = next(row for row in block_gate["results"] if row["signal"] == "v2:sigma")
+    v3_block = next(row for row in block_gate["results"] if row["signal"] == "v3:sigma")
+    check("v2 sigma does not survive block null", v2_block["passes_all_blocks"] is False)
+    check("v3 sigma does not survive block null", v3_block["passes_all_blocks"] is False)
+
     for pattern in ("*holdout*", "*v2_holdout*", "*v3_holdout*"):
         for directory in (ROOT / "results" / "tables", PUBLISHED):
             matches = list(directory.glob(pattern)) if directory.exists() else []

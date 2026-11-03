@@ -12,7 +12,7 @@ This one ended with three negative results — and I’m publishing it because t
 
 **v3 — conditional tail risk.** Calibration was excellent: mean sigma 4.29% vs realized 4.30%, with a 3.76 pp top-vs-bottom decile spread. The signal passed only 43.0% of date-level information tests. Stopped before the holdout.
 
-**Then I tested the gate itself.** At 72 assets, the 80% date-level rule had **zero power** even at a 20% R² signal; a pooled test detected the same signal in 100% of seeds. The stops were about **stability**, not proof that no signal exists.
+**Then I tested the gate itself.** At 72 assets, the 80% date-level rule had **zero power** even at a 20% R² signal. An iid pooled test detected it in every seed — but a block-aware null cut 20/21 apparent passes to 3/21, and v2/v3 sigma did not survive. The 80% gate was too strict; the iid pooled test was too permissive. The stops were about **stability**, not proof that no signal exists.
 
 The result is not a Sharpe ratio. It is a pipeline that can tell the difference between a signal and noise — and a 2025–2026 holdout that is still untouched.
 

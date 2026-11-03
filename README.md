@@ -139,9 +139,9 @@ v3 tested a different object — a conditional forecast of next-month absolute r
 
 ### But the gate itself was underpowered
 
-A synthetic power study tested the 80% date-level information gate. At 72 assets and 179 dates, it had **zero power** even at a 20% \(R^2\) signal; a pooled, date-blocked test detected the same signal in 100% of seeds. The actual development features and v2/v3 sigma also pass the pooled test.
+A synthetic power study tested the 80% date-level information gate. At 72 assets and 179 dates, it had **zero power** even at a 20% \(R^2\) signal; an iid pooled test detected the same signal. But the iid pooled test was too permissive: a **block-aware null** cut 20/21 apparent passes to **3/21**, and the v2/v3 sigma did not survive.
 
-That does **not** promote v1/v2/v3: the pooled test is not a stability test, and its p-values sit at the 30-permutation floor. The honest reading is that the stops were evidence of **instability**, not proof that no signal exists. The holdout remains untouched. See [`docs/18_gate_power_study.md`](docs/18_gate_power_study.md).
+That does **not** promote v1/v2/v3. The 80% gate was too strict; the iid pooled test was too permissive. The defensible gate is a block-aware pooled gate with a minimum effect size. The holdout remains untouched. See [`docs/18_gate_power_study.md`](docs/18_gate_power_study.md).
 
 ---
 

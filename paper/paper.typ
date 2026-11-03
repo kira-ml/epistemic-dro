@@ -61,7 +61,7 @@
   #text(size: 20pt, weight: "bold")[The holdout is still untouched]
   #v(0.25em)
   #text(size: 11pt)[
-    Three pre-registered tests of uncertainty-aware DRO on 72 US ETFs — and a gate that was too strict
+    Three pre-registered tests of uncertainty-aware DRO — and two gates that failed in opposite directions
   ]
   #v(0.85em)
   #text(size: 10pt)[Ken Ira Lacson Talingting]
@@ -103,11 +103,13 @@
   forecast of next-month absolute return; calibration is excellent (#pct(v3_gate.mean_sigma, 2) vs
   #pct(v3_gate.mean_realized, 2)), but the signal passes only #pct(v3_gate.pass, 1) and underperforms
   trailing volatility on development. A synthetic power study shows the 80% date-level gate has
-  **zero power** at a 20% $R^2$ signal, while a pooled test detects the same signal. The v1/v2/v3
-  stops are therefore evidence of **instability**, not proof that no signal exists. The contribution
-  is the apparatus: a frozen protocol, a mandatory baseline, an information gate, a non-degenerate
-  comparator, a preserved holdout, and a clean negative result — plus evidence that the gate itself
-  needs a power analysis.
+  **zero power** at a 20% $R^2$ signal, while an iid pooled test detects the same signal. But the iid
+  pooled test is too permissive: under a block-aware null it cuts 20/21 apparent passes to 3/21, and
+  the v2/v3 sigma do not survive. The v1/v2/v3 stops are evidence of **instability**, not proof that no
+  signal exists; and a pooled test is not a substitute for a block-aware gate. The contribution is the
+  apparatus: a frozen protocol, a mandatory baseline, an information gate, a non-degenerate comparator,
+  a preserved holdout, and a clean negative result — plus evidence that the gate itself needs a power
+  analysis.
 ]
 
 #v(0.5em)
@@ -264,7 +266,7 @@ passed #pct(v3_gate.pass, 1) of date-level tests. The holdout was not touched.
 // 6
 // ---------------------------------------------------------------------------
 
-= Was the gate too strict?
+= Were the gates wrong in both directions?
 
 The v2/v3 stops were driven by a pre-holdout gate that required a signal to beat a date-blocked
 permutation null in at least 80% of dates. That rule controls false positives, but its power was never
@@ -296,14 +298,19 @@ and the v3 sigma at $p = #fmt(gate.v3_pooled_p, 3)$.
 But the pooled test is not a stability test. It can detect weak average dependence that is not stable
 date by date. It does **not** retroactively promote v1/v2/v3, and the holdout remains untouched.
 
-*The gate is a stability filter, not a signal-existence test.* The v1/v2/v3 stops are evidence of
-**instability**, not proof that no signal exists. A v4 protocol should pre-register two gates: an
-average-information gate with a minimum effect size and a block-aware null, and a stability gate with a
-power justification.
+The iid pooled gate is also too permissive. Under a block-permutation null that preserves 6-, 12-, and
+24-month blocks, only #gate.block_passes of #gate.block_total signals survive. The v2 sigma has a maximum
+block p-value of #fmt(gate.v2_block_max, 3); the v3 sigma #fmt(gate.v3_block_max, 3). Neither survives.
+The apparent pooled passes were largely time-series artifacts.
+
+*The 80% gate is too strict; the iid pooled gate is too permissive.* A block-aware pooled gate with a
+minimum effect size is the defensible middle. The v1/v2/v3 stops remain evidence of **instability**, not
+proof that no signal exists. A v4 protocol should pre-register that two-part gate: average information
+with a minimum effect size and a block-aware null, plus a stability gate with a power justification.
 
 #figure(
   image("figures/gate_power.png", width: 100%),
-  caption: [Left: per-date pass rate versus signal strength at 72 assets. Right: gate power at $beta=0.2$ and $beta=0.5$. The 80% MI gate and the decile gate fail; the pooled gate succeeds. The gate is measuring stability, not average signal.]
+  caption: [Left: per-date pass rate versus signal strength at 72 assets. Right: gate power at $beta=0.2$ and $beta=0.5$. The 80% MI gate and the decile gate fail; the iid pooled gate succeeds. But the iid pooled gate is too permissive: on the actual data, a block-aware null cuts 20/21 apparent passes to 3/21.]
 )
 
 // ---------------------------------------------------------------------------

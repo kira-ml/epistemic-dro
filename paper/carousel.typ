@@ -124,9 +124,9 @@
 // 6 -------------------------------------------------------------------------
 #eyebrow[THE GATE ITSELF]
 #v(14pt)
-#text(size: 24pt, weight: "bold")[I tested the gate, not just the models.]
+#text(size: 24pt, weight: "bold")[I tested the gate in both directions.]
 #v(14pt)
-#text(size: 13pt)[The 80% date-level MI gate had **zero power** at 72 assets — even at a 20% $R^2$ signal. A pooled test detected the same signal in 100% of seeds.]
+#text(size: 13pt)[The 80% date-level MI gate had **zero power** at 72 assets — even at a 20% $R^2$ signal. The iid pooled gate detected it in every seed, but it was too permissive.]
 #v(14pt)
 #table(
   columns: (auto, auto, auto),
@@ -137,10 +137,12 @@
   [3.8% R²], [#pct(gate.mi_power_02_72, 0)], [#pct(gate.pooled_power_02_72, 0)],
   [20% R²], [#pct(gate.mi_power_05_72, 0)], [#pct(gate.pooled_power_05_72, 0)],
 )
-#v(10pt)
+#v(8pt)
 #text(size: 11pt, fill: muted)[Synthetic, 72 assets, 179 dates, linear signal, 2 seeds.]
-#v(14pt)
-#text(size: 13pt, fill: accent, weight: "bold")[The stops were about stability, not proof of no signal.]
+#v(12pt)
+#text(size: 13pt)[A block-aware null cut **20/21** apparent passes to **3/21**. The v2 and v3 sigma did not survive.]
+#v(10pt)
+#text(size: 13pt, fill: accent, weight: "bold")[Too strict is not the same as too permissive. The stops were about stability.]
 #footer
 
 #pagebreak()

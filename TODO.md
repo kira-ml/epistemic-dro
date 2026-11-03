@@ -104,10 +104,12 @@
 - [x] Compare a pooled MI gate and a decile-spread gate.
 - [x] Re-evaluate actual v1/v2/v3 development signals under the pooled test.
 - [x] Add `docs/18_gate_power_study.md`, a paper section, and a carousel slide.
-- [ ] Add autocorrelated/block-bootstrap nulls to the pooled gate.
-- [ ] Decide the v4 two-part gate only after the block-aware null is tested.
+- [x] Add a block-aware null: iid pooled passes 20/21; block-aware passes **3/21**; v2/v3 sigma do not survive.
+- [ ] Add a **minimum effect size** to the gate, not just a p-value.
+- [ ] Add a common-factor/autocorrelated size simulation to validate the block-aware null itself.
+- [ ] Decide the v4 two-part gate only after the block-aware null and effect-size gate are fixed.
 
-**Key result:** at 72 assets and 179 dates, the 80% gate has **zero power at a 20% R² signal**; the pooled gate detects the same signal in 100% of seeds. The v1/v2/v3 stops are evidence of **instability**, not proof of no signal. The holdout remains untouched.
+**Key result:** the 80% gate has **zero power at a 20% R² signal**; the iid pooled gate is too permissive (20/21 passes) and the block-aware gate is the middle (3/21). The v1/v2/v3 stops are evidence of **instability**, not proof of no signal. The holdout remains untouched.
 
 ---
 

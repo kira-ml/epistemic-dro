@@ -1,0 +1,268 @@
+{
+  "permutations": 100,
+  "blocks": [
+    6,
+    12,
+    24
+  ],
+  "results": [
+    {
+      "signal": "v1:mom_1m",
+      "pooled_mi": 0.046734506750249594,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.18811881188118812,
+        "12": 0.16831683168316833,
+        "24": 0.16831683168316833
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:mom_3m",
+      "pooled_mi": 0.044056005365196604,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.38613861386138615,
+        "12": 0.38613861386138615,
+        "24": 0.39603960396039606
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:mom_6m",
+      "pooled_mi": 0.059569111310787015,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.0297029702970297,
+        "12": 0.009900990099009901,
+        "24": 0.009900990099009901
+      },
+      "passes_iid": true,
+      "passes_all_blocks": true
+    },
+    {
+      "signal": "v1:mom_12m",
+      "pooled_mi": 0.05661999523523065,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.10891089108910891,
+        "12": 0.1188118811881188,
+        "24": 0.1485148514851485
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:vol_3m",
+      "pooled_mi": 0.05491186235101431,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.0297029702970297,
+        "12": 0.019801980198019802,
+        "24": 0.0594059405940594
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:vol_12m",
+      "pooled_mi": 0.08811006235677077,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.0297029702970297,
+        "12": 0.009900990099009901,
+        "24": 0.04950495049504951
+      },
+      "passes_iid": true,
+      "passes_all_blocks": true
+    },
+    {
+      "signal": "v1:downside_vol_12m",
+      "pooled_mi": 0.08690496121652114,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.019801980198019802,
+        "12": 0.009900990099009901,
+        "24": 0.039603960396039604
+      },
+      "passes_iid": true,
+      "passes_all_blocks": true
+    },
+    {
+      "signal": "v1:skew_12m",
+      "pooled_mi": 0.010642589024290494,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.5544554455445545,
+        "12": 0.5643564356435643,
+        "24": 0.6039603960396039
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:worst_1m_12m",
+      "pooled_mi": 0.07026983539993736,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.15841584158415842,
+        "12": 0.19801980198019803,
+        "24": 0.1188118811881188
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:vol_ratio_3_12",
+      "pooled_mi": 0.014586964083241227,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.2079207920792079,
+        "12": 0.19801980198019803,
+        "24": 0.12871287128712872
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:volume_shock_1m",
+      "pooled_mi": 0.0006476928628096346,
+      "iid_pvalue": 0.36633663366336633,
+      "block_pvalues": {
+        "6": 0.43564356435643564,
+        "12": 0.48514851485148514,
+        "24": 0.38613861386138615
+      },
+      "passes_iid": false,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:corr_market_36m",
+      "pooled_mi": 0.1199503581440009,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.43564356435643564,
+        "12": 0.4158415841584158,
+        "24": 0.4752475247524752
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:mdd_12m",
+      "pooled_mi": 0.07158411356537897,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.04950495049504951,
+        "12": 0.019801980198019802,
+        "24": 0.0594059405940594
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:dollar_vol_12m",
+      "pooled_mi": 0.012474258966333807,
+      "iid_pvalue": 0.0297029702970297,
+      "block_pvalues": {
+        "6": 0.8910891089108911,
+        "12": 0.8910891089108911,
+        "24": 0.9207920792079208
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:beta_36m",
+      "pooled_mi": 0.05470833681159171,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.5247524752475248,
+        "12": 0.37623762376237624,
+        "24": 0.44554455445544555
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:exp_mkt_rf",
+      "pooled_mi": 0.06229833952590447,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.06930693069306931,
+        "12": 0.12871287128712872,
+        "24": 0.12871287128712872
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:exp_smb",
+      "pooled_mi": 0.0349889404168886,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.19801980198019803,
+        "12": 0.22772277227722773,
+        "24": 0.24752475247524752
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:exp_hml",
+      "pooled_mi": 0.04845470103997496,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.1485148514851485,
+        "12": 0.18811881188118812,
+        "24": 0.19801980198019803
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v1:exp_mom",
+      "pooled_mi": 0.05982268492565357,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.31683168316831684,
+        "12": 0.26732673267326734,
+        "24": 0.22772277227722773
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v2:sigma",
+      "pooled_mi": 0.07210781472953176,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.0891089108910891,
+        "12": 0.1188118811881188,
+        "24": 0.06930693069306931
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    },
+    {
+      "signal": "v3:sigma",
+      "pooled_mi": 0.05338546138132916,
+      "iid_pvalue": 0.009900990099009901,
+      "block_pvalues": {
+        "6": 0.31683168316831684,
+        "12": 0.39603960396039606,
+        "24": 0.26732673267326734
+      },
+      "passes_iid": true,
+      "passes_all_blocks": false
+    }
+  ],
+  "summary": {
+    "iid_passes": 20,
+    "block_passes": 3,
+    "total": 21
+  },
+  "note": "Development only. A pooled signal that passes iid but not block permutation is a time-series artifact. Do not touch the holdout."
+}

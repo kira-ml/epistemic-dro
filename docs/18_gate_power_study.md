@@ -87,37 +87,53 @@ The v1 feature that does not pass is `volume_shock_1m` (p = 0.161). The other 18
 - The v1 features are correlated with each other; 18 “passes” are not 18 independent signals.
 - The pooled test was not part of the original pre-registration. It does **not** retroactively promote v2/v3 to the holdout.
 
+### 4.2 Block-aware null
+
+The iid pooled test is anti-conservative when the panel is autocorrelated. We repeated the test with a **block-permutation null** that preserves contiguous 6-, 12-, and 24-month blocks of the target. This keeps time-series structure but breaks the cross-date alignment with the feature.
+
+| Signal set | iid pooled passes | Block-aware passes |
+|---|---:|---:|
+| 19 v1 features + v2/v3 sigma | **20 / 21** | **3 / 21** |
+
+The three survivors are `mom_6m`, `vol_12m`, and `downside_vol_12m`. The v2 sigma fails every block length (max p = 0.119); the v3 sigma fails every block length (max p = 0.396).
+
+This is the key correction: the iid pooled test was too permissive. Most of the apparent pooled passes were time-series artifacts, not cross-sectional information. The v2/v3 stops remain defensible.
+
+The right gate is therefore neither the 80% date-level rule (too strict) nor the iid pooled test (too permissive). It is a **block-aware pooled gate with a minimum effect size**, plus a stability criterion whose power is declared.
+
 ---
 
 ## 5. Interpretation
 
 1. **The 80% gate is a stability filter, not a signal-existence test.** It asks “is this detectable in almost every date?” not “is there an average signal?”
 2. **The gate has near-zero power for realistic effect sizes.** At 72 assets, a 20% \(R^2\) signal passes only 39.7% of dates; the gate requires 80%.
-3. **The v2/v3 stops are evidence of instability, not proof of no signal.** The actual development signals pass a pooled test, but the pooled test is not enough to justify the holdout.
+3. **The v2/v3 stops are evidence of instability, not proof of no signal.** The actual development signals pass an iid pooled test, but a block-aware null cuts 20/21 passes to 3/21; v2/v3 sigma do not survive. The iid pooled test is too permissive, not enough to justify the holdout.
 4. **The original protocol conflated two questions.** A better v4 protocol should pre-register two gates:
    - an **average-information gate** with a minimum effect size and a block-aware null;
    - a **stability gate** with a power justification.
-5. **Do not run the holdout retrospectively.** The gate change is a new pre-registration, not a reason to consume the preserved sample.
+5. **Neither gate is right alone.** The 80% rule is too strict; the iid pooled test is too permissive. The block-aware pooled gate is the defensible middle.
+6. **Do not run the holdout retrospectively.** The gate change is a new pre-registration, not a reason to consume the preserved sample.
 
 ---
 
 ## 6. Limitations
 
-- Synthetic panels are iid across dates; real features and returns have autocorrelation. The pooled gate may be anti-conservative on real data.
+- Synthetic panels are iid across dates; real features and returns have autocorrelation. The iid pooled gate is anti-conservative on the actual data; the block-aware null corrects it but uses only three block lengths.
 - Only 2 seeds per cell; this is a power illustration, not a precise power curve.
-- The minimum p-value with 30 permutations is 0.032; stronger permutation resolution is needed for effect-size ranking.
-- Statistical dependence is not economic significance. A pooled MI pass does not imply a tradable signal.
+- The minimum p-value with 30 permutations is 0.032; stronger permutation resolution is needed for effect-size ranking. The block study uses 100 permutations.
+- Statistical dependence is not economic significance. A block-aware MI pass does not imply a tradable signal.
 - The study does not test the v2/v3 holdout.
 
 ---
 
 ## 7. Next steps
 
-1. Add autocorrelated and block-bootstrap nulls to the pooled gate.
+1. ~~Add autocorrelated and block-bootstrap nulls to the pooled gate.~~ **Done:** block lengths 6/12/24; only 3/21 signals survive; v2/v3 sigma do not.
 2. Add a **minimum effect size** to the gate, not just a p-value.
-3. Pre-register a two-part gate for any v4:
-   - average information with a minimum effect size;
+3. Add a common-factor/autocorrelated **size simulation** to validate the block-aware null itself.
+4. Pre-register a two-part gate for any v4:
+   - average information with a minimum effect size and a block-aware null;
    - stability with a power-justified threshold.
-4. Keep the 2025–2026 holdout untouched until the new gate passes.
+5. Keep the 2025–2026 holdout untouched until the new gate passes.
 
 **This is a methods result, not a licence to promote v1/v2/v3.**
