@@ -36,7 +36,7 @@
 #v(3pt)
 #text(size: 31pt, weight: "bold", fill: accent)[The holdout is still untouched.]
 #v(22pt)
-#text(size: 17pt, fill: muted)[What I learned trying to make uncertainty pay.]
+#text(size: 17pt, fill: muted)[A research-engineering portfolio project — and what I learned trying to make uncertainty pay.]
 #v(95pt)
 #text(size: 11pt, fill: accent, weight: "bold")[Swipe →]
 #footer
@@ -133,7 +133,9 @@
 #text(size: 13pt)[*Stability is the hard part.* Average calibration and a decile spread are not enough.]
 #v(8pt)
 #text(size: 13pt)[*Preserve the holdout.* Three attempts, zero holdout touches. The apparatus is the result.]
-#v(14pt)
+#v(10pt)
+#text(size: 10pt, fill: muted)[Stack: purged walk-forward · Ridge · LightGBM quantiles · conformal · cvxpy · CI + verifier.]
+#v(12pt)
 #block(fill: accent, inset: 12pt)[
   #text(size: 12pt, fill: white, weight: "bold")[Paper + code: github.com/kira-ml/epistemic-dro]
 ]

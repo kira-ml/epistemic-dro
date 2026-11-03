@@ -11,6 +11,7 @@
 | **Visual card** | [`linkedin_card.png`](linkedin_card.png) | Single-image hook; 4:5 feed card | LinkedIn image post / carousel cover |
 | **One-page summary** | [`one_pager.pdf`](one_pager.pdf) | Leave-behind / print | Email, attachment, event handout |
 | **Short post** | [`linkedin_post.md`](linkedin_post.md) | Context and CTA | Post caption |
+| **Career strategy** | [`career_post_strategy.md`](career_post_strategy.md) | 12-model lens, positioning, pre-post checklist | Read before posting |
 | **Traditional one-pager** | [`one_page_summary.md`](one_page_summary.md) | Plain-text summary if you need one | Doc/PDF export |
 
 ## Why this order

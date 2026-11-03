@@ -1,6 +1,34 @@
 # LinkedIn post drafts
 
-## Version A — carousel caption (recommended)
+## Version 0 — flagship (use this first)
+
+I build pre-registered research pipelines for ML-driven portfolio construction.
+
+This one ended with three negative results — and I’m publishing it because the process is the point.
+
+**v1 — epistemic uncertainty (reduced M1).** Ridge mean + bootstrap sigma. A Ridge baseline had no detectable out-of-sample linear signal (−0.019 pooled R²; mean rank IC 0.013, t = 0.56). The uncertainty-aware DRO did not separate from point-estimate DRO. The tail-risk hypothesis failed; the non-inferiority test passed.
+
+**v2 — conformal quantiles.** Calibration worked: 89.9% validation coverage, 85.9% test coverage. The uncertainty signal still passed only 65.4% of date-level information tests against an 80% gate. Stopped before the holdout.
+
+**v3 — conditional tail risk.** Calibration was excellent: mean sigma 4.29% vs realized 4.30%, with a 3.76 pp top-vs-bottom decile spread. The signal passed only 43.0% of date-level information tests. Stopped before the holdout.
+
+The result is not a Sharpe ratio. It is a pipeline that can tell the difference between a signal and noise — and a 2025–2026 holdout that is still untouched.
+
+Stack: purged walk-forward · Ridge baseline · LightGBM quantile regression · split conformal · cvxpy/CLARABEL · DRO/CVaR · CI + verifier.
+
+Paper + code: https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.0
+
+If you work on uncertainty quantification, DRO, or conformal prediction, I’d like to compare notes.
+
+Not investment advice. No alpha claim. No live deployment.
+
+#QuantResearch #MachineLearning #PortfolioOptimization #ResearchIntegrity #PreRegistration
+
+> **Do not post until:** the `v1.0.0` GitHub release exists, CI is green, and the release link resolves.
+
+---
+
+## Version A — carousel caption (previous draft)
 
 I tried to make uncertainty pay three times. The holdout is still untouched.
 
