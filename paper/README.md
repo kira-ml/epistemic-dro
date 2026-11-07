@@ -44,7 +44,7 @@
 
 ## Data and licensing
 
-Code is **MIT** (see [`../LICENSE`](../LICENSE)). The paper text and figures are **CC BY 4.0** (see [`LICENSE`](LICENSE)); attribution: Ken Ira Talingting, *The holdout is still untouched*, with a link to this repository. Yahoo Finance, FRED, and Ken French data are **not** redistributed. [`published-results/`](published-results/) contains aggregate metrics only. Nothing here is investment advice.
+Code is **MIT** (see [`../LICENSE`](../LICENSE)). The paper text and figures are **CC BY 4.0** (see [`LICENSE`](LICENSE)); attribution: Ken Ira Talingting, *The holdout is still untouched*, with a link to this repository. Yahoo Finance, FRED, and Ken French data are **not** redistributed. [`published-results/`](published-results/) contains aggregate and derived research outputs only; no raw vendor prices are redistributed. Nothing here is investment advice.
 
 ## Rebuild
 

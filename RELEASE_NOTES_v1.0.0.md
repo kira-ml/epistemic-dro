@@ -39,7 +39,7 @@ python scripts/reproduce_all.py
 
 `reproduce_all.py` runs the tests, lint, result verifier, and paper build from the committed aggregate tables. Raw vendor snapshots are external and are not rebuilt.
 
-Raw vendor data is **not** included. `paper/published-results/` contains aggregate metrics only.
+Raw vendor data is **not** included. `paper/published-results/` contains aggregate and derived research outputs only; no raw vendor prices are redistributed.
 
 ## Licence and data
 

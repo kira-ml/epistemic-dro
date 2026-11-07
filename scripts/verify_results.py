@@ -58,6 +58,17 @@ def main() -> int:
         all(item["pass_rate"] < 0.80 for item in v2_gate["features"]),
         str([item["pass_rate"] for item in v2_gate["features"]]),
     )
+    check(
+        "v2 features do not survive",
+        all(item["survives"] is False for item in v2_gate["features"]),
+        str([item["survives"] for item in v2_gate["features"]]),
+    )
+    coverage = v2_gate["coverage"]
+    check(
+        "v2 coverage is a fraction",
+        all(0.0 <= float(value) <= 1.0 for value in coverage.values()),
+        str(coverage),
+    )
 
     v3_gate = _load("v3_sigma_audit.json")
     check("v3 holdout not allowed", v3_gate["holdout_allowed"] is False)
@@ -65,6 +76,11 @@ def main() -> int:
         "v3 gate below 80%",
         v3_gate["sigma"]["pass_rate"] < 0.80,
         str(v3_gate["sigma"]["pass_rate"]),
+    )
+    check(
+        "v3 sigma does not survive",
+        v3_gate["sigma"]["survives"] is False,
+        str(v3_gate["sigma"]["survives"]),
     )
 
     final = _load("final_report.json")
@@ -152,16 +168,40 @@ def main() -> int:
     for value, key in zip(v3_values, ("net_sharpe", "max_drawdown", "cvar95"), strict=True):
         check(f"paper v3 {key} matches summary", _close(value, v3_summary["M1_v3"][key]))
 
-    gate_values = _match(r"v2_gate = \(pass: ([-\d.]+)")
+    v2_gate_values = _match(
+        r"v2_gate = \(pass: ([-\d.]+), coverage_val: ([-\d.]+), coverage_test: ([-\d.]+)\)"
+    )
     check(
         "paper v2 gate matches audit",
-        _close(gate_values[0], v2_gate["features"][0]["pass_rate"]),
+        _close(v2_gate_values[0], v2_gate["features"][0]["pass_rate"]),
     )
-    gate_values = _match(r"v3_gate = \(pass: ([-\d.]+)")
+    check(
+        "paper v2 validation coverage matches audit",
+        _close(v2_gate_values[1], v2_gate["coverage"]["mean_validation_coverage"]),
+    )
+    check(
+        "paper v2 test coverage matches audit",
+        _close(v2_gate_values[2], v2_gate["coverage"]["mean_test_coverage"]),
+    )
+
+    v3_gate_values = _match(
+        r"v3_gate = \(pass: ([-\d.]+), mean_sigma: ([-\d.]+), "
+        r"mean_realized: ([-\d.]+), corr: ([-\d.]+), decile_spread: ([-\d.]+)\)"
+    )
     check(
         "paper v3 gate matches audit",
-        _close(gate_values[0], v3_gate["sigma"]["pass_rate"]),
+        _close(v3_gate_values[0], v3_gate["sigma"]["pass_rate"]),
     )
+    for value, key, label in (
+        (v3_gate_values[1], "mean_sigma", "mean sigma"),
+        (v3_gate_values[2], "mean_realized_abs", "mean realized absolute return"),
+        (v3_gate_values[3], "correlation", "correlation"),
+        (v3_gate_values[4], "decile_spread", "decile spread"),
+    ):
+        check(
+            f"paper v3 {label} matches audit",
+            _close(value, v3_gate["calibration"][key]),
+        )
 
     failures = [item for item in checks if not item[1]]
     for name, ok, detail in checks:

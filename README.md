@@ -23,9 +23,9 @@ This project tests a narrower and more defensible claim:
 
 The deliverable is not a stock-price forecast. It is a leakage-tested walk-forward apparatus, a convex robust optimizer, and an honest comparison against simple baselines.
 
-### Relationship to `../robustfolio`
+### Relationship to [robustfolio](https://github.com/kira-ml/robustfolio)
 
-`robustfolio` already tests whether robust covariance and turnover-aware portfolio methods beat plain baselines on a small ETF universe under a frozen protocol. This project is deliberately different:
+[`robustfolio`](https://github.com/kira-ml/robustfolio) already tests whether robust covariance and turnover-aware portfolio methods beat plain baselines on a small ETF universe under a frozen protocol. This project is deliberately different:
 
 - it uses a cross-sectional ML return model with **epistemic uncertainty**;
 - it optimizes **mean-CVaR**, not mean-variance;

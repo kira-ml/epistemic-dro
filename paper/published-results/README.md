@@ -1,6 +1,6 @@
 # Published aggregate results
 
-These files are the aggregate outputs behind `paper/mini_paper.pdf` and the LinkedIn assets. They contain **no raw prices** and **no holdout result**.
+These files are the aggregate and derived research outputs behind `paper/mini_paper.pdf` and the LinkedIn assets. They contain **no raw vendor prices** and **no holdout result**.
 
 They are committed so a fresh clone can rebuild the paper without rerunning the models:
 
@@ -32,4 +32,4 @@ python scripts/build_paper.py
 
 **No v2/v3 holdout result exists.** The 2025–2026 holdout was never run.
 
-**Licensing:** aggregate results only. Raw vendor data is not redistributed; see the root README and `data/README.md`.
+**Licensing:** aggregate and derived research outputs only. Raw vendor data is not redistributed; see the root README and `data/README.md`.

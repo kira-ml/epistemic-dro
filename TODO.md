@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-11-04
 **Current state:** v1 closed (H1/H3 fail, H2 non-inferiority pass); v2 and v3 stopped before holdout; the gate/effect-size study is complete and is a **post-hoc methods audit**; **no v4 on this data**; 2025–2026 holdout **untouched**.
-**Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 54/54; CI green on `7511597`; **GitHub release v1.0.0 published 2026-11-04 with 7 assets** (paper, carousel, card, one-pager, summary, LICENSE, CITATION); claim-precision pass complete.  
+**Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 63/63; **GitHub release v1.0.0 published 2026-11-04 with 7 assets** (paper, carousel, card, one-pager, summary, LICENSE, CITATION); claim-precision pass complete; metadata/verifier pass complete 2026-11-07 (version aligned, release date corrected, derived-output wording).  
 **Repo note:** the 2026-11-04 docs/asset pass is committed and pushed to `main`; the release remains anchored to tag `v1.0.0`.
 **Session close (2026-11-04):** GitHub release is live and verified; claim-precision pass is committed; **LinkedIn launch is paused by owner before upload**. No LinkedIn post was made; verified on the activity/Documents tabs (last document is `V2.1 — The Baseline Audit`, fraud detection). Resume only when the owner chooses.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
@@ -26,7 +26,7 @@
 ### 1. Completed release layer
 
 - [x] `paper/published-results/` with aggregate-only tables.
-- [x] `scripts/verify_results.py` — 54/54 checks.
+- [x] `scripts/verify_results.py` — 63/63 checks.
 - [x] `.github/workflows/ci.yml` — tests, lint, verifier, paper build.
 - [x] `paper/mini_paper.pdf`, `paper/linkedin_carousel.pdf`, `paper/linkedin_card.png`, `paper/one_pager.pdf`.
 - [x] `v1.0.0` tag, `RELEASE_NOTES_v1.0.0.md`.
@@ -107,6 +107,8 @@
 
 **Claim-precision pass completed 2026-11-04:** paper, carousel, card, one-page summary, README, release notes, and post drafts corrected; assets rebuilt; 7-page paper, 7-slide carousel, verifier 54/54. **Release v1.0.0 published and verified:** 7 assets, all HTTP 200, CI success. Remaining gates: mobile readability and one external reader.
 
+**Metadata and verifier pass completed 2026-11-07:** `pyproject.toml` and `__init__.py` aligned to `1.0.0`; `CITATION.cff` release date aligned to `2026-11-04`; "aggregate metrics only" corrected to "aggregate and derived research outputs; no raw vendor prices" in the paper README, release notes, and published-results README; verifier expanded from 54 to 63 checks (v2 coverage, v2/v3 survival flags, v3 calibration, and paper cross-checks); 26 mutation tests added so every checked claim must fail when changed; 81 tests pass; `ruff` clean; verifier 63/63.
+
 ### Launch sequence
 
 1. **Day 0:** create/verify the release; one external reader; fix factual errors only.
@@ -170,7 +172,7 @@
 - [x] Gate power study: 80% gate zero power at 20% R².
 - [x] Block-aware null: iid 20/21 vs block 3/21; v2/v3 sigma do not survive.
 - [x] Effect-size audit: survivors' IC CIs include zero; trailing vol dominates sigma; **no v4**.
-- [x] 55 tests pass; `ruff` clean; verifier 54/54; CI green.
+- [x] 81 tests pass; `ruff` clean; verifier 63/63; CI green (2026-11-07 metadata/verifier pass).
 
 ---
 
