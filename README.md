@@ -10,6 +10,7 @@ This repository is a research apparatus, not a live strategy. It is designed to 
 
 **Read the paper:** [`paper/mini_paper.pdf`](paper/mini_paper.pdf) — *The holdout is still untouched: three pre-registered tests of uncertainty-aware DRO*.
 **Visual summary:** [`paper/linkedin_carousel.pdf`](paper/linkedin_carousel.pdf) · [`paper/linkedin_card.png`](paper/linkedin_card.png)
+**Synthesis with Robustfolio:** [Two nulls, one evaluation problem](https://github.com/kira-ml/robustfolio/blob/main/essays/two-nulls-one-evaluation-problem.md)
 
 ---
 
