@@ -17,7 +17,7 @@
 - [ ] **Keep the v1 label accurate:** “reduced M1” = Ridge mean + bootstrap sigma, not the original LightGBM ensemble.
 - [ ] **Keep the v2/v3 label accurate:** “stopped before holdout.” No holdout result exists.
 - [ ] **Keep the gate labels accurate:** 80% gate too strict; iid pooled gate too permissive; block-aware + effect size is the defensible design.
-- [ ] **No raw vendor data in the repo.** Aggregate metrics only.
+- [ ] **No raw vendor data in the repo.** Aggregate and derived research outputs only; no raw vendor prices.
 
 ---
 
@@ -102,7 +102,7 @@
 - [x] Slide 1/card/caption: working paper; current-listed ETF universe; not survivorship-free.
 - [x] Added `scripts/reproduce_all.py` as a one-command result-level reproduction gate.
 - [x] Release link live; CI green; assets attached.
-- [ ] Mobile accessibility pass: body text at least 16pt at 540pt; one idea per slide.
+- [ ] Mobile accessibility pass: body text at least 16pt at 540pt; one idea per slide. Audit recorded in [`notes/mobile_accessibility_audit_2026-11-07.md`](notes/mobile_accessibility_audit_2026-11-07.md): current body is 13–14pt, so the v1.0.0 carousel fails the criterion; rebuild only with the launch decision.
 - [ ] One external reader; record strongest objection and factual fixes.
 
 **Claim-precision pass completed 2026-11-04:** paper, carousel, card, one-page summary, README, release notes, and post drafts corrected; assets rebuilt; 7-page paper, 7-slide carousel, verifier 54/54. **Release v1.0.0 published and verified:** 7 assets, all HTTP 200, CI success. Remaining gates: mobile readability and one external reader.

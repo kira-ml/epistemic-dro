@@ -114,6 +114,6 @@ Store the manifest in `data/raw/MANIFEST.json` (gitignored) and copy the human-r
 
 - Do not commit raw snapshots.
 - Do not commit derived rows that reconstruct a restricted dataset.
-- A public repo may include code, synthetic smoke-test data, and aggregate results.
+- A public repo may include code, synthetic smoke-test data, and aggregate or derived results that do not reconstruct raw vendor data.
 - Check the provider's terms before publishing any figure that contains raw values.
 - The repository's MIT license covers the code only; it does not grant rights to third-party data.
