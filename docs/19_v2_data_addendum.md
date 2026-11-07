@@ -20,7 +20,7 @@ This addendum records the v2 snapshot used for the conformal-quantile developmen
 | Provider | Yahoo Finance chart API (adjusted close); FRED; Ken French Data Library |
 | Manifest | `data/raw_v2/MANIFEST.json` with SHA-256 per table |
 | Builder | `scripts/build_snapshot.py`; universe `configs/etf_universe.csv` |
-| Redistribution | Raw snapshot local-only and gitignored; aggregate metrics only |
+| Redistribution | Raw snapshot local-only and gitignored; aggregate and derived research outputs only, no raw vendor prices |
 | Holdout | 2025–2026 untouched; no v2 holdout result exists |
 
 The snapshot is a **current-listed** ETF universe; closed funds are not represented, so there is no survivorship-free claim. Expense ratio and distribution yield are unavailable and excluded from the primary model. The 2025–2026 holdout was not read for v2; the development gate stopped the attempt before it.
