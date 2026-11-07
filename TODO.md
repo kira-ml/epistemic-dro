@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-11-04
 **Current state:** v1 closed (H1/H3 fail, H2 non-inferiority pass); v2 and v3 stopped before holdout; the gate/effect-size study is complete and is a **post-hoc methods audit**; **no v4 on this data**; 2025–2026 holdout **untouched**.
-**Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 63/63; **GitHub release v1.0.0 published 2026-11-04 with 7 assets** (paper, carousel, card, one-pager, summary, LICENSE, CITATION); claim-precision pass complete; metadata/verifier pass complete 2026-11-07 (version aligned, release date corrected, derived-output wording).  
+**Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 63/63; **GitHub release v1.0.0 published 2026-11-04 with 7 assets** (paper, carousel, card, one-pager, summary, LICENSE, CITATION); claim-precision pass complete; metadata/verifier pass complete 2026-11-07 (version aligned, release date corrected, derived-output wording, CI pinned with read-only permissions).  
 **Repo note:** the 2026-11-04 docs/asset pass is committed and pushed to `main`; the release remains anchored to tag `v1.0.0`.
 **Session close (2026-11-04):** GitHub release is live and verified; claim-precision pass is committed; **LinkedIn launch is paused by owner before upload**. No LinkedIn post was made; verified on the activity/Documents tabs (last document is `V2.1 — The Baseline Audit`, fraud detection). Resume only when the owner chooses.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
@@ -50,6 +50,7 @@
 - [x] Verify `https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.0` resolves.
 - [x] Do **not** attach raw data.
 - [x] CI check on `7511597` is green; all 7 assets return HTTP 200.
+- [x] CI actions pinned to commit SHAs and permissions limited to `contents: read` (2026-11-07).
 
 **Release:** https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.0
 
