@@ -1,10 +1,11 @@
 # TODO — Epistemic-Aware DRO
 
-**Last updated:** 2026-11-07
+**Last updated:** 2026-11-08
 **Current state:** v1 closed (H1/H3 fail, H2 non-inferiority pass); v2 and v3 stopped before holdout; the gate/effect-size study is complete and is a **post-hoc methods audit**; **no v4 on this data**; 2025–2026 holdout **untouched**.
 **Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 63/63; **GitHub release v1.0.0 published 2026-11-04 with 7 assets** (paper, carousel, card, one-pager, summary, LICENSE, CITATION); claim-precision pass complete; metadata/verifier pass complete 2026-11-07 (version aligned, release date corrected, derived-output wording, CI pinned with read-only permissions).  
 **Repo note:** the 2026-11-04 docs/asset pass is committed and pushed to `main`; the release remains anchored to tag `v1.0.0`.
 **Session close (2026-11-04):** GitHub release is live and verified; claim-precision pass is committed; **LinkedIn launch is paused by owner before upload**. No LinkedIn post was made; verified on the activity/Documents tabs (last document is `V2.1 — The Baseline Audit`, fraud detection). Resume only when the owner chooses.
+**2026-11-08:** master TODO, portfolio page, project briefs, and external-review outreach kit prepared outside the repo. External review and launch remain paused; no research change.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
 
 ---
@@ -106,7 +107,7 @@
 - [ ] Mobile accessibility pass: body text at least 16pt at 540pt; one idea per slide. Audit recorded in [`notes/mobile_accessibility_audit_2026-11-07.md`](notes/mobile_accessibility_audit_2026-11-07.md): current body is 13–14pt, so the v1.0.0 carousel fails the criterion; rebuild only with the launch decision.
 - [ ] One external reader; record strongest objection and factual fixes.
 
-**Claim-precision pass completed 2026-11-04:** paper, carousel, card, one-page summary, README, release notes, and post drafts corrected; assets rebuilt; 7-page paper, 7-slide carousel, verifier 54/54. **Release v1.0.0 published and verified:** 7 assets, all HTTP 200, CI success. Remaining gates: mobile readability and one external reader.
+**Claim-precision pass completed 2026-11-04:** paper, carousel, card, one-page summary, README, release notes, and post drafts corrected; assets rebuilt; 7-page paper, 7-slide carousel, verifier 63/63 (expanded from 54 checks on 2026-11-07). **Release v1.0.0 published and verified:** 7 assets, all HTTP 200, CI success. Remaining gates: mobile readability and one external reader.
 
 **Metadata and verifier pass completed 2026-11-07:** `pyproject.toml` and `__init__.py` aligned to `1.0.0`; `CITATION.cff` release date aligned to `2026-11-04`; "aggregate metrics only" corrected to "aggregate and derived research outputs; no raw vendor prices" in the paper README, release notes, and published-results README; verifier expanded from 54 to 63 checks (v2 coverage, v2/v3 survival flags, v3 calibration, and paper cross-checks); 26 mutation tests added so every checked claim must fail when changed; 81 tests pass; `ruff` clean; verifier 63/63.
 
