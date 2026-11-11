@@ -477,11 +477,12 @@ must not be run retrospectively.
   optimization. *SIAM Review*, 53(3), 464–501.
 
 + Delage, E., & Ye, Y. (2010). Distributionally robust optimization under moment
-  uncertainty. *Operations Research*, 58(3), 595–612.
+  uncertainty with application to data-driven problems. *Operations Research*, 58(3),
+  595–612.
 
 + Mohajerin Esfahani, P., & Kuhn, D. (2018). Data-driven distributionally robust
-  optimization using the Wasserstein metric. *Mathematical Programming*, 171(1–2),
-  115–166.
+  optimization using the Wasserstein metric: performance guarantees and tractable
+  reformulations. *Mathematical Programming*, 171(1–2), 115–166.
 
 + Rockafellar, R. T., & Uryasev, S. (2000). Optimization of conditional value-at-risk.
   *Journal of Risk*, 2(3), 21–41.
