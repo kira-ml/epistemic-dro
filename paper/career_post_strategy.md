@@ -14,7 +14,7 @@ It should **not** read as “I tried three strategies and none worked.” It sho
 | Secondary audience | General ML/data-science practitioners interested in uncertainty and evaluation |
 | Not the audience | Retail trading, “best stock picks,” growth-hacking LinkedIn |
 | Identity signal | Research engineer who pre-registers, falsifies, and ships reproducible artifacts |
-| Proof | 7-page paper, 7-slide carousel, public repo, CI, verifier, preserved holdout |
+| Proof | 8-page paper, 7-slide carousel, public repo, CI, verifier, preserved holdout |
 | CTA | “If you work on uncertainty, DRO, or conformal prediction, I’d like to compare notes.” Optional: open to research roles. |
 
 The project is a **research-engineering portfolio piece**, not an alpha claim. The post should make that explicit in the first three lines.
@@ -36,7 +36,7 @@ The project is a **research-engineering portfolio piece**, not an alpha claim. T
 | **9. Reflexivity** | The post sets expectations for future work. | Do not claim more than the repo can defend; keep the holdout untouched. |
 | **10. Goodhart** | Do not optimize for likes or impressions. | Optimize for saves, profile visits, paper downloads, and qualified comments. |
 | **11. Exploration vs exploitation** | 75% exploit the flagship paper; 25% explore a second format. | Post the carousel first; only later test the card or a video. |
-| **12. Bottleneck** | The bottleneck is proof and release, not more content. | Finish the `v1.0.0` release, citation, and license before posting. |
+| **12. Bottleneck** | The bottleneck is proof and release, not more content. | Use the `v1.0.1` release, citation, and license before posting. |
 
 ---
 
@@ -52,7 +52,7 @@ The project is a **research-engineering portfolio piece**, not an alpha claim. T
 
 ## 4. What is missing before the first post
 
-1. **A public release link.** The post should link to `v1.0.0`, not a raw repository. Create the GitHub release and attach the paper, carousel, card, and one-pager.
+1. **A public release link.** The post should link to `v1.0.1`, not a raw repository. The corrected release includes the paper, carousel, card, and one-pager.
 2. **A capability line in the caption.** Say what you build, not just what failed.
 3. **A plain-English translation of H1/H2/H3.** “Tail-risk hypothesis failed; non-inferiority passed” before the labels.
 4. **A stack line.** Purged walk-forward, Ridge baseline, LightGBM quantiles, split conformal, cvxpy/CLARABEL, CI + verifier.
@@ -66,7 +66,7 @@ The project is a **research-engineering portfolio piece**, not an alpha claim. T
 
 ### Day 0 — release
 
-- Create the `v1.0.0` GitHub release with the paper and visual assets.
+- Use the `v1.0.1` GitHub release with the corrected paper and visual assets.
 - Confirm CI is green.
 - Add the release link to the repo description and featured section.
 

@@ -20,7 +20,7 @@ The result is not a Sharpe ratio. It is a pipeline that can tell the difference 
 
 Stack: purged walk-forward · Ridge baseline · LightGBM quantile regression · split conformal · cvxpy/CLARABEL · DRO/CVaR · CI + verifier.
 
-Paper + code: https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.0
+Paper + code: https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.1
 
 If you work on uncertainty quantification, DRO, or conformal prediction, I’d like to compare notes.
 
@@ -28,7 +28,7 @@ Not investment advice. No alpha claim. No live deployment. Working paper; curren
 
 #QuantResearch #MachineLearning #PortfolioOptimization #ResearchIntegrity #PreRegistration
 
-> **Do not post until:** the `v1.0.0` GitHub release exists, CI is green, and the release link resolves.
+> **Do not post until:** the `v1.0.1` GitHub release resolves, CI is green, and the corrected paper asset matches the committed source.
 
 ---
 

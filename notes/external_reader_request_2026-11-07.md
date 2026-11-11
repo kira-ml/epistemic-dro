@@ -1,9 +1,9 @@
 # Independent reader request
 
 **Date:** 2026-11-07
-**Goal:** one adversarial quant/ML reader for the v1.0.0 package, before 2026-11-30. The ask is for the strongest objection, not an endorsement. A factual error or an overread claim is the useful outcome.
+**Goal:** one adversarial quant/ML reader for the v1.0.1 package, before 2026-11-30. The ask is for the strongest objection, not an endorsement. A factual error or an overread claim is the useful outcome.
 
-**State.** `v1.0.0` is released (2026-11-04). The 2025-2026 holdout is untouched; v2 and v3 stopped before it. No raw vendor data is redistributed. The 2026-11-07 metadata/verifier pass aligned version and release date, corrected the derived-output wording, expanded the verifier to 63 checks, and added 26 mutation tests; 81 tests pass and `ruff` is clean.
+**State.** `v1.0.1` is released (2026-11-11); `v1.0.0` remains the original release. The corrected paper is 8 pages, its uploaded PDF matches the committed source, and all 22 unique references were validated against primary metadata. The 2025-2026 holdout is untouched; v2 and v3 stopped before it. No raw vendor data is redistributed. The verifier has 63 checks; 81 tests pass and `ruff` is clean.
 
 ## The message
 

@@ -13,7 +13,7 @@
 **What was tested**
 
 - 72 liquid US ETFs, point-in-time, 2010–2024 development.
-- 19 lagged features; monthly walk-forward; 60-month train, 12-month validation, 1-month purge.
+- v1: 13 frozen lagged features; v2/v3: the same 13 plus six derived features (19 total). Monthly walk-forward; 60-month train, 12-month validation, 1-month purge.
 - Long-only, sum=1, 5% cap, 10 bps one-way costs; net Sharpe primary; MDD and CVaR95 guardrails.
 - Mandatory Ridge B0; date-blocked information audit; target-shuffling test; counter-metric gate.
 

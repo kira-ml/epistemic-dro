@@ -6,7 +6,7 @@
 
 | Layer | File | Job | Where it goes |
 |---|---|---|---|
-| **Mini paper** | [`mini_paper.pdf`](mini_paper.pdf) | Credibility; 7 pages; full method, three results, limitations | Featured link, comments, repo, email |
+| **Mini paper** | [`mini_paper.pdf`](mini_paper.pdf) | Credibility; 8 pages; full method, three results, limitations | Featured link, comments, repo, email |
 | **LinkedIn carousel** | [`linkedin_carousel.pdf`](linkedin_carousel.pdf) | Reach and dwell time; 7 native slides | LinkedIn document post |
 | **Visual card** | [`linkedin_card.png`](linkedin_card.png) | Single-image hook; 4:5 feed card | LinkedIn image post / carousel cover |
 | **One-page summary** | [`one_pager.pdf`](one_pager.pdf) | Leave-behind / print | Email, attachment, event handout |
