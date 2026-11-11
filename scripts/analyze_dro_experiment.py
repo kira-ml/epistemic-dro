@@ -60,14 +60,17 @@ def _bootstrap_diff(
         sharpe_diff[repeat] = metrics_a["net_sharpe"] - metrics_b["net_sharpe"]
         mdd_diff[repeat] = metrics_a["max_drawdown"] - metrics_b["max_drawdown"]
         cvar_diff[repeat] = metrics_a["cvar95"] - metrics_b["cvar95"]
+        # Positive means candidate A has a smaller drawdown / less negative
+        # CVaR than baseline B. The sign matters: an earlier version subtracted
+        # A from B, so a genuine improvement was reported as negative.
         relative_mdd[repeat] = (
-            (metrics_b["max_drawdown"] - metrics_a["max_drawdown"])
+            (metrics_a["max_drawdown"] - metrics_b["max_drawdown"])
             / abs(metrics_b["max_drawdown"])
             if metrics_b["max_drawdown"] != 0.0
             else float("nan")
         )
         relative_cvar[repeat] = (
-            (metrics_b["cvar95"] - metrics_a["cvar95"]) / abs(metrics_b["cvar95"])
+            (metrics_a["cvar95"] - metrics_b["cvar95"]) / abs(metrics_b["cvar95"])
             if metrics_b["cvar95"] != 0.0
             else float("nan")
         )
@@ -124,8 +127,8 @@ def main() -> None:
 
     verdict = {
         "H1_tail_improvement": {
-            "mdd_improvement_observed": point["B5_DRO_point"]["max_drawdown"]
-            - point["M1_reduced"]["max_drawdown"],
+            "mdd_improvement_observed": point["M1_reduced"]["max_drawdown"]
+            - point["B5_DRO_point"]["max_drawdown"],
             "relative_mdd_ci90": h1["relative_mdd_ci90"],
             "cvar_diff_ci90": h1["cvar_diff_ci90"],
             "passes_20pct_mdd": h1["relative_mdd_ci90"][0] >= 0.20,

@@ -196,7 +196,7 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 | B3_CVaR | 0.798 | −24.28% | −8.44% | 1.82 |
 | B1_equal_weight | 0.673 | −26.61% | −9.76% | 0.11 |
 
-- H1: relative MDD improvement 0.4%; 90% CI [−6.2%, +1.1%]; CVaR diff CI [−0.0001, +0.0031] includes zero → **FAIL**.
+- H1: relative MDD improvement 0.4%; 90% CI [-1.1%, +6.2%]; CVaR diff CI [−0.0001, +0.0031] includes zero → **FAIL**.
 - H2: M1 − B5 Sharpe +0.018; 90% CI [−0.000, +0.037] → **PASS** (within the 0.20 margin).
 - H3: M1 vs B5 MDD CI [−0.0024, +0.0160]; CVaR CI includes zero → **FAIL**.
 - Secondary: M1 beats 1/N on Sharpe (+0.143, CI [+0.020, +0.266]), MDD (+0.060, CI [+0.0016, +0.137]), and CVaR (+0.0146, CI [+0.0043, +0.026]). The optimizer structure helps; the uncertainty layer does not separate.
@@ -218,7 +218,7 @@ Append-only. Each entry records the decision, the alternatives, the rationale, r
 **Decision:** Accept the final report (`docs/13_final_report.md`), close the confirmatory phase as a clean negative result for H1/H3, and stop modelling. Do not deploy, do not claim alpha, and do not add features or capacity to force a positive result.
 
 **Final evidence:**
-- H1 FAIL: 0.4% relative MDD improvement, 90% CI [−6.2%, +1.1%]; CVaR95 difference CI includes zero.
+- H1 FAIL: 0.4% relative MDD improvement, 90% CI [-1.1%, +6.2%]; CVaR95 difference CI includes zero. *Corrected 2026-11-11: the interval was previously sign-flipped; the point estimate and verdict are unchanged.*
 - H2 PASS: +0.018 Sharpe vs B5, 90% CI [−0.000, +0.037], within the 0.20 margin.
 - H3 FAIL: uncertainty ablation does not separate from point-DRO.
 - Secondary: M1 beats 1/N on Sharpe (+0.143), MDD (+0.060), and CVaR (+0.0146); the optimizer structure helps, not the uncertainty layer.

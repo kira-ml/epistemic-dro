@@ -6,6 +6,7 @@
 **Repo note:** the 2026-11-04 docs/asset pass is committed and pushed to `main`; the release remains anchored to tag `v1.0.0`.
 **Session close (2026-11-04):** GitHub release is live and verified; claim-precision pass is committed; **LinkedIn launch is paused by owner before upload**. No LinkedIn post was made; verified on the activity/Documents tabs (last document is `V2.1 — The Baseline Audit`, fraud detection). Resume only when the owner chooses.
 **2026-11-08:** master TODO, portfolio page, project briefs, and external-review outreach kit prepared outside the repo. External review and launch remain paused; no research change.
+**2026-11-11:** `v1.0.1` patch prepared locally: corrected the H1 relative-MDD interval sign, disclosed the 13-vs-19 feature distinction and the 158-vs-179 evaluation paths, and added numbered references/table formatting. Results unchanged (0.4% point estimate, H1 FAIL; holdout untouched). Tag/release pending owner approval.
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
 
 ---

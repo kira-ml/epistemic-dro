@@ -14,7 +14,7 @@
 
 **No — not detectably, under this protocol.**
 
-- **H1 FAILS:** the uncertainty-aware portfolio's max-drawdown improvement is **0.4% relative** (90% CI [−6.2%, +1.1%]), far below the pre-registered 20% threshold. The CVaR95 difference interval includes zero.
+- **H1 FAILS:** the uncertainty-aware portfolio's max-drawdown improvement is **0.4% relative** (90% CI [-1.1%, +6.2%]), far below the pre-registered 20% threshold. The CVaR95 difference interval includes zero.
 - **H2 PASSES:** net Sharpe is not materially worse than the best baseline (+0.018 vs point-DRO; 90% CI [−0.000, +0.037], within the 0.20 margin).
 - **H3 FAILS:** removing the uncertainty layer does not degrade the tail result in a detectable way. The ablation is within noise.
 
@@ -28,7 +28,7 @@ The **DRO/CVaR optimizer** is associated with better risk-adjusted performance t
 |---|---|
 | Universe | 72 liquid US-listed equity ETFs, PIT eligibility |
 | Period | 2010-01 .. 2024-11 (179 monthly rebalances) |
-| Mean forecast | Ridge B0 on 13 ETF features; OOS \(R^2\) = −0.019; IC = 0.013 (t = 0.56) |
+| Mean forecast | Ridge B0 on 13 ETF features (14 folds, 158 months with predictions); OOS \(R^2\) = −0.019; IC = 0.013 (t = 0.56) |
 | Uncertainty | 5-model bootstrap Ridge sigma (reduced M1); mean sigma 0.54% vs mean mu 0.79% monthly |
 | Information audit | G-R4 null: 0/13 features passed the 80% date-level MI rule |
 | Optimizer | Box DRO + CVaR, CLARABEL, long-only, sum=1, 5% cap |
@@ -57,7 +57,9 @@ The reduced M1 is **not** the original LightGBM ensemble. The negative result ap
 | M1 − B5 | Net Sharpe | +0.018 | [−0.000, +0.037] | CI touches zero |
 | M1 − B5 | Max drawdown | +0.0010 | [−0.0024, +0.0160] | No separation |
 | M1 − B5 | CVaR95 | +0.0013 | [−0.0001, +0.0031] | CI includes zero |
-| M1 − B5 | Relative MDD improvement | +0.4% | [−6.2%, +1.1%] | Far below +20% |
+| M1 - B5 | Relative MDD improvement | +0.4% | [-1.1%, +6.2%] | Far below +20% |
+
+*Correction (2026-11-11): the bootstrap interval was previously sign-flipped in this report and the paper. The point estimate (+0.4%) and the H1 verdict (fail) are unchanged. The paper now also discloses that the 14-fold B0 diagnostic (158 months) and the monthly-refit DRO backtest (179 months) are separate evaluation paths.*
 | M1 − B1 | Net Sharpe | +0.143 | [+0.020, +0.266] | Optimizer beats 1/N |
 | M1 − B1 | Max drawdown | +0.060 | [+0.0016, +0.137] | Optimizer beats 1/N |
 | M1 − B1 | CVaR95 | +0.0146 | [+0.0043, +0.026] | Optimizer beats 1/N |

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "epistemic-dro"
-version = "1.0.0"
+version = "1.0.1"
 description = "Epistemic-aware distributionally robust mean-CVaR portfolio research prototype"
 requires-python = ">=3.10"
 readme = "README.md"
