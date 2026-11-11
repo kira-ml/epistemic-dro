@@ -1,12 +1,12 @@
 # TODO — Epistemic-Aware DRO
 
-**Last updated:** 2026-11-08
+**Last updated:** 2026-11-11
 **Current state:** v1 closed (H1/H3 fail, H2 non-inferiority pass); v2 and v3 stopped before holdout; the gate/effect-size study is complete and is a **post-hoc methods audit**; **no v4 on this data**; 2025–2026 holdout **untouched**.
-**Release state:** `v1.0.0` tag → `7511597`; paper 7 pages; carousel 7 slides; verifier 63/63; **GitHub release v1.0.0 published 2026-11-04 with 7 assets** (paper, carousel, card, one-pager, summary, LICENSE, CITATION); claim-precision pass complete; metadata/verifier pass complete 2026-11-07 (version aligned, release date corrected, derived-output wording, CI pinned with read-only permissions).  
+**Release state:** `v1.0.0` tag → `7511597` (paper 7 pages, 2026-11-04); **`v1.0.1` published 2026-11-11 with 7 assets** (corrected 8-page paper, carousel, card, one-pager, summary, LICENSE, CITATION; tag → `7550f5b`; CI green); verifier 63/63; claim-precision and metadata passes complete.  
 **Repo note:** the 2026-11-04 docs/asset pass is committed and pushed to `main`; the release remains anchored to tag `v1.0.0`.
 **Session close (2026-11-04):** GitHub release is live and verified; claim-precision pass is committed; **LinkedIn launch is paused by owner before upload**. No LinkedIn post was made; verified on the activity/Documents tabs (last document is `V2.1 — The Baseline Audit`, fraud detection). Resume only when the owner chooses.
 **2026-11-08:** master TODO, portfolio page, project briefs, and external-review outreach kit prepared outside the repo. External review and launch remain paused; no research change.
-**2026-11-11:** `v1.0.1` patch prepared locally: corrected the H1 relative-MDD interval sign, disclosed the 13-vs-19 feature distinction and the 158-vs-179 evaluation paths, and added numbered references/table formatting. Results unchanged (0.4% point estimate, H1 FAIL; holdout untouched). Tag/release pending owner approval.
+**2026-11-11:** `v1.0.1` published: corrected the H1 relative-MDD interval sign, disclosed the 13-vs-19 feature distinction and the 158-vs-179 evaluation paths, and added numbered references/table formatting. Results unchanged (0.4% point estimate, H1 FAIL; holdout untouched). All 23 unique references were validated against Crossref, NeurIPS, OpenLibrary, and Semantic Scholar; two full published titles were restored. Tag `v1.0.1` → `7550f5b`; 7 assets; asset digest matches the committed paper; CI green. Release: https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.1
 **Rule:** the remaining work is **release, verification, and distribution** — not another model search on the same data.
 
 ---
