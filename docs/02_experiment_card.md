@@ -111,7 +111,7 @@ No random splits. No test-period information in feature construction, universe f
   - factor exposures: market, size, value, and momentum loadings;
   - metadata: expense ratio and distribution yield, only if a historical series exists. If only a current snapshot exists, either exclude these fields or disclose that they are not point-in-time.
 - Model: LightGBM regression or ranking; 5 seeds.
-- Feature screening: MI/CMI audit against a permutation null; drop features that fail in at least 80% of training windows (G-R4).
+- Feature screening: MI/CMI audit against a permutation null. As implemented (G-R4), a feature is kept only if it beats the null in at least 80% of training windows. The earlier prose ("drop features that fail in at least 80% of windows") is ambiguous and reads as a 20% pass-rate floor; under that looser reading 12 of 13 v1 features would survive. The strict rule is the one applied.
 - Tuning: validation window only; no test data.
 - Feature preprocessing: fit inside each training window.
 

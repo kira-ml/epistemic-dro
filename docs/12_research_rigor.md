@@ -55,7 +55,7 @@ These are additions to v1.0-etf, logged in `docs/04_decision_log.md` as `DEC-202
 
 1. **B0 Ridge baseline.** A regularized Ridge return forecast is added to the baseline set. It uses the same universe, dates, features, splits, and constraints. M1/M2 must beat it on purged OOS data or the simpler forecast is reported.
 2. **Conditional robust loss.** Estimate the Pareto tail index of monthly ETF returns. If \(\alpha < 4\), use LightGBM `huber` (or quantile); otherwise the pre-registered regression objective is allowed.
-3. **MI screening.** Compute mutual information and conditional mutual information on each training window, with a permutation null. A feature that fails to beat the null in at least 80% of windows is dropped and logged. This is a screening rule, not a license to fish.
+3. **MI screening.** Compute mutual information and conditional mutual information on each training window, with a permutation null. As implemented, a feature is kept only if it beats the null in at least 80% of windows. The original sentence below could also be read as dropping only features that fail in at least 80% of windows, which is a 20% floor; that looser reading would keep 12 of 13 v1 features. The strict rule is the one applied. This is a screening rule, not a license to fish.
 4. **Bayesian optimization.** Tune only within the frozen candidate bounds. Use Optuna/BoTorch-style Bayesian optimization; log every trial. Unguided grid search is prohibited.
 5. **Counter-metric gate.** A result is not "successful" unless Sharpe, max drawdown, and CVaR95 pass their pre-registered bounds simultaneously.
 6. **Experiment ledger.** Every run — including failed and exploratory runs — appends one JSONL record to `experiments/ledger.jsonl`.

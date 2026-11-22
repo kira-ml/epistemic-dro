@@ -32,7 +32,7 @@
     )
   ],
 )
-#set text(font: "Libertinus Serif", size: 10.4pt, lang: "en", hyphenate: true)
+#set text(font: "New Computer Modern", size: 10.4pt, lang: "en", hyphenate: true)
 #set par(justify: true, leading: 0.68em, spacing: 1.0em)
 #set heading(numbering: "1.1")
 #show heading.where(level: 1): it => block(above: 1.5em, below: 0.5em)[
@@ -61,7 +61,7 @@
   #text(size: 20pt, weight: "bold")[The holdout is still untouched]
   #v(0.25em)
   #text(size: 11pt)[
-    Three pre-registered attempts of uncertainty-aware DRO — and two gates that failed in opposite directions
+    Three attempts at uncertainty-aware DRO — and two gates that failed in opposite directions
   ]
   #v(0.85em)
   #text(size: 10pt)[Ken Ira Lacson Talingting]
@@ -79,9 +79,11 @@
 )[
   #set text(size: 9pt)
   #set par(leading: 0.62em)
-  *Status: one completed negative result and two pre-holdout stops, not a strategy.* v1 is closed (H1 and H3 fail, H2 passes its non-inferiority
-  guardrail). v2 and v3 were stopped by frozen pre-holdout information gates. The 2025–2026 holdout was
-  never touched. This is a methods study on 72 US-listed ETFs; it makes no alpha, stock-selection,
+  *Status: one completed negative result and two pre-holdout stops, not a strategy.* The first attempt is
+  closed: its tail-improvement test and its uncertainty ablation fail, while its Sharpe non-inferiority
+  guardrail passes. The second and third attempts were stopped by information gates recorded in their
+  plans; those plans and the stop decisions were committed after the development results were computed.
+  The 2025–2026 holdout was never touched. This is a methods study on 72 US-listed ETFs; it makes no alpha, stock-selection,
   causal, or live-deployment claim. Nothing here is investment advice.
 ]
 
@@ -91,23 +93,26 @@
   #set text(size: 9.5pt)
   #set par(leading: 0.64em)
   *Abstract.* Does epistemic uncertainty improve the tail-risk/return trade-off of a distributionally
-  robust mean-CVaR portfolio? This paper reports three pre-registered attempts on a point-in-time
-  universe of 72 US ETFs. In v1, a Ridge baseline has no detectable out-of-sample linear signal
+  robust mean-CVaR portfolio? This paper reports three pre-specified attempts on a point-in-time
+  universe of 72 US ETFs: the first was frozen before its analysis; the second and third were documented
+  together with their stop decisions. In the first attempt, a Ridge baseline has no detectable out-of-sample linear signal
   (#fmt(b0.r2, 3) pooled $R^2$; mean rank IC #fmt(b0.ic, 3), $t = #fmt(b0.t, 2)$), the original 80% date-level
-  mutual-information audit finds no surviving feature among the 13 frozen v1 features (a pooled
+  mutual-information audit finds no surviving feature among the 13 frozen features (a pooled
   re-evaluation finds weak average dependence but not stability), and a reduced uncertainty-aware DRO does not separate from
-  point-estimate DRO: H1 fails, H2 passes its non-inferiority guardrail, H3 fails. v2 replaces bootstrap sigma with conformalized
-  LightGBM return quantiles; calibration is good (validation coverage #pct(v2_gate.coverage_val, 1),
+  point-estimate DRO: the tail-improvement test fails, the Sharpe non-inferiority guardrail passes, and the
+  uncertainty ablation fails. The second attempt replaces bootstrap sigma with conformalized LightGBM return
+  quantiles; calibration is good (validation coverage #pct(v2_gate.coverage_val, 1),
   test #pct(v2_gate.coverage_test, 1)), but the uncertainty signal passes only #pct(v2_gate.pass, 1) of
-  date-level information tests against an 80% gate. v3 replaces return quantiles with a conditional
+  date-level information tests against an 80% gate. The third attempt replaces return quantiles with a conditional
   forecast of next-month absolute return; calibration is good on average (#pct(v3_gate.mean_sigma, 2) vs
   #pct(v3_gate.mean_realized, 2)), but the signal passes only #pct(v3_gate.pass, 1) and underperforms
   trailing volatility on development. A synthetic power study shows the 80% date-level gate has
-  **zero power** at a 20% $R^2$ signal, while an iid pooled test detects the same signal. But the iid
+  **no detectable power (0 of 2 seeds)** at a 20% $R^2$ signal, while an iid pooled test detects the same signal. But the iid
   pooled test is too permissive: under a block-aware null it cuts 20/21 apparent passes to 3/21, and
-  the v2/v3 sigma do not survive. An effect-size audit finds the three block-aware survivors have rank
-  IC intervals that include zero; trailing volatility dominates the conditional sigma. No v4 is justified
-  on this data. The v1 closure and v2/v3 stops are evidence of **instability**, not proof that no signal exists; and a
+  the second- and third-attempt sigma do not survive. An effect-size audit finds the three block-aware survivors
+  have rank IC intervals that include zero; trailing volatility dominates the conditional sigma. No fourth
+  attempt is justified on this data. The first-attempt closure and the two stops are evidence of **instability**,
+  not proof that no signal exists; and a
   pooled test is not a substitute for a block-aware gate. The contribution is the apparatus: a frozen
   protocol, a mandatory baseline, an information gate, a non-degenerate comparator, a preserved holdout,
   and a clean negative result — plus evidence that the gate itself needs a power and effect-size analysis.
@@ -130,14 +135,52 @@ functional [7].
 
 That is the hypothesis. It is not the finding.
 
+*Positioning.* The DRO literature supplies guarantees for a chosen ambiguity set
+[3–6]; the conformal literature supplies marginal coverage guarantees [13, 14]; the
+ML asset-pricing literature supplies forecasts [10]. Those are properties of an
+estimator or a set, not of a portfolio decision. This paper tests the transfer:
+whether a calibrated uncertainty signal survives a monthly, cost-bearing, long-only
+allocation and a date-level stability gate. It does not propose a new estimator; the
+contribution is the apparatus and the documented failure of transfer on this data.
+
 The project asks a narrow question: does an epistemic-uncertainty layer improve the tail-risk/return
 trade-off of a DRO mean-CVaR portfolio, net of costs, out-of-sample, relative to point-estimate DRO and
 simple baselines? The answer is reported under a frozen protocol, with a clean negative result treated
 as a successful outcome. The project fails only if it is leaky, non-reproducible, or overclaims.
 
-Three attempts were made. Each had a different object of uncertainty. v1 was closed after its reduced
-test; v2 and v3 were stopped by gates written before their results were seen. The 2025–2026 holdout
-remains untouched.
+Three attempts were made. Each had a different object of uncertainty. The first was closed after its reduced
+test; the second and third were stopped by gates written before their results were seen. The 2025–2026
+holdout remains untouched.
+
+One naming convention, fixed here and used throughout. The three attempts are numbered by the uncertainty
+estimator they use. The three tests are named after the property they check. The table gives both, so a
+reader can move between the plain name and the short label without ambiguity.
+
+#v(0.5em)
+#figure(
+  table(
+    columns: (auto, 1fr),
+    align: (left, left),
+    inset: (x: 4pt, y: 3.5pt),
+    stroke: none,
+    table.hline(stroke: 0.8pt),
+    table.header([*Name (label)*], [*Meaning in this paper*]),
+    table.hline(stroke: 0.4pt),
+    [Tail-improvement test (H1)], [A 20% relative max-drawdown improvement over point-estimate DRO.],
+    [Sharpe guardrail (H2)], [Net Sharpe non-inferiority within a 0.20 margin.],
+    [Uncertainty ablation (H3)], [Switching uncertainty off changes the tail metrics.],
+    [Attempt 1 (v1)], [Ridge mean plus bootstrap sigma.],
+    [Attempt 2 (v2)], [Conformalized LightGBM return quantiles.],
+    [Attempt 3 (v3)], [Conditional forecast of next-month absolute excess return, used as DRO sigma.],
+    [Ridge baseline (B0)], [Ridge baseline mean model; mandatory before any complex model.],
+    [CVaR-only comparator (B3)], [No uncertainty layer; identical to B5 with zero sigma.],
+    [Point-estimate DRO (B5)], [DRO with zero sigma, so no uncertainty enters.],
+    [Uncertainty-aware DRO (M1)], [The treatment: the DRO portfolio in each attempt, with that attempt's sigma.],
+    table.hline(stroke: 0.8pt),
+  ),
+  caption: [Plain names and their labels. The decision rule is shared; the object of uncertainty changes.],
+  numbering: none,
+)
 
 // ---------------------------------------------------------------------------
 // 2
@@ -181,7 +224,7 @@ The last gate is why the holdout survived.
 // 3
 // ---------------------------------------------------------------------------
 
-= v1: epistemic uncertainty
+= Attempt 1: epistemic uncertainty (v1)
 
 The first attempt used the original design: Ridge B0 mean, a five-model bootstrap uncertainty proxy, and
 a box DRO with a CVaR penalty. The original LightGBM ensemble was not fitted because the information
@@ -194,7 +237,9 @@ $t = #fmt(-0.48, 2)$: the null is not an obvious leak.
 
 *The features do not survive.* A date-blocked mutual-information audit over 259 cross-sections of the
 13 frozen v1 features finds no feature that beats a permutation null in 80% of dates. The best pass
-rate is 0.552 (vol_12m). LightGBM [12] is not justified.
+rate is 0.552 (vol_12m). Under the looser reading of the protocol sentence — drop only features that
+fail in at least 80% of dates — 12 of 13 would survive; the strict 80% pass-rate rule is the one
+applied. LightGBM [12] is not justified under that rule.
 
 *The reduced DRO does not separate.* Table 1 reports the main result. The reduced M1 re-fits the same
 Ridge specification monthly on a rolling 60-month window, so its DRO backtest spans 179 months; the
@@ -237,7 +282,7 @@ Strategy-level deflated Sharpe probabilities [15] are reported in `docs/13_final
 // 4
 // ---------------------------------------------------------------------------
 
-= v2: conformalized quantiles
+= Attempt 2: conformalized quantiles (v2)
 
 The second attempt changed the object of uncertainty from bootstrap dispersion to a distributional
 forecast. LightGBM [12] quantile regression predicts q05/q50/q95 of next-month excess return, three
@@ -246,10 +291,18 @@ seeds are averaged, and split-conformal residual quantiles [13, 14] calibrate th
 comparator is non-degenerate: each asset's trailing 36-month realized volatility. A constant sigma was
 rejected before the holdout because a constant penalty is weight-invariant and collapses to CVaR-only.
 
-Calibration worked. Validation coverage was #pct(v2_gate.coverage_val, 1); development test coverage
-was #pct(v2_gate.coverage_test, 1). But coverage is not information. The pre-holdout gate asked whether
-the conformal sigma beats a date-blocked permutation null in at least 80% of dates. It passed
-#pct(v2_gate.pass, 1). The holdout was not touched.
+Calibration is necessary but not sufficient. Validation coverage was #pct(v2_gate.coverage_val, 1).
+Development test coverage was #pct(v2_gate.coverage_test, 1). Coverage is a marginal, average property:
+it says the interval contains the outcome at the stated rate across the validation sample, not that it
+is conditionally correct, stable across dates, or informative for ranking. A single coverage number
+therefore licenses one claim only: the interval is honest on average in that sample. The test figure is an
+out-of-sample check, not a second calibration target; the gap from validation to test is a
+transportability warning, not a success.
+
+The pre-holdout gate asked a different question: whether the conformal sigma beats a date-blocked
+permutation null in at least 80% of dates. It passed #pct(v2_gate.pass, 1). That is the number relevant
+to the decision, and it is why the holdout was not touched. A model can have roughly 90% coverage and
+still fail a date-level information gate; the coverage number alone would have overstated the signal.
 
 #figure(
   image("figures/gate_pass_rates.png", width: 88%),
@@ -260,7 +313,7 @@ the conformal sigma beats a date-blocked permutation null in at least 80% of dat
 // 5
 // ---------------------------------------------------------------------------
 
-= v3: conditional tail risk
+= Attempt 3: conditional tail risk (v3)
 
 The third attempt changed the object again. Instead of epistemic uncertainty or a return quantile, it
 forecast *next-month absolute excess return* with LightGBM [12] L1 regression and used the forecast as
@@ -308,7 +361,7 @@ This is a **post-hoc methods audit**, not part of the original pre-registration.
     [0.5], [20%], [#pct(gate.mi_pass_05_72, 1)], [#pct(gate.mi_power_05_72, 0)], [#pct(gate.pooled_power_05_72, 0)], [#pct(gate.decile_power_05_72, 0)],
     table.hline(stroke: 0.8pt),
   ),
-  caption: [Gate power at 72 assets and 179 dates, linear signal, 2 seeds. The MI pass rate is the per-date pass rate; the other gate columns are power across the two seeds. The 80% gate has zero power even at a 20% $R^2$ signal. The pooled gate detects that signal in every seed. The decile gate's per-date pass rate is #pct(gate.decile_pass_05_72, 1) at $beta = 0.5$, but its seed-level power is still zero at 72 assets.]
+  caption: [Gate power at 72 assets and 179 dates, linear signal, 2 seeds. The MI pass rate is the per-date pass rate; the other gate columns are power across the two seeds. The 80% gate has zero power in both seeds even at a 20% $R^2$ signal. The pooled gate detects that signal in every seed. The decile gate's per-date pass rate is #pct(gate.decile_pass_05_72, 1) at $beta = 0.5$, but its seed-level power is still zero at 72 assets.]
 )
 
 At 72 assets, a 20% $R^2$ signal passes only #pct(gate.mi_pass_05_72, 1) of dates; the gate requires
@@ -317,6 +370,14 @@ The pooled gate detects that signal in 100% of seeds at every breadth. The failu
 positives — the gate has 0% size under the null — it is **power**. The simulation is deliberately
 simple: linear signal, iid errors, two seeds. It establishes the direction of the power problem, not a
 universal calibration; a common-factor/autocorrelated size simulation is future work.
+
+The power result is about the **instrument**, not the signal. A gate that fails a 20% $R^2$ signal most
+of the time cannot support the inference that the signal is absent; it can support the decision to stop
+under an underpowered rule. That is why the v2/v3 stops are framed as decisions, not measurements, and
+why the block-aware/effect-size audit is the check on the survivors. The two-seed, linear/iid design
+bounds the direction of the problem; it does not calibrate the gate for factor structure. A
+dependent-data simulation with more seeds is the natural extension, and it would sharpen the
+interpretation rather than change the stop rule.
 
 The actual development signals tell the same story. Under a pooled, date-blocked MI test, #gate.v1_passes
 of the #gate.v1_total features in the current build pass at BH q < 0.05; the v2 sigma passes at
@@ -329,6 +390,9 @@ The iid pooled gate is also too permissive. Under a block-permutation null that 
 24-month blocks, only #gate.block_passes of #gate.block_total signals survive. The v2 sigma has a maximum
 block p-value of #fmt(gate.v2_block_max, 3); the v3 sigma #fmt(gate.v3_block_max, 3). Neither survives.
 The apparent pooled passes were largely time-series artifacts.
+
+The block null is the right correction for serial dependence, but it can overcorrect. The effect-size
+audit is the check, and it is reported next.
 
 Effect size closes the question. The three block-aware survivors have rank ICs whose 90% block-bootstrap
 intervals [17] include zero. The v2 and v3 sigma have strong ICs against future absolute return, but trailing
@@ -375,12 +439,13 @@ audit finds no surviving feature; a pooled re-evaluation finds weak average depe
 stability. If the conditional mean is not reliably predictable, the uncertainty layer has little to
 shrink. The binding constraint is the information in the feature set, not the optimizer.
 
-*Uncertainty is easy to calibrate and hard to make informative.* v2 and v3 are both calibrated. v3 has a
+*Uncertainty is easy to calibrate and hard to make informative.* The second and third attempts are both
+calibrated. The third has a
 clear decile spread. Neither passes a stability gate. Average calibration and cross-sectional spread are
 necessary but not sufficient; the signal must be stable date by date.
 
 *Comparison design matters.* A constant sigma is a constant penalty in a long-only, sum-to-one box DRO;
-it does not change the optimizer. The first v2 comparator collapsed to CVaR-only for exactly this reason.
+it does not change the optimizer. The second attempt's first comparator collapsed to CVaR-only for exactly this reason.
 The replacement — trailing realized volatility — is non-degenerate and is the right kind of benchmark:
 asset-specific, but not conditional on the model being tested.
 
@@ -388,7 +453,9 @@ The gates did their job ex post: they preserved the holdout, and the later block
 audit supports the stops. The original 80% gate was still underpowered; the stop decision was
 defensible, not infallible. A project that only reports the final holdout would have consumed the
 2025–2026 sample on a signal that failed its own pre-holdout test. Here the holdout is still available
-for a genuinely different model.
+for a genuinely different model. Because no attempt reached it, the three-attempt sequence does not
+inflate the holdout's error rate; the multiplicity is confined to the development-period diagnostics,
+which are reported as exploratory and with block-aware intervals.
 
 // ---------------------------------------------------------------------------
 // 8
@@ -416,14 +483,20 @@ first step in that direction, and it failed for a specific, diagnosable reason.
 
 - The universe is current-listed; closed funds are omitted. The results are not survivorship-free.
 - The ETF cross-section is narrower than a stock universe; power is limited.
-- v1's reduced M1 uses bootstrap Ridge sigma, not the original LightGBM ensemble.
-- B5 uses zero sigma and is identical to B3 (CVaR-only); the DRO-vs-no-DRO comparison is uninformative.
+- The first attempt's reduced uncertainty-aware portfolio uses bootstrap Ridge sigma, not the original
+  LightGBM ensemble.
+- The point-estimate comparator uses zero sigma and is therefore identical to the CVaR-only comparator;
+  the DRO-versus-no-DRO comparison is uninformative.
 - The gate power study is a post-hoc, linear/iid, two-seed simulation; it motivates, but does not validate, a block-aware gate.
 - Deflated Sharpe is strategy-level; it does not test M1 against B5.
 - v2 and v3 never reached the holdout. Their negative results are development-period results.
 - The v2/v3 holdout is only 20 months and cannot reliably detect a 20% relative MDD improvement.
 - The conditional tail forecast is aleatoric, not epistemic; it is labelled as such.
 - The linear-cost model is not a market-impact model. There is no live deployment.
+- The feature-screening rule is ambiguous in the protocol prose. The implementation kept a feature only if it beat the null in at least 80% of windows; the looser reading — dropping only features that fail in at least 80% of windows — would have kept 12 of 13. The strict rule was applied, and the conclusion rests on the pooled and block-aware audits in §6, not on the screen alone.
+- The published v1 numbers were generated at commit `d5dca68`, when the feature builder produced 13 features. The current builder produces 19; the six derived features were added after the v1 audit and are excluded from the v1 result. Exact v1 reproduction uses `d5dca68`.
+- The v2 and v3 analysis plans and their stop decisions were committed together on 2026-11-02, after the development results were computed. The record documents the rule and the outcome together; it is not a prospectively registered plan. The v1 protocol was frozen at 14:55 on 2026-11-02, before its analysis.
+- The paired bootstrap resamples months independently. Max drawdown is path-dependent, so its interval is not an exact sampling interval under serial dependence; a block bootstrap is the natural correction and is not reported here. H1's failure does not depend on this, because the point estimate is 0.43% against a 20% target. H3's "within noise" should be read as "not separated by this test".
 
 // ---------------------------------------------------------------------------
 // 10
@@ -516,3 +589,82 @@ must not be run retrospectively.
 
 + Politis, D. N., & Romano, J. P. (1994). The stationary bootstrap. *Journal of the
   American Statistical Association*, 89(428), 1303–1313.
+
+#pagebreak()
+#heading(numbering: none)[Appendix A. Claim ledger]
+<app-claims>
+
+#set par(justify: false, leading: 0.55em)
+#set text(size: 9pt)
+
+The table states the strongest reading the evidence supports, not the most favourable one.
+It is meant to be read before the abstract. `Measured` means computed on this sample and
+internally verified; `Pre-registered` means the rule was fixed before the result;
+`Decision` means a stop or a choice, not a measurement; `Post-hoc` means computed after the
+result was seen; `Not claimed` means outside the paper's scope.
+
+#figure(
+  block[
+    #set text(size: 8.4pt)
+    #table(
+      columns: (1.25fr, 0.85fr, 2.55fr),
+      align: (left, left, left),
+      inset: (x: 4pt, y: 4pt),
+      stroke: none,
+      table.hline(stroke: 0.8pt),
+      table.header([*Claim*], [*Status*], [*Evidence; what would change it*]),
+      table.hline(stroke: 0.4pt),
+      [The v1 mean forecast has no detectable out-of-sample linear signal on this data.],
+        [Measured, development],
+        [Pooled $R^2$ #fmt(b0.r2, 3); mean rank IC #fmt(b0.ic, 3), $t = #fmt(b0.t, 2)$;
+         shuffled-target IC #fmt(-0.004, 3), $t = #fmt(-0.48, 2)$; 13 frozen features,
+         259 cross-sections. #linebreak()
+         *Changes if:* a different feature set or model class. The holdout was not used.],
+      [The v1 uncertainty layer does not improve the tail/return trade-off.],
+        [Pre-registered test, development],
+        [H1 fails: relative MDD #pct(v1_boot.rel_mdd_point, 1), 90% CI
+         [#pct(v1_boot.rel_mdd_ci.at(0), 1), #pct(v1_boot.rel_mdd_ci.at(1), 1)]; H3
+         fails; H2 passes its 0.20 non-inferiority guardrail: Sharpe difference
+         #fmt(v1_boot.sharpe_diff, 3) #ci(v1_boot.sharpe_ci.at(0), v1_boot.sharpe_ci.at(1), 3). #linebreak()
+         *Changes if:* a larger sample or a different sigma. `B5` is a zero-sigma
+         comparator, so the DRO-vs-no-DRO leg is uninformative.],
+      [v2 and v3 are calibrated but not stable enough for the frozen gate.],
+        [Decision, development; plan and stop committed together],
+        [v2 coverage #pct(v2_gate.coverage_val, 1) / #pct(v2_gate.coverage_test, 1), gate
+         #pct(v2_gate.pass, 1); v3 sigma #pct(v3_gate.mean_sigma, 2) vs realized
+         #pct(v3_gate.mean_realized, 2), gate #pct(v3_gate.pass, 1). #linebreak()
+         *Changes if:* a stable signal under a block-aware gate. Both are
+         development-period results.],
+      [The 80% date-level gate has low power; the iid pooled gate is too permissive.],
+        [Post-hoc simulation],
+        [0 of 2 seeds at a 20% $R^2$ signal; pooled gate detects it in both; block null cuts
+         #gate.iid_passes/#gate.block_total apparent passes to
+         #gate.block_passes/#gate.block_total. #linebreak()
+         *Changes if:* a factor/autocorrelated simulation with more seeds; the study is
+         linear, iid and two-seed.],
+      [Trailing volatility dominates the conditional uncertainty signal.],
+        [Post-hoc effect-size audit],
+        [Trailing 36m IC #fmt(effect.trail_ic, 3) vs v2 #fmt(effect.v2_ic, 3) and v3
+         #fmt(effect.v3_ic, 3); the three block-aware survivors' 90% intervals include
+         zero. #linebreak()
+         *Changes if:* a different target or horizon. The audit is development-only.],
+      [The 2025–2026 holdout is untouched.],
+        [Design fact, auditable],
+        [No holdout command was run; no holdout result exists; the verifier checks the
+         published aggregates. #linebreak()
+         *Changes if:* any holdout run. The claim is about this repository, not about the
+         world.],
+      [No v4 is justified on this data.],
+        [Decision, not measurement],
+        [The pre-holdout gate and the effect-size audit; the best survivor is dominated by
+         trailing volatility. #linebreak()
+         *Changes if:* new data or a new pre-registration with a stable signal.],
+      [Epistemic uncertainty is uninformative in general.],
+        [Not claimed],
+        [One universe, one period, three attempts. #linebreak()
+         *Changes if:* a different universe or horizon with a stable signal.],
+      table.hline(stroke: 0.8pt),
+    ),
+  ],
+  caption: [Claim ledger. The status vocabulary is defined above.],
+) <tab-claims>

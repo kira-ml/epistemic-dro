@@ -22,7 +22,7 @@
 #let pct(x, digits) = fmt(x * 100, digits) + "%"
 
 #set page(width: 540pt, height: 675pt, margin: 38pt, fill: paper)
-#set text(font: "Libertinus Serif", size: 14pt, fill: ink, lang: "en")
+#set text(font: "New Computer Modern", size: 14pt, fill: ink, lang: "en")
 #set par(justify: false, leading: 0.65em, spacing: 0.9em)
 
 #let eyebrow(x) = text(size: 9pt, fill: muted, tracking: 1.2pt)[#x]
@@ -32,9 +32,9 @@
 #v(70pt)
 #eyebrow[EPISTEMIC-AWARE DRO · 72 US ETFs · 2010–2024]
 #v(22pt)
-#text(size: 31pt, weight: "bold")[Three pre-registered attempts.]
+#text(size: 27pt, weight: "bold")[Three pre-registered attempts.]
 #v(3pt)
-#text(size: 31pt, weight: "bold", fill: accent)[The holdout is still untouched.]
+#text(size: 27pt, weight: "bold", fill: accent)[The holdout is still untouched.]
 #v(22pt)
 #text(size: 17pt, fill: muted)[A research-engineering portfolio project — and what I learned trying to make uncertainty pay.]
 #v(10pt)

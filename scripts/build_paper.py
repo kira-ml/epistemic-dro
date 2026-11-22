@@ -1,4 +1,4 @@
-"""Build the mini research paper, figures, and LinkedIn card.
+"""Build the mini research paper, figures, LinkedIn card, and A4 one-pager.
 ...
 """
 
@@ -157,8 +157,18 @@ def build_figures() -> None:
         "B1_equal_weight": "1/N",
     }
     for name in ("M1_reduced", "B5_DRO_point", "B1_equal_weight"):
-        ax.plot(cumulative.index, cumulative[name], label=labels[name], color=colors[name], linewidth=1.8)
-    ax.set_title("Cumulative net excess return — metric path, not an investable return", fontsize=10.5, loc="left")
+        ax.plot(
+            cumulative.index,
+            cumulative[name],
+            label=labels[name],
+            color=colors[name],
+            linewidth=1.8,
+        )
+    ax.set_title(
+        "Cumulative net excess return — metric path, not an investable return",
+        fontsize=10.5,
+        loc="left",
+    )
     ax.set_ylabel("Growth of 1")
     ax.legend(frameon=False, fontsize=8, loc="upper left")
     ax.grid(axis="y", color="#e6e6e6", linewidth=0.8)
@@ -171,11 +181,23 @@ def build_figures() -> None:
     v3_gate = _load("v3_sigma_audit.json")
     pass_rates = [v2_gate["features"][0]["pass_rate"], v3_gate["sigma"]["pass_rate"]]
     fig, ax = plt.subplots(figsize=(6.6, 3.4), dpi=200)
-    bars = ax.bar(["v2\nconformal quantiles", "v3\nconditional tail risk"], pass_rates, color=["#9a9a9a", "#9a9a9a"], width=0.5)
+    bars = ax.bar(
+        ["v2\nconformal quantiles", "v3\nconditional tail risk"],
+        pass_rates,
+        color=["#9a9a9a", "#9a9a9a"],
+        width=0.5,
+    )
     ax.axhline(0.80, color="#9c3527", linewidth=1.4, linestyle="--")
     ax.text(1.55, 0.815, "frozen gate: 80%", color="#9c3527", fontsize=8, ha="right")
     for bar, value in zip(bars, pass_rates, strict=False):
-        ax.text(bar.get_x() + bar.get_width() / 2, value + 0.02, f"{value:.1%}", ha="center", fontsize=10, fontweight="bold")
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            value + 0.02,
+            f"{value:.1%}",
+            ha="center",
+            fontsize=10,
+            fontweight="bold",
+        )
     ax.set_ylim(0, 1.0)
     ax.set_ylabel("Date-level pass rate")
     ax.set_title("Pre-holdout information gates", fontsize=10.5, loc="left")
@@ -192,7 +214,9 @@ def build_figures() -> None:
     ax.bar(decile.index + 1, decile.values, color="#1f5c99", width=0.72)
     ax.set_xlabel("Predicted tail-risk decile")
     ax.set_ylabel("Mean realized |excess return|")
-    ax.set_title("Calibration is good — per-date information is not stable", fontsize=10.5, loc="left")
+    ax.set_title(
+        "Calibration is good — per-date information is not stable", fontsize=10.5, loc="left"
+    )
     ax.grid(axis="y", color="#e6e6e6", linewidth=0.8)
     ax.tick_params(labelsize=8)
     fig.tight_layout()
@@ -201,13 +225,17 @@ def build_figures() -> None:
 
     gate = pd.read_csv(DATA / "gate_power_summary.csv")
     gate = gate[
-        (gate["n_assets"] == 72)
-        & (gate["n_dates"] == 179)
-        & (gate["signal"] == "linear")
+        (gate["n_assets"] == 72) & (gate["n_dates"] == 179) & (gate["signal"] == "linear")
     ].sort_values("beta")
-    fig, axes = plt.subplots(1, 2, figsize=(9.0, 3.6), dpi=200, gridspec_kw={"width_ratios": [1.1, 1.0]})
-    axes[0].plot(gate["beta"], gate["mi_pass_rate"], marker="o", color="#1f5c99", label="80% MI gate")
-    axes[0].plot(gate["beta"], gate["decile_pass_rate"], marker="s", color="#c46a1b", label="decile gate")
+    fig, axes = plt.subplots(
+        1, 2, figsize=(9.0, 3.6), dpi=200, gridspec_kw={"width_ratios": [1.1, 1.0]}
+    )
+    axes[0].plot(
+        gate["beta"], gate["mi_pass_rate"], marker="o", color="#1f5c99", label="80% MI gate"
+    )
+    axes[0].plot(
+        gate["beta"], gate["decile_pass_rate"], marker="s", color="#c46a1b", label="decile gate"
+    )
     axes[0].axhline(0.80, color="#9c3527", linestyle="--", linewidth=1.2)
     axes[0].text(0.02, 0.82, "80% threshold", color="#9c3527", fontsize=7.5)
     axes[0].set_xlabel("Signal strength β")
@@ -239,6 +267,27 @@ def build_figures() -> None:
 
 
 def build_linkedin_card() -> None:
+    """Render the Computer Modern card from Typst, then rasterize it.
+
+    The old matplotlib card used DejaVu Sans, so it drifted from the paper's
+    typography. The Typst source is now the single source of truth for the card.
+    """
+    import pymupdf
+    import typst
+
+    typst.compile(
+        str(PAPER / "linkedin_card_cm.typ"),
+        output=str(PAPER / "linkedin_card_cm.pdf"),
+    )
+    doc = pymupdf.open(PAPER / "linkedin_card_cm.pdf")
+    doc[0].get_pixmap(dpi=200).save(PAPER / "linkedin_card.png")
+    doc.close()
+
+
+# Legacy matplotlib card, kept for reference. The current card is built above
+# from linkedin_card_cm.typ so it uses the same New Computer Modern type as the
+# paper.
+def build_linkedin_card_legacy() -> None:
     _style()
     fig, ax = plt.subplots(figsize=(8.0, 10.0), dpi=180)
     ax.set_xlim(0, 1)
@@ -247,32 +296,118 @@ def build_linkedin_card() -> None:
     fig.patch.set_facecolor("#f7f5f0")
     ax.add_patch(Rectangle((0, 0), 1, 1, facecolor="#f7f5f0", edgecolor="none"))
 
-    ax.text(0.07, 0.94, "EPISTEMIC-AWARE DRO  ·  72 US ETFs  ·  2010–2024  ·  WORKING PAPER", fontsize=9, color="#6b6b6b", family="DejaVu Sans")
-    ax.text(0.07, 0.865, "Three pre-registered attempts.", fontsize=26, fontweight="bold", color="#1a1a1a")
-    ax.text(0.07, 0.815, "The holdout is still untouched.", fontsize=26, fontweight="bold", color="#1f5c99")
-    ax.text(0.07, 0.765, "What I learned trying to make uncertainty pay.", fontsize=12, color="#4a4a4a")
+    ax.text(
+        0.07,
+        0.94,
+        "EPISTEMIC-AWARE DRO  ·  72 US ETFs  ·  2010–2024  ·  WORKING PAPER",
+        fontsize=9,
+        color="#6b6b6b",
+        family="DejaVu Sans",
+    )
+    ax.text(
+        0.07,
+        0.865,
+        "Three pre-registered attempts.",
+        fontsize=26,
+        fontweight="bold",
+        color="#1a1a1a",
+    )
+    ax.text(
+        0.07,
+        0.815,
+        "The holdout is still untouched.",
+        fontsize=26,
+        fontweight="bold",
+        color="#1f5c99",
+    )
+    ax.text(
+        0.07, 0.765, "What I learned trying to make uncertainty pay.", fontsize=12, color="#4a4a4a"
+    )
 
     boxes = [
-        ("v1  Epistemic uncertainty", "H1 / H3 fail  ·  H2 non-inferiority pass", "Ridge mean + bootstrap σ\nno stable mean or uncertainty signal", "#9c3527"),
-        ("v2  Conformal quantiles", "Stopped before holdout", "coverage 0.899 / 0.859\ninformation gate 65.4% < 80%", "#b07a1e"),
-        ("v3  Conditional tail risk", "Stopped before holdout", "calibration 4.29% vs 4.30%\ninformation gate 43.0% < 80%", "#b07a1e"),
+        (
+            "v1  Epistemic uncertainty",
+            "H1 / H3 fail  ·  H2 non-inferiority pass",
+            "Ridge mean + bootstrap σ\nno stable mean or uncertainty signal",
+            "#9c3527",
+        ),
+        (
+            "v2  Conformal quantiles",
+            "Stopped before holdout",
+            "coverage 0.899 / 0.859\ninformation gate 65.4% < 80%",
+            "#b07a1e",
+        ),
+        (
+            "v3  Conditional tail risk",
+            "Stopped before holdout",
+            "calibration 4.29% vs 4.30%\ninformation gate 43.0% < 80%",
+            "#b07a1e",
+        ),
     ]
     y = 0.70
     for title, verdict, detail, color in boxes:
-        ax.add_patch(FancyBboxPatch((0.07, y - 0.105), 0.86, 0.115, boxstyle="round,pad=0.012,rounding_size=0.012", facecolor="white", edgecolor="#dddddd", linewidth=0.8))
+        ax.add_patch(
+            FancyBboxPatch(
+                (0.07, y - 0.105),
+                0.86,
+                0.115,
+                boxstyle="round,pad=0.012,rounding_size=0.012",
+                facecolor="white",
+                edgecolor="#dddddd",
+                linewidth=0.8,
+            )
+        )
         ax.text(0.10, y - 0.025, title, fontsize=12.5, fontweight="bold", color="#1a1a1a")
         ax.text(0.10, y - 0.055, verdict, fontsize=10.5, color=color, fontweight="bold")
         ax.text(0.10, y - 0.090, detail, fontsize=8.8, color="#555555", linespacing=1.35)
         y -= 0.14
 
-    ax.add_patch(FancyBboxPatch((0.07, 0.13), 0.86, 0.12, boxstyle="round,pad=0.012,rounding_size=0.012", facecolor="#1f5c99", edgecolor="none"))
-    ax.text(0.10, 0.205, "Calibration ≠ information.  Gates > narratives.", fontsize=14, fontweight="bold", color="white")
-    ax.text(0.10, 0.170, "One completed result. Two pre-holdout stops. Zero holdout touches.", fontsize=9.3, color="#dce8f3")
+    ax.add_patch(
+        FancyBboxPatch(
+            (0.07, 0.13),
+            0.86,
+            0.12,
+            boxstyle="round,pad=0.012,rounding_size=0.012",
+            facecolor="#1f5c99",
+            edgecolor="none",
+        )
+    )
+    ax.text(
+        0.10,
+        0.205,
+        "Calibration ≠ information.  Gates > narratives.",
+        fontsize=14,
+        fontweight="bold",
+        color="white",
+    )
+    ax.text(
+        0.10,
+        0.170,
+        "One completed result. Two pre-holdout stops. Zero holdout touches.",
+        fontsize=9.3,
+        color="#dce8f3",
+    )
     ax.text(0.10, 0.143, "The apparatus is the result.", fontsize=9.3, color="#dce8f3")
 
-    ax.text(0.07, 0.075, "Paper + code: github.com/kira-ml/epistemic-dro", fontsize=8.5, color="#6b6b6b")
-    ax.text(0.93, 0.075, "Paper CC BY 4.0", fontsize=8.5, color="#6b6b6b", family="DejaVu Sans", ha="right")
-    ax.text(0.07, 0.045, "Not investment advice. No alpha claim. No live deployment. Current-listed; not survivorship-free.", fontsize=7.8, color="#8a8a8a")
+    ax.text(
+        0.07, 0.075, "Paper + code: github.com/kira-ml/epistemic-dro", fontsize=8.5, color="#6b6b6b"
+    )
+    ax.text(
+        0.93,
+        0.075,
+        "Paper CC BY 4.0",
+        fontsize=8.5,
+        color="#6b6b6b",
+        family="DejaVu Sans",
+        ha="right",
+    )
+    ax.text(
+        0.07,
+        0.045,
+        "Not investment advice. No alpha claim. No live deployment. Current-listed; not survivorship-free.",
+        fontsize=7.8,
+        color="#8a8a8a",
+    )
     fig.savefig(PAPER / "linkedin_card.png", bbox_inches="tight", facecolor=fig.get_facecolor())
     plt.close(fig)
 
@@ -285,10 +420,12 @@ def compile_paper() -> None:
 
 
 def make_one_pager_pdf() -> None:
-    from PIL import Image
+    import typst
 
-    Image.open(PAPER / "linkedin_card.png").convert("RGB").save(
-        PAPER / "one_pager.pdf", "PDF", resolution=180.0
+    typst.compile(
+        str(PAPER / "one_pager.typ"),
+        output=str(PAPER / "one_pager.pdf"),
+        root=str(PAPER),
     )
 
 

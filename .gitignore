@@ -56,3 +56,5 @@ results/tables/*
 Thumbs.db
 .vscode/
 .idea/
+# Tooling cache
+.serena/

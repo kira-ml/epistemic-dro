@@ -3,12 +3,13 @@ message: "Code is MIT; the paper text and figures are CC BY 4.0. If you use this
 type: software
 title: "Epistemic-Aware DRO for Mean-CVaR Portfolios"
 abstract: >-
-  A pre-registered research apparatus for testing whether ML epistemic
+  A pre-specified research apparatus for testing whether ML epistemic
   uncertainty improves the tail-risk/return trade-off of a distributionally
-  robust mean-CVaR ETF portfolio. v1 completed with H1/H3 failing and H2
-  passing; v2 and v3 were stopped before the holdout when their information
-  gates failed. The 2025-2026 holdout remains untouched. No alpha claim, no
-  live deployment, and no investment advice.
+  robust mean-CVaR ETF portfolio. The first attempt completed: the tail-improvement test and the
+  uncertainty ablation failed, and the Sharpe guardrail passed. The second and third attempts were
+  stopped before the holdout when their information gates failed; those plans and stop decisions were
+  documented together after the development results were computed. The 2025-2026 holdout remains
+  untouched. No alpha claim, no live deployment, and no investment advice.
 authors:
   - family-names: Talingting
     given-names: Ken Ira Lacson

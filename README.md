@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/kira-ml/epistemic-dro/actions/workflows/ci.yml/badge.svg)](https://github.com/kira-ml/epistemic-dro/actions/workflows/ci.yml)
 
-**Research prototype · November 2026 · v1 final (H1/H3 fail) · v2/v3 stopped before holdout****
+**Release:** [`v1.0.1`](https://github.com/kira-ml/epistemic-dro/releases/tag/v1.0.1) · **Research prototype · November 2026 · v1 final (H1/H3 fail) · v2/v3 stopped before holdout**
 
 > Does epistemic uncertainty from an ML return model improve the tail-risk/return trade-off of a distributionally robust mean-CVaR portfolio, net of costs, out-of-sample?
 
@@ -191,7 +191,7 @@ epistemic-dro/
 │   ├── baseline_benchmarks.md
 │   └── dro_experiment.md     # reduced DRO result and verdict
 ├── paper/
-│   ├── mini_paper.pdf        # 6-page working paper
+│   ├── mini_paper.pdf        # 10-page working paper
 │   ├── linkedin_carousel.pdf # 7-slide native document post
 │   ├── linkedin_card.png     # 4:5 visual card
 │   ├── one_pager.pdf         # one-page leave-behind
